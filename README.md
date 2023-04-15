@@ -37,6 +37,7 @@ It's a focus tensor actually: tools, models, datasets, data sources, hardware, m
 
 - base on a bare-bone docker image like `nvidia/cuda:11.8.0-devel-ubuntu22.04` so I can switch between different cloud services easily
 - these files are at the root or they could be folder-specific
+    - `.env` for environment variables
     - `packages.txt` for apt packages
     - `requirements.txt` for Python packages
     - `datasets.txt` for datasets

@@ -1,0 +1,4 @@
+requests
+tqdm
+datasets
+huggingface_hub
