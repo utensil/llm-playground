@@ -15,6 +15,7 @@ nomic-ai/gpt4all_prompt_generations
 # scientific_papers
 https://s3.amazonaws.com/datasets.huggingface.co/scientific_papers/1.1.1/arxiv-dataset.zip
 
+https://github.com/Instruction-Tuning-with-GPT-4/GPT-4-LLM
 
 # openai/summarize_from_feedback
 # openai/webgpt_comparisons
@@ -26,3 +27,5 @@ ehartford/oa_leet10k
 ehartford/leet10k-alpaca
 
 QingyiSi/Alpaca-CoT
+
+# TODO: sil-ai/bloom-lm EleutherAI/the_pile JavaFXpert/gpt-math-techniques

@@ -63,3 +63,5 @@ TheBloke/vicuna-13B-1.1-GPTQ-4bit-128g
 magicgh/llama13b-lora-cot
 magicgh/llama13b-lora-gpt4all
 
+# TODO: gpt4chan goatfile glm-130b bigscience/bloom
+
