@@ -29,15 +29,18 @@ It's a focus tensor actually: tools, models, datasets, data sources, hardware, m
     - Cloud GPU: ~A100 80G VRAM
     - mostly use cloud services to switch between hardware easily
 - Metrics:
-    - light-weight metrics for general and domain-specific tasks
+    - light-weight metrics to evaluate models and datasets for general and domain-specific tasks
 - Hows:
     - experiments to better understand why and how LLMs work
 
 ## The settings
 
 - base on a bare-bone docker image like `nvidia/cuda:11.8.0-devel-ubuntu22.04` so I can switch between different cloud services easily
-- `packages.txt` for common apt packages
-- `requirements.txt` for common Python packages
+- these files are at the root or they could be folder-specific
+    - `packages.txt` for apt packages
+    - `requirements.txt` for Python packages
+    - `datasets.txt` for datasets
+    - `models.txt` for models
 - the jupyter notebooks should
     - clone this repo and use helper scripts to fix other dependencies like text-generation-webui, GPTQ-for-LLaMa, alpaca_lora_4bit, etc.
     - use helper scripts to download datasets and models
