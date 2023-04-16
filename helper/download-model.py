@@ -225,7 +225,7 @@ if __name__ == '__main__':
     # Creating the folder and writing the metadata
     output_folder = Path(base_folder) / output_folder
     if not output_folder.exists():
-        output_folder.mkdir()
+        output_folder.mkdir(parent=True)
     with open(output_folder / 'huggingface-metadata.txt', 'w') as f:
         f.write(f'url: https://huggingface.co/{model}\n')
         f.write(f'branch: {branch}\n')
