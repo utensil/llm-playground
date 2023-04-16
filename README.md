@@ -24,14 +24,17 @@ It's a focus tensor actually: tools, models, datasets, data sources, hardware, m
     - the data source types that can be loaded with LlamaIndex/LangChain and injected into prompts.
     - other types I need.
 - Hardware:
+    - Edge: ~8 GB RAM
     - CPU-only: ~32 GB RAM
     - Consumer-grade GPU: RTX 3090Ti/A6000 ~48G VRAM
-    - Cloud GPU: ~A100 80G VRAM
+    - Training-grade GPU: ~A100 80G VRAM
     - mostly use cloud services to switch between hardware easily
 - Metrics:
-    - light-weight metrics to evaluate models and datasets for general and domain-specific tasks
+    - light-weight metrics to evaluate datasets for quality and diversity
+    - a small set of instructions and interactions for quick sanity-check on models and easy to run like unit tests
+    - light-weight metrics to evaluate models for general and domain-specific tasks
 - Hows:
-    - experiments to better understand why and how LLMs work
+    - experiments and visualizations to better understand why and how LLMs work
 
 ## The settings
 
