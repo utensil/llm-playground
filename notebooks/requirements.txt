@@ -1,0 +1,8 @@
+jupyterhub
+notebook
+pandas
+scipy
+matplotlib
+jupyterlab
+jupyterlab-git
+ipywidgets
