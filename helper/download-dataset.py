@@ -20,6 +20,7 @@ import subprocess
 import requests
 import tqdm
 from tqdm.contrib.concurrent import thread_map
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument('DATASET', type=str, default=None, nargs='?')
@@ -131,6 +132,11 @@ def download_files(file_list, output_folder, num_threads=8):
     thread_map(lambda url: get_file(url, output_folder), file_list, max_workers=num_threads)
 
 if __name__ == '__main__':
+    # determine the root of the repo and cd to it
+    ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+    os.chdir(ROOT)
+    print(f"Working directory changed to: {ROOT}")
+
     dataset = args.DATASET
     branch = args.branch
     if dataset is None:

@@ -26,6 +26,7 @@ import subprocess
 import requests
 import tqdm
 from tqdm.contrib.concurrent import thread_map
+import os
 
 # import aria2p
 
@@ -198,6 +199,11 @@ def download_files(file_list, output_folder, num_threads=8):
     thread_map(lambda url: get_file_by_aria2(url, output_folder), file_list, max_workers=num_threads)
 
 if __name__ == '__main__':
+    # determine the root of the repo and cd to it
+    ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+    os.chdir(ROOT)
+    print(f"Working directory changed to: {ROOT}")
+
     model = args.MODEL
     branch = args.branch
     if model is None:
