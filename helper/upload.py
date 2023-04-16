@@ -28,7 +28,7 @@ if __name__ == '__main__':
     if not repo.is_repo_clean():
         repo.git_add(auto_lfs_track=True)
         # print(f'Files to be uploaded:\n\n{repository.files_to_be_staged(local_repo)}')
-        # repo.push_to_hub()
+        repo.push_to_hub()
         print('Upload succeeded.')
     else:
         print('Nothing to upload, exiting...')
