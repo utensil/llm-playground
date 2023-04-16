@@ -28,4 +28,6 @@ ehartford/leet10k-alpaca
 
 QingyiSi/Alpaca-CoT
 
+https://github.com/Nan-Do/LeetCodeContestsDataset
+
 # TODO: sil-ai/bloom-lm EleutherAI/the_pile JavaFXpert/gpt-math-techniques
