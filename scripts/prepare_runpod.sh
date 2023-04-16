@@ -1,7 +1,14 @@
 #!/bin/bash
 
 # To test this in Codespaces, run `cd /workspaces/ && rm -rf text-generation-webui && git clone https://github.com/oobabooga/text-generation-webui && WORKSPACE=/workspaces/ llm-playground/scripts/prepare_runpod.sh`
-# To run this in RunPod, set the command to `curl https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/prepare_runpod.sh -sSf | bash`
+# To run this in RunPod with `runpod/oobabooga:1.0.0`, set
+# Expose HTTP Ports (Max 10): 7860,8888
+# docker command: `bash -c "curl https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/prepare_runpod.sh -sSf | bash"`
+# LOAD_MODEL PygmalionAI/pygmalion-6b
+# WEBUI chatbot
+# JUPYTER_PASSWORD secret
+# HUGGINGFACE_TOKEN secret
+# SUDO nosudo
 
 set -euxo pipefail
 
@@ -47,9 +54,9 @@ ln -s $WORKSPACE/llm-playground/loras ./loras
 ln -s $WORKSPACE/llm-playground/datasets ./training/datasets
 
 # comment out the following when testing in Codespaces
-if [ "$LOAD_MODEL" = "PygmalionAI/pygmalion-6b" ]; then
-    mv $TMP/models/PygmalionAI_pygmalion-6b ./models/
-fi
+# if [ "$LOAD_MODEL" = "PygmalionAI/pygmalion-6b" ]; then
+#     mv $TMP/models/PygmalionAI_pygmalion-6b ./models/
+# fi
 
 JUPYTER_PASSWORD=${JUPYTER_PASSWORD:-"PygmalionAI_pygmalion-6b"}
 
