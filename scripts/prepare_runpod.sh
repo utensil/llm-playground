@@ -42,8 +42,8 @@ cd $WORKSPACE/text-generation-webui/
 git pull
 
 TMP=$WORKSPACE/tmp/
-mkdir -p $TMP
 rm -rf $TMP
+mkdir -p $TMP
 
 mv models $TMP
 mv loras $TMP
