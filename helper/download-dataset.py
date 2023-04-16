@@ -30,10 +30,11 @@ args = parser.parse_args()
 
 def get_file(url, output_folder):
     r = requests.get(url, stream=True)
-    with open(output_folder / Path(url.rsplit('/', 1)[1]), 'wb') as f:
+    filename = Path(url.rsplit('/', 1)[1])
+    with open(output_folder / filename, 'wb') as f:
         total_size = int(r.headers.get('content-length', 0))
         block_size = 1024
-        with tqdm.tqdm(total=total_size, unit='iB', unit_scale=True, bar_format='{l_bar}{bar}| {n_fmt:6}/{total_fmt:6} {rate_fmt:6}') as t:
+        with tqdm.tqdm(postfix=f'File: {filename}', total=total_size, unit='iB', unit_scale=True, bar_format='{l_bar}{bar}| {n_fmt:6}/{total_fmt:6} {rate_fmt:6} {postfix}') as t:
             for data in r.iter_content(block_size):
                 t.update(len(data))
                 f.write(data)
@@ -68,9 +69,12 @@ def sanitize_branch_name(branch_name):
     else:
         raise ValueError("Invalid branch name. Only alphanumeric characters, period, underscore and dash are allowed.")
 
-def get_download_links_from_huggingface(dataset, branch):
+def get_download_links_from_huggingface(dataset, branch, dir=''):
     base = "https://huggingface.co"
-    page = f"/api/datasets/{dataset}/tree/{branch}?cursor="
+    page = f"/api/datasets/{dataset}/tree/{branch}"
+    if dir != '':
+        page = f'{page}/{dir}'
+
     cursor = b""
 
     links = []
@@ -81,28 +85,50 @@ def get_download_links_from_huggingface(dataset, branch):
     has_safetensors = False
     is_lora = False
     while True:
-        content = requests.get(f"{base}{page}{cursor.decode()}").content
+        api_url = f"{base}{page}?cursor={cursor.decode()}"
+        # print(api_url)
+        content = requests.get(api_url).content
+        # print(content)
 
         dict = json.loads(content)
+
+        if 'error' in dict:
+            print(f'Ignoring error: {dict["error"]}')
+            break
+
         if len(dict) == 0:
             break
 
         for i in range(len(dict)):
-            fname = dict[i]['path']
+            item = dict[i]
 
-            if 'lfs' in dict[i]:
-                sha256.append([fname, dict[i]['lfs']['oid']])
+            fname = item['path']
+
+            # print(f'{item}')
+
+            if item['type'] == 'directory':
+                dir = fname if dir == '' else f'{dir}/{fname}'
+                dir_links, dir_sha256 = get_download_links_from_huggingface(dataset, branch, dir=dir)
+
+                links.extend(dir_links)                
+                # TODO: also add dir_sha256, fix fname in the process
+
+            if 'lfs' in item:
+                sha256.append([fname, item['lfs']['oid']])
 
             links.append(f"https://huggingface.co/{dataset}/resolve/{branch}/{fname}")
 
-        cursor = base64.b64encode(f'{{"file_name":"{dict[-1]["path"]}"}}'.encode()) + b':50'
+        cursor_file = dict[-1]["path"]
+        # print(f'Using file {cursor_file} as cursor')
+        curson_json = f'{{"file_name":"{cursor_file}"}}'
+        cursor = base64.b64encode(curson_json.encode()) + b':50'
         cursor = base64.b64encode(cursor)
         cursor = cursor.replace(b'=', b'%3D')
 
     return links, sha256
 
 def download_files(file_list, output_folder, num_threads=8):
-    thread_map(lambda url: get_file_by_aria2(url, output_folder), file_list, max_workers=num_threads)
+    thread_map(lambda url: get_file(url, output_folder), file_list, max_workers=num_threads)
 
 if __name__ == '__main__':
     dataset = args.DATASET
