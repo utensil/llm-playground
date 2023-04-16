@@ -1,6 +1,7 @@
 {
     "image": "mcr.microsoft.com/devcontainers/universal:2",
     "remoteEnv": {
-        "HUGGINGFACE_TOKEN": "${localEnv:HUGGINGFACE_TOKEN}"
+        "HUGGINGFACE_TOKEN": "${localEnv:HUGGINGFACE_TOKEN}",
+        "WORKSPACE": "/workspaces/"
     }
 }

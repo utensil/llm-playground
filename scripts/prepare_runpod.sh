@@ -9,6 +9,7 @@
 # JUPYTER_PASSWORD secret
 # HUGGINGFACE_TOKEN secret
 # SUDO nosudo
+# WORKSPACE /workspace/
 
 set -euxo pipefail
 
@@ -37,9 +38,17 @@ if [ ! -z "$LOAD_DATASET" ]; then
     python ./helper/download-dataset.py $LOAD_DATASET
 fi
 
+mkdir -p $WORKSPACE/llm-playground/models
+mkdir -p $WORKSPACE/llm-playground/loras
+mkdir -p $WORKSPACE/llm-playground/datasets
+
+python ./helper/upload.py
+
 cd $WORKSPACE/text-generation-webui/
 
 git pull
+
+pip3 install -r requirements.txt
 
 TMP=$WORKSPACE/tmp/
 rm -rf $TMP
@@ -52,6 +61,8 @@ mv training/datasets $TMP
 ln -s $WORKSPACE/llm-playground/models ./models
 ln -s $WORKSPACE/llm-playground/loras ./loras
 ln -s $WORKSPACE/llm-playground/datasets ./training/datasets
+
+cp $WORKSPACE/llm-playground/storage/3b.txt ./training/datasets/3b.txt
 
 # comment out the following when testing in Codespaces
 # if [ "$LOAD_MODEL" = "PygmalionAI/pygmalion-6b" ]; then
