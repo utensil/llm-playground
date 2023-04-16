@@ -58,12 +58,11 @@ def get_file(url, output_folder):
 def get_file_by_aria2(url, output_folder):
     filename = url.split('/')[-1]
 
-    print(f"aria2c --console-log-level=error -c -x 16 -s 16 -k 1M {url} -d {output_folder}")
     # r = requests.get(url, stream=True)
     # total_size = int(r.headers.get('content-length', 0))
     
     if (output_folder / Path(filename)).exists() and not (output_folder / Path(f"{filename}.aria2")).exists():
-        print(f"File {filename} already downloaded.")
+        print(f"Downloaded: {filename}")
         return
 
     # full_dir = f"{Path('/app/text-generation-webui/') / output_folder}"
@@ -73,8 +72,11 @@ def get_file_by_aria2(url, output_folder):
 
     # /app/text-generation-webui/models
 
+    aria_command = f"aria2c -c -x 16 -s 16 -k 1M {url} -d {output_folder} -o {filename}"
+
+    print(f"Running: {aria_command}")
     # # call command line aria2c to download
-    subprocess.run(f"aria2c -c -x 16 -s 16 -k 1M {url} -d {output_folder} -o {filename}", shell=True, check=True)
+    subprocess.run(aria_command, shell=True, check=True)
 
 def sanitize_branch_name(branch_name):
     pattern = re.compile(r"^[a-zA-Z0-9._-]+$")
@@ -177,6 +179,8 @@ def get_download_links_from_huggingface(model, branch):
                     elif is_pt:
                         has_pt = True
                         classifications.append('pt')
+            else:
+                print(f'Skipping: {fname}')
 
         cursor = base64.b64encode(f'{{"file_name":"{dict[-1]["path"]}"}}'.encode()) + b':50'
         cursor = base64.b64encode(cursor)
@@ -225,7 +229,7 @@ if __name__ == '__main__':
     # Creating the folder and writing the metadata
     output_folder = Path(base_folder) / output_folder
     if not output_folder.exists():
-        output_folder.mkdir(parent=True)
+        output_folder.mkdir(parents=True)
     with open(output_folder / 'huggingface-metadata.txt', 'w') as f:
         f.write(f'url: https://huggingface.co/{model}\n')
         f.write(f'branch: {branch}\n')
