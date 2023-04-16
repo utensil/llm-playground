@@ -23,6 +23,7 @@ from tqdm.contrib.concurrent import thread_map
 
 parser = argparse.ArgumentParser()
 parser.add_argument('DATASET', type=str, default=None, nargs='?')
+parser.add_argument('--branch', type=str, default='main', help='Name of the Git branch to download from.')
 parser.add_argument('--threads', type=int, default=1, help='Number of files to download simultaneously.')
 parser.add_argument('--output', type=str, default=None, help='The folder where the dataset should be saved.')
 args = parser.parse_args()
@@ -40,16 +41,25 @@ def get_file(url, output_folder):
 def get_file_by_aria2(url, output_folder):
     filename = url.split('/')[-1]
 
-    print(f"aria2c --console-log-level=error -c -x 16 -s 16 -k 1M {url} -d {output_folder}")
     # r = requests.get(url, stream=True)
     # total_size = int(r.headers.get('content-length', 0))
     
     if (output_folder / Path(filename)).exists() and not (output_folder / Path(f"{filename}.aria2")).exists():
-        print(f"File {filename} already downloaded.")
+        print(f"Downloaded: {filename}")
         return
 
+    # full_dir = f"{Path('/app/text-generation-webui/') / output_folder}"
+    # print(f"aria2p downloading {url} to {full_dir} as {filename}")
+
+    # aria2.add_uris(url, options={'dir': full_dir, 'out': filename})
+
+    # /app/text-generation-webui/models
+
+    aria_command = f"aria2c -c -x 16 -s 16 -k 1M {url} -d {output_folder} -o {filename}"
+
+    print(f"Running: {aria_command}")
     # # call command line aria2c to download
-    subprocess.run(f"aria2c -c -x 16 -s 16 -k 1M {url} -d {output_folder} -o {filename}", shell=True, check=True)
+    subprocess.run(aria_command, shell=True, check=True)
 
 def sanitize_branch_name(branch_name):
     pattern = re.compile(r"^[a-zA-Z0-9._-]+$")
@@ -113,12 +123,12 @@ if __name__ == '__main__':
                 print(f"Error: {err_branch}")
                 sys.exit()
 
-    links, sha256, is_lora = get_download_links_from_huggingface(dataset, branch)
+    links, sha256 = get_download_links_from_huggingface(dataset, branch)
 
     if args.output is not None:
         base_folder = args.output
     else:
-        base_folder = 'datasets' if not is_lora else 'loras'
+        base_folder = 'datasets'
 
     output_folder = f"{'_'.join(dataset.split('/')[-2:])}"
     if branch != 'main':
@@ -127,7 +137,7 @@ if __name__ == '__main__':
     # Creating the folder and writing the metadata
     output_folder = Path(base_folder) / output_folder
     if not output_folder.exists():
-        output_folder.mkdir()
+        output_folder.mkdir(parents=True)
     with open(output_folder / 'huggingface-metadata.txt', 'w') as f:
         f.write(f'url: https://huggingface.co/{dataset}\n')
         f.write(f'branch: {branch}\n')
