@@ -7,7 +7,7 @@ set -euxo pipefail
 
 set -x
 
-export WORKSPACE=${WORKSPACE:-"workspace"}
+WORKSPACE=${WORKSPACE:-"/workspace"}
 
 cd $WORKSPACE
 
@@ -19,8 +19,8 @@ cd llm-playground
 
 ./helper/prepare.sh
 
-export LOAD_MODEL=${LOAD_MODEL:-"PygmalionAI/pygmalion-6b"}
-export LOAD_DATASET=${LOAD_DATASET:-""}
+LOAD_MODEL=${LOAD_MODEL:-"PygmalionAI/pygmalion-6b"}
+LOAD_DATASET=${LOAD_DATASET:-""}
 
 if [ ! -z "$LOAD_MODEL" ] && [ "$LOAD_MODEL" != "PygmalionAI/pygmalion-6b" ]; then
     python ./helper/download-model.py $LOAD_MODEL
@@ -34,7 +34,7 @@ cd $WORKSPACE/text-generation-webui/
 
 git pull
 
-export TMP=$WORKSPACE/tmp/
+TMP=$WORKSPACE/tmp/
 mkdir -p $TMP
 rm -rf $TMP
 
@@ -51,7 +51,7 @@ if [ "$LOAD_MODEL" = "PygmalionAI/pygmalion-6b" ]; then
     mv $TMP/models/PygmalionAI_pygmalion-6b ./models/
 fi
 
-export JUPYTER_PASSWORD=${JUPYTER_PASSWORD:-"PygmalionAI_pygmalion-6b"}
+JUPYTER_PASSWORD=${JUPYTER_PASSWORD:-"PygmalionAI_pygmalion-6b"}
 
 if [[ $JUPYTER_PASSWORD ]]
 then
