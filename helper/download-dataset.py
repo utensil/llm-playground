@@ -32,8 +32,10 @@ args = parser.parse_args()
 def get_file(url_info, output_folder):
     url = url_info['link']
     filename = url_info['path']
-    dir = Path(url.rsplit('/', 1)[0])
-    (output_folder / dir).mkdir(parents=True)
+    dir = Path(filename.rsplit('/', 1)[0])
+
+    if not (output_folder / dir).exists():
+        (output_folder / dir).mkdir(parents=True)
 
     r = requests.get(url, stream=True)
     total_size = int(r.headers.get('content-length', 0))
@@ -105,7 +107,7 @@ def get_download_links_from_huggingface(dataset, branch, dir=None):
         dict = json.loads(content)
 
         if 'error' in dict:
-            print(f'Ignoring error: {dict["error"]}')
+            # print(f'Ignoring error: {dict["error"]}')
             break
 
         if len(dict) == 0:
@@ -119,23 +121,28 @@ def get_download_links_from_huggingface(dataset, branch, dir=None):
             # print(f'{item}')
 
             if item['type'] == 'directory':
+                print(f'Gathering: {fname}')
+
                 dir_links, dir_sha256 = get_download_links_from_huggingface(dataset, branch, dir=fname)
 
                 links.extend(dir_links)                
                 # TODO: also add dir_sha256, fix fname in the process
 
             if item['type'] == 'file':
-                if 'lfs' in item:
-                    oid = item['lfs']['oid']
-                    sha256.append([fname, item['lfs']['oid']])
-
                 link = f"https://huggingface.co/datasets/{dataset}/resolve/{branch}/{fname}"
                 # print(f'{link}')
 
-                links.append({"link": link, "path": fname, "sha256sum": oid})
+                url_info = {"link": link, "path": fname}
+
+                if 'lfs' in item:
+                    oid = item['lfs']['oid']
+                    sha256.append([fname, oid])
+                    url_info["sha256sum"] = oid
+
+                links.append(url_info)
 
         cursor_file = dict[-1]["path"]
-        print(f'Using file {cursor_file} as cursor')
+        # print(f'Using file {cursor_file} as cursor')
         curson_json = f'{{"file_name":"{cursor_file}"}}'
         cursor = base64.b64encode(curson_json.encode()) + b':50'
         cursor = base64.b64encode(cursor)
@@ -144,7 +151,7 @@ def get_download_links_from_huggingface(dataset, branch, dir=None):
     return links, sha256
 
 def download_files(file_list, output_folder, num_threads=8):
-    thread_map(lambda url: get_file(url_info, output_folder), file_list, max_workers=num_threads)
+    thread_map(lambda url_info: get_file(url_info, output_folder), file_list, max_workers=num_threads)
 
 if __name__ == '__main__':
     # determine the root of the repo and cd to it
@@ -170,8 +177,6 @@ if __name__ == '__main__':
                 print(f"Error: {err_branch}")
                 sys.exit()
 
-    links, sha256 = get_download_links_from_huggingface(dataset, branch)
-
     if args.output is not None:
         base_folder = args.output
     else:
@@ -185,6 +190,21 @@ if __name__ == '__main__':
     output_folder = Path(base_folder) / output_folder
     if not output_folder.exists():
         output_folder.mkdir(parents=True)
+
+    links_file = output_folder / 'links.json'
+
+    links, sha256 = [], []
+
+    # TODO expire logic
+    if links_file.exists():    
+        with open(links_file, 'r') as f:
+            links = json.load(f)
+            # TODO fix sha256
+    else:
+        links, sha256 = get_download_links_from_huggingface(dataset, branch)
+        with open(links_file, 'w') as f:
+            json.dump(links, f)
+
     with open(output_folder / 'huggingface-metadata.txt', 'w') as f:
         f.write(f'url: https://huggingface.co/{dataset}\n')
         f.write(f'branch: {branch}\n')
