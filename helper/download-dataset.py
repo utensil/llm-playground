@@ -25,15 +25,26 @@ import os
 parser = argparse.ArgumentParser()
 parser.add_argument('DATASET', type=str, default=None, nargs='?')
 parser.add_argument('--branch', type=str, default='main', help='Name of the Git branch to download from.')
-parser.add_argument('--threads', type=int, default=1, help='Number of files to download simultaneously.')
+parser.add_argument('--threads', type=int, default=8, help='Number of files to download simultaneously.')
 parser.add_argument('--output', type=str, default=None, help='The folder where the dataset should be saved.')
 args = parser.parse_args()
 
-def get_file(url, output_folder):
+def get_file(url_info, output_folder):
+    url = url_info['link']
+    filename = url_info['path']
+    dir = Path(url.rsplit('/', 1)[0])
+    (output_folder / dir).mkdir(parents=True)
+
     r = requests.get(url, stream=True)
-    filename = Path(url.rsplit('/', 1)[1])
+    total_size = int(r.headers.get('content-length', 0))
+
+    output_file = output_folder / Path(filename)
+
+    if output_file.exists() and output_file.stat().st_size == total_size:
+        print(f"Downloaded: {output_file}")
+        return
+
     with open(output_folder / filename, 'wb') as f:
-        total_size = int(r.headers.get('content-length', 0))
         block_size = 1024
         with tqdm.tqdm(postfix=f'File: {filename}', total=total_size, unit='iB', unit_scale=True, bar_format='{l_bar}{bar}| {n_fmt:6}/{total_fmt:6} {rate_fmt:6} {postfix}') as t:
             for data in r.iter_content(block_size):
@@ -70,25 +81,25 @@ def sanitize_branch_name(branch_name):
     else:
         raise ValueError("Invalid branch name. Only alphanumeric characters, period, underscore and dash are allowed.")
 
-def get_download_links_from_huggingface(dataset, branch, dir=''):
+def get_download_links_from_huggingface(dataset, branch, dir=None):
     base = "https://huggingface.co"
     page = f"/api/datasets/{dataset}/tree/{branch}"
-    if dir != '':
+    if dir is not None:
         page = f'{page}/{dir}'
 
     cursor = b""
 
     links = []
     sha256 = []
-    classifications = []
-    has_pytorch = False
-    has_pt = False
-    has_safetensors = False
-    is_lora = False
+
+    # TODO support passing in
+    token = os.environ.get("HUGGINGFACE_TOKEN")
+    headers = { "authorization" : f'Bearer {token}'}
+
     while True:
         api_url = f"{base}{page}?cursor={cursor.decode()}"
         # print(api_url)
-        content = requests.get(api_url).content
+        content = requests.get(api_url, headers=headers).content
         # print(content)
 
         dict = json.loads(content)
@@ -108,19 +119,23 @@ def get_download_links_from_huggingface(dataset, branch, dir=''):
             # print(f'{item}')
 
             if item['type'] == 'directory':
-                dir = fname if dir == '' else f'{dir}/{fname}'
-                dir_links, dir_sha256 = get_download_links_from_huggingface(dataset, branch, dir=dir)
+                dir_links, dir_sha256 = get_download_links_from_huggingface(dataset, branch, dir=fname)
 
                 links.extend(dir_links)                
                 # TODO: also add dir_sha256, fix fname in the process
 
-            if 'lfs' in item:
-                sha256.append([fname, item['lfs']['oid']])
+            if item['type'] == 'file':
+                if 'lfs' in item:
+                    oid = item['lfs']['oid']
+                    sha256.append([fname, item['lfs']['oid']])
 
-            links.append(f"https://huggingface.co/{dataset}/resolve/{branch}/{fname}")
+                link = f"https://huggingface.co/datasets/{dataset}/resolve/{branch}/{fname}"
+                # print(f'{link}')
+
+                links.append({"link": link, "path": fname, "sha256sum": oid})
 
         cursor_file = dict[-1]["path"]
-        # print(f'Using file {cursor_file} as cursor')
+        print(f'Using file {cursor_file} as cursor')
         curson_json = f'{{"file_name":"{cursor_file}"}}'
         cursor = base64.b64encode(curson_json.encode()) + b':50'
         cursor = base64.b64encode(cursor)
@@ -129,7 +144,7 @@ def get_download_links_from_huggingface(dataset, branch, dir=''):
     return links, sha256
 
 def download_files(file_list, output_folder, num_threads=8):
-    thread_map(lambda url: get_file(url, output_folder), file_list, max_workers=num_threads)
+    thread_map(lambda url: get_file(url_info, output_folder), file_list, max_workers=num_threads)
 
 if __name__ == '__main__':
     # determine the root of the repo and cd to it

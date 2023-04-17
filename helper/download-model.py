@@ -142,6 +142,7 @@ def get_download_links_from_huggingface(model, branch):
     has_pt = False
     has_safetensors = False
     is_lora = False
+
     while True:
         content = requests.get(f"{base}{page}{cursor.decode()}").content
 
