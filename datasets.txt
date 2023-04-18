@@ -30,4 +30,23 @@ QingyiSi/Alpaca-CoT
 
 https://github.com/Nan-Do/LeetCodeContestsDataset
 
-# TODO: sil-ai/bloom-lm EleutherAI/the_pile JavaFXpert/gpt-math-techniques
+Muennighoff/flan
+
+BAAI/COIG
+
+# JavaFXpert/gpt-math-techniques
+gsm8k
+MU-NLPC/Calc-aqua_rat
+MU-NLPC/Calc-gsm8k
+reasoning-machines/gsm-hard
+https://github.com/reasoning-machines/pal.git
+
+# https://github.com/hendrycks/math/
+https://people.eecs.berkeley.edu/~hendrycks/MATH.tar
+https://drive.google.com/open?id=1hQsua3TkpEmcJD_UWQx8dmNdEZPyxw23&authuser=0
+
+anon8231489123/ShareGPT_Vicuna_unfiltered
+
+togethercomputer/RedPajama-Data-1T
+
+# TODO: sil-ai/bloom-lm EleutherAI/the_pile bigscience/bloomz bigscience/evaluation-results
