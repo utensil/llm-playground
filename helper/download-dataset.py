@@ -36,7 +36,7 @@ def get_file(url_info, output_folder):
     dir = dir_and_basename[0] if len(dir_and_basename) == 2 else ''
 
     if not (output_folder / dir).exists():
-        (output_folder / dir).mkdir(parents=True)
+        (output_folder / dir).mkdir(parents=True, exist_ok=True)
 
     total_size = url_info['size']
 
@@ -190,7 +190,7 @@ if __name__ == '__main__':
     # Creating the folder and writing the metadata
     output_folder = Path(base_folder) / output_folder
     if not output_folder.exists():
-        output_folder.mkdir(parents=True)
+        output_folder.mkdir(parents=True, exist_ok=True)
 
     links_file = output_folder / 'links.json'
 
