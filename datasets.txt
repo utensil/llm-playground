@@ -49,4 +49,6 @@ anon8231489123/ShareGPT_Vicuna_unfiltered
 
 togethercomputer/RedPajama-Data-1T
 
+openai_humaneval
+
 # TODO: sil-ai/bloom-lm EleutherAI/the_pile bigscience/bloomz bigscience/evaluation-results
