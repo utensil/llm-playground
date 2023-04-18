@@ -32,7 +32,8 @@ args = parser.parse_args()
 def get_file(url_info, output_folder):
     url = url_info['link']
     filename = url_info['path']
-    dir = Path(filename.rsplit('/', 1)[0])
+    dir_and_basename = filename.rsplit('/', 1)
+    dir = dir_and_basename[0] if len(dir_and_basename) == 2 else ''
 
     if not (output_folder / dir).exists():
         (output_folder / dir).mkdir(parents=True)
