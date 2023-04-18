@@ -37,8 +37,7 @@ def get_file(url_info, output_folder):
     if not (output_folder / dir).exists():
         (output_folder / dir).mkdir(parents=True)
 
-    r = requests.get(url, stream=True)
-    total_size = int(r.headers.get('content-length', 0))
+    total_size = url_info['size']
 
     output_file = output_folder / Path(filename)
 
@@ -47,6 +46,7 @@ def get_file(url_info, output_folder):
         return
 
     with open(output_folder / filename, 'wb') as f:
+        r = requests.get(url, stream=True)
         block_size = 1024
         with tqdm.tqdm(postfix=f'File: {filename}', total=total_size, unit='iB', unit_scale=True, bar_format='{l_bar}{bar}| {n_fmt:6}/{total_fmt:6} {rate_fmt:6} {postfix}') as t:
             for data in r.iter_content(block_size):
@@ -132,7 +132,7 @@ def get_download_links_from_huggingface(dataset, branch, dir=None):
                 link = f"https://huggingface.co/datasets/{dataset}/resolve/{branch}/{fname}"
                 # print(f'{link}')
 
-                url_info = {"link": link, "path": fname}
+                url_info = {"link": link, "path": fname, "size": item["size"]}
 
                 if 'lfs' in item:
                     oid = item['lfs']['oid']
