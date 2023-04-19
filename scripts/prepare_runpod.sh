@@ -1,6 +1,9 @@
 #!/bin/bash
-
-# To test this in Codespaces, run `cd /workspaces/ && rm -rf text-generation-webui && git clone https://github.com/oobabooga/text-generation-webui && WORKSPACE=/workspaces/ llm-playground/scripts/prepare_runpod.sh`
+# 
+# Reference: Setting up a ChatBot with the Oobabooga Text Generation WebUI template https://blog.runpod.io/setting_up_oobabooga_chatbot/
+#
+# Container source: https://github.com/runpod/containers/tree/main/oobabooga
+#
 # To run this in RunPod with `runpod/oobabooga:1.0.0`, set
 # Expose HTTP Ports (Max 10): 7860,8888
 # docker command: `bash -c "curl https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/prepare_runpod.sh -sSf | bash"`
@@ -10,6 +13,9 @@
 # HUGGINGFACE_TOKEN secret
 # SUDO nosudo
 # WORKSPACE /workspace/
+#
+# To test this in Codespaces, run `cd /workspaces/ && rm -rf text-generation-webui && git clone https://github.com/oobabooga/text-generation-webui && WORKSPACE=/workspaces/ llm-playground/scripts/prepare_runpod.sh`
+
 
 set -euxo pipefail
 
