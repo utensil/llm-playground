@@ -51,4 +51,13 @@ togethercomputer/RedPajama-Data-1T
 
 openai_humaneval
 
-# TODO: sil-ai/bloom-lm EleutherAI/the_pile bigscience/bloomz bigscience/evaluation-results
+# TODO
+
+# sil-ai/bloom-lm
+# EleutherAI/the_pile
+
+# bigscience/bloomz
+
+# bigscience/evaluation-results
+
+# https://raw.githubusercontent.com/databrickslabs/dolly/master/data/databricks-dolly-15k.jsonl
