@@ -55,9 +55,44 @@ openai_humaneval
 
 # sil-ai/bloom-lm
 # EleutherAI/the_pile
+# EleutherAI/the_pile_deduplicated
 
 # bigscience/bloomz
 
 # bigscience/evaluation-results
 
-# https://raw.githubusercontent.com/databrickslabs/dolly/master/data/databricks-dolly-15k.jsonl
+https://raw.githubusercontent.com/databrickslabs/dolly/master/data/databricks-dolly-15k.jsonl
+
+# https://github.com/anthropics/evals
+Anthropic/model-written-evals
+
+https://github.com/microsoft/AGIEval
+
+https://github.com/EleutherAI/lm-evaluation-harness
+
+https://github.com/akoksal/LongForm
+
+https://github.com/thisserand/alpaca-lora-finetune-language
+
+https://github.com/loubnabnl/bloom-code-evaluation
+
+yahma/alpaca-cleaned
+RyokoAI/ShareGPT52K
+
+YeungNLP/firefly-train-1.1M
+
+MU-NLPC/Calc-aqua_rat
+MU-NLPC/Calc-gsm8k
+
+liuhaotian/LLaVA-CC3M-Pretrain-595K
+liuhaotian/LLaVA-Instruct-150K
+
+akoksal/LongForm
+
+HuggingFaceM4/COCO
+
+BelleGroup/train_2M_CN
+BelleGroup/multiturn_chat_0.8M
+BelleGroup/school_math_0.25M
+BelleGroup/generated_chat_0.4M
+
