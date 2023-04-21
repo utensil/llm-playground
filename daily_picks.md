@@ -13,13 +13,14 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 
 |    Date    | Papers | News                                                 | Discoveries | Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
+| 4.21 | | | [137 emergent abilities](https://www.jasonwei.net/blog/emergence) |
 | 4.21 | | | Training [logbook](https://github.com/facebookresearch/metaseq/tree/main/projects/OPT/chronicles) & [metric](https://wandb.ai/eleutherai/neox) |
 | 4.21 | | | [axolotl](https://github.com/winglian/axolotl) & [genv](https://github.com/run-ai/genv) |
 | 4.20 |  [Verifiability](https://arxiv.org/abs/2304.09848) |
 | 4.19 | | |  [GPTCache](https://github.com/zilliztech/GPTCache) |
 | 4.19 | | |  [GPTCache](https://github.com/zilliztech/GPTCache) |
 | 4.19 | |  [StableLM](https://stability.ai/blog/stability-ai-launches-the-first-of-its-stablelm-suite-of-language-models) |
-| 4.19 | | |  [meerkat](https://github.com/HazyResearch/meerkat) |
+| 4.19 | | |  [meerkat](https://github.com/HazyResearch/meerkat)[^5] |
 | 4.19 | | | [CAMEL](https://github.com/lightaime/camel) & [chatarena](https://github.com/chatarena/chatarena) |
 | 4.18 | | [LLaVA](https://github.com/haotian-liu/LLaVA) |
 | 4.17 | | |   [Alpaca-CoT](https://github.com/PhoebusSi/Alpaca-CoT) |
@@ -32,7 +33,9 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 | 4.14 | | | [Buzzard's talk](https://leanprover.zulipchat.com/#narrow/stream/219941-Machine-Learning-for-Theorem-Proving/topic/Bangalore.20talk.20on.20LLM.2BITP/near/348388948) |
 | 4.14 | | | [ProofNet](https://github.com/zhangir-azerbayev/ProofNet) |
 | 4.14 | [Multimodal C4](https://arxiv.org/abs/2304.06939) |
+| 4.13 | [CodeWhisperer](https://aws.amazon.com/cn/blogs/aws/amazon-codewhisperer-free-for-individual-use-is-now-generally-available/) |
 | 4.13 | [GPT-4 Annotating](https://arxiv.org/abs/2304.06588) |
+| 4.12 | | | [LLMPruner](https://github.com/yangjianxin1/LLMPruner) |
 | 4.12 | [Galactic ChitChat](https://arxiv.org/abs/2304.05406) |
 | 4.12 | |  [Dolly v2](https://www.databricks.com/blog/2023/04/12/dolly-first-open-commercially-viable-instruction-tuned-llm) |
 | 4.11 | [Toxicity](https://arxiv.org/abs/2304.05335) |
@@ -64,6 +67,7 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 | 3.29 | | [LLaMA-Adapter](https://arxiv.org/abs/2303.16199) |
 | 3.29 | | | [llama_index](https://github.com/jerryjliu/llama_index) | 
 | 3.28 | | [Cerebras-GPT](https://www.cerebras.net/blog/cerebras-gpt-a-family-of-open-compute-efficient-large-language-models/) |
+| 3.27 | | [LeCun's talk](https://twitter.com/ylecun/status/1640133789199347713) |
 | 3.26 | [Low-Rank Simplicity Bias](https://openreview.net/forum?id=dn4B7Mes2z) |
 | 3.24 | | [Dolly](https://www.databricks.com/blog/2023/03/24/hello-dolly-democratizing-magic-chatgpt-open-models.html) |
 | 3.23 | | | [dalai](https://github.com/cocktailpeanut/dalai)[^4] |
@@ -94,11 +98,11 @@ Decide whether include them and determine dates:
 
 |    Date    | Papers | News                                                 | Discoveries | Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
+| 4.18 | [SPQA](https://danielmiessler.com/blog/spqa-ai-architecture-replace-existing-software/) |
 | 4.9 | | |  [spaCy](https://github.com/explosion/spaCy) |
 | 3.31 | | |  [simple-llm-finetuner](https://github.com/lxe/simple-llm-finetuner) |
 |    3.1     |        | | [lvwerra/trl](https://github.com/lvwerra/trl) |
 | 1.6 |  |  [NeevaAI](https://neeva.com/blog/introducing-neevaai) |
-
 
 ## Related curated lists
 
@@ -138,3 +142,5 @@ Decide whether include them and determine dates:
 [^3]: Helped me experience prompt-based coding infinitely
 
 [^4]: Helped me testing LLaMA and Alpaca locally
+
+[^5]: Meerkat is a Python library for interactively exploring unstructured data with foundation models that understand them, you can also seamlessly switch between augmented data frames and reactive GUIs for easy verification and feedback.
