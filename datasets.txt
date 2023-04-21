@@ -49,7 +49,20 @@ anon8231489123/ShareGPT_Vicuna_unfiltered
 
 togethercomputer/RedPajama-Data-1T
 
-openai_humaneval
+# openai_humaneval
+https://raw.githubusercontent.com/openai/human-eval/master/data/HumanEval.jsonl.gz
+
+Muennighoff/flan
+
+HuggingFaceM4/COCO
+https://cs.stanford.edu/people/karpathy/deepimagesent/caption_datasets.zip
+http://images.cocodataset.org/zips/train2014.zip
+https://github.com/ymcui/Chinese-LLaMA-Alpaca/raw/main/data/alpaca_data_zh_51k.json
+
+akoksal/LongForm
+
+liuhaotian/LLaVA-Instruct-150K
+liuhaotian/LLaVA-CC3M-Pretrain-595K
 
 # TODO
 
@@ -81,15 +94,11 @@ RyokoAI/ShareGPT52K
 
 YeungNLP/firefly-train-1.1M
 
-MU-NLPC/Calc-aqua_rat
-MU-NLPC/Calc-gsm8k
 
-liuhaotian/LLaVA-CC3M-Pretrain-595K
-liuhaotian/LLaVA-Instruct-150K
 
-akoksal/LongForm
 
-HuggingFaceM4/COCO
+
+
 
 BelleGroup/train_2M_CN
 BelleGroup/multiturn_chat_0.8M
