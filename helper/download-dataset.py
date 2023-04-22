@@ -100,10 +100,14 @@ def get_download_links_from_huggingface(dataset, branch, dir=None):
     headers = { "authorization" : f'Bearer {token}'}
 
     while True:
-        api_url = f"{base}{page}?cursor={cursor.decode()}"
-        # print(api_url)
+        api_url = f"{base}{page}"
+        
+        if cursor != b"":
+            api_url = f"{api_url}?cursor={cursor.decode()}"
+
+        print(api_url)
         content = requests.get(api_url, headers=headers).content
-        # print(content)
+        print(content)
 
         dict = json.loads(content)
 
