@@ -87,6 +87,10 @@ BelleGroup/multiturn_chat_0.8M
 BelleGroup/school_math_0.25M
 BelleGroup/generated_chat_0.4M
 
+https://github.com/yizhongw/self-instruct
+https://github.com/lamini-ai/lamini
+https://github.com/nelson-liu/evaluating-verifiability-in-generative-search-engines
+
 # TODO: need extra download
 
 # need filter too
