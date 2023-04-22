@@ -47,8 +47,6 @@ https://drive.google.com/open?id=1hQsua3TkpEmcJD_UWQx8dmNdEZPyxw23&authuser=0
 
 anon8231489123/ShareGPT_Vicuna_unfiltered
 
-togethercomputer/RedPajama-Data-1T
-
 # openai_humaneval
 https://raw.githubusercontent.com/openai/human-eval/master/data/HumanEval.jsonl.gz
 
@@ -89,7 +87,14 @@ BelleGroup/multiturn_chat_0.8M
 BelleGroup/school_math_0.25M
 BelleGroup/generated_chat_0.4M
 
-# TODO
+# TODO: need extra download
+
+# need filter too
+togethercomputer/RedPajama-Data-1T
+
+https://github.com/wellecks/naturalproofs
+
+# TODO: too big, to foundational, need to filter and dedup
 
 # sil-ai/bloom-lm
 # EleutherAI/the_pile
@@ -98,5 +103,13 @@ BelleGroup/generated_chat_0.4M
 # bigscience/bloomz
 
 # bigscience/evaluation-results
+
+# c4
+# wikipedia
+# the_pile_books3
+# pg19
+
+# TODO
+
 
 
