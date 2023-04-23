@@ -35,6 +35,12 @@ if [ -z "$CODESPACES" ]; then
     echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
 fi
 
+cd $WORKSPACE
+
+if [ ! -d "llm-playground" ]; then
+  git clone https://github.com/utensil/llm-playground
+fi
+
 cd llm-playground
 
 ./helper/prepare.sh
@@ -49,13 +55,7 @@ if [ -z "$CODESPACES" ]; then
     fi
 fi
 
-cd $WORKSPACE
-
-if [ ! -d "llm-playground" ]; then
-  git clone https://github.com/utensil/llm-playground
-fi
-
-cd llm-playground
+cd $WORKSPACE/llm-playground
 
 LOAD_MODEL=${LOAD_MODEL:-""}
 LOAD_DATASET=${LOAD_DATASET:-""}
