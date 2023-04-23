@@ -110,7 +110,8 @@ if [[ $JUPYTER_PASSWORD ]]
 then
   echo "Launching Jupyter Lab"
   cd /
-  nohup jupyter lab --allow-root --no-browser --port=8888 --ip=* --ServerApp.token=$JUPYTER_PASSWORD --ServerApp.allow_origin=* --ServerApp.preferred_dir=$WORKSPACE &
+  jupyter lab --generate-config
+  nohup jupyter lab --config=/root/.jupyter/jupyter_notebook_config.py --allow-root --no-browser --port=8888 --ip=* --ServerApp.token=$JUPYTER_PASSWORD --ServerApp.allow_origin=* --ServerApp.preferred_dir=$WORKSPACE &
 fi
 
 sleep infinity
