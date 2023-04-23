@@ -132,7 +132,7 @@ facebook/opt-1.3b
 
 def get_download_links_from_huggingface(model, branch):
     base = "https://huggingface.co"
-    page = f"/api/models/{model}/tree/{branch}?cursor="
+    page = f"/api/models/{model}/tree/{branch}"
     cursor = b""
 
     links = []
@@ -144,7 +144,15 @@ def get_download_links_from_huggingface(model, branch):
     is_lora = False
 
     while True:
-        content = requests.get(f"{base}{page}{cursor.decode()}").content
+        api_url = f"{base}{page}"
+        if cursor != b"":
+                api_url = f"{api_url}?cursor={cursor.decode()}"
+                
+        # print(api_url)
+        
+        content = requests.get(api_url).content
+        
+        # print(content)
 
         dict = json.loads(content)
         if len(dict) == 0:
