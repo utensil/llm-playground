@@ -9,7 +9,7 @@
 #
 # To run this in RunPod with `huggingface/transformers-pytorch-deepspeed-latest-gpu`, set
 # Expose HTTP Ports (Max 10): 7860,8888
-# docker command: `bash -c "curl https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/prepare_runpod_pytorch.sh -sSf | bash"`
+# docker command: `bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/prepare_runpod_pytorch.sh -sSf | bash"`
 # WEBUI chatbot
 # JUPYTER_PASSWORD change to your secret
 # HUGGINGFACE_TOKEN change to your token from https://huggingface.co/settings/tokens
@@ -43,6 +43,7 @@ fi
 
 cd llm-playground
 
+export DEBIAN_FRONTEND=noninteractive
 ./helper/prepare.sh
 
 # Skip CUDA in Codespaces
