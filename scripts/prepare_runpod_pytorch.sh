@@ -22,10 +22,10 @@ set -euxo pipefail
 
 set -x
 
+CODESPACES=${CODESPACES:-""}
 WORKSPACE=${WORKSPACE:-"/workspace"}
 
 cd $WORKSPACE
-
 
 if [ -z "$CODESPACES" ]; then
     nvidia-smi
