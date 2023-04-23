@@ -4,3 +4,4 @@ build-essential
 software-properties-common
 gnupg
 aria2
+ninja-build
