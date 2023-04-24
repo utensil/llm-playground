@@ -54,8 +54,8 @@ mkdir -p $WORKSPACE/llm-playground/datasets
 
 python ./helper/upload.py
 
-cd notebooks
-pip3 install -r requirements.txt
+# cd notebooks
+# pip3 install -r requirements.txt
 
 cd $WORKSPACE
 
@@ -63,11 +63,11 @@ if [ ! -d "text-generation-webui" ]; then
   git clone https://github.com/oobabooga/text-generation-webui
 fi
 
-cd $WORKSPACE/text-generation-webui/
+# cd $WORKSPACE/text-generation-webui/
 
-git pull
+# git pull
 
-pip3 install -r requirements.txt
+# pip3 install -r requirements.txt
 
 TMP=$WORKSPACE/tmp/
 rm -rf $TMP
