@@ -4,20 +4,19 @@ This is for tracking daily papers, daily news, my daily discoveries/thoughts/wor
 
 Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline) and [Daily Papers](https://papers.labml.ai/papers/daily/) but personalized and focused.
 
-- Milestone-ish models/datasets/apps are categorized as news, even if they come with papers.
-- Papers are for better understanding the mechanisms and not just a new model trained differently, good blogs are also counted as papers.
-- Discoveries are what changed my perspective or practice.
+- Milestone-ish models/datasets/apps are categorized as 🚀News, even if they come with papers.
+- 📚Papers are for better understanding the mechanisms and not just a new model trained differently, good blogs are also counted as papers.
+- ⚡Discoveries are what changed my perspective or practice.
 - News are dated by the time they happened. Discoveries and papers are dated by the time I noticeed their importance[^1].
 - Style: only key words in the table, extra info should be available via the link or the food note.
 
 
-|    Date    | Papers | News                                                 | Discoveries | Thoughts/work |
+|    Date    | 📚Papers | 🚀News                                                 | ⚡Discoveries | 🧠Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
 | 4.21 | | | [137 emergent abilities](https://www.jasonwei.net/blog/emergence) |
 | 4.21 | | | Training [logbook](https://github.com/facebookresearch/metaseq/tree/main/projects/OPT/chronicles) & [metric](https://wandb.ai/eleutherai/neox) |
 | 4.21 | | | [axolotl](https://github.com/winglian/axolotl) & [genv](https://github.com/run-ai/genv) |
 | 4.20 |  [Verifiability](https://arxiv.org/abs/2304.09848) |
-| 4.19 | | |  [GPTCache](https://github.com/zilliztech/GPTCache) |
 | 4.19 | | |  [GPTCache](https://github.com/zilliztech/GPTCache) |
 | 4.19 | |  [StableLM](https://stability.ai/blog/stability-ai-launches-the-first-of-its-stablelm-suite-of-language-models) |
 | 4.19 | | |  [meerkat](https://github.com/HazyResearch/meerkat)[^5] |
@@ -26,6 +25,7 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 | 4.17 | | |   [Alpaca-CoT](https://github.com/PhoebusSi/Alpaca-CoT) |
 | 4.17 | |  [RedPajama-Data](https://github.com/togethercomputer/RedPajama-Data) |
 | 4.17 | |  | [alpaca_lora_4bit](https://github.com/johnsmith0031/alpaca_lora_4bit) |
+| 4.17 | |  | [Transformer Family](https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/) |
 | 4.16 |  [LLMs + Symbolic Solvers](https://arxiv.org/abs/2304.09102) |
 | 4.16 |   [`suggest_premises`](https://github.com/BartoszPiotrowski/lean-premise-selection) |
 | 4.15 | |[MiniGPT-4](https://minigpt-4.github.io/) |
@@ -38,6 +38,7 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 | 4.12 | | | [LLMPruner](https://github.com/yangjianxin1/LLMPruner) |
 | 4.12 | [Galactic ChitChat](https://arxiv.org/abs/2304.05406) |
 | 4.12 | |  [Dolly v2](https://www.databricks.com/blog/2023/04/12/dolly-first-open-commercially-viable-instruction-tuned-llm) |
+| 4.12 | |  [DeepSpeed Chat](https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-chat) |
 | 4.11 | [Toxicity](https://arxiv.org/abs/2304.05335) |
 | 4.11 | [Privacy Attacks](https://arxiv.org/abs/2304.05197) |
 | 4.11 | [Self-Debug](https://arxiv.org/abs/2304.05128) |
@@ -52,14 +53,17 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 | 4.7 | |  [lightning](https://github.com/Lightning-AI/lightning) & [lit-llama](https://github.com/Lightning-AI/lit-llama) |
 | 4.7 |  | [Vicuna](https://github.com/lm-sys/FastChat) |
 | 4.5 | | [SAM](https://ai.facebook.com/research/publications/segment-anything/) |
+| 4.5 | | [StackLLaMA & trl](https://huggingface.co/blog/stackllama) |
 | 4.4 | | |  [text-generation-webui](https://github.com/oobabooga/text-generation-webui) |
 | 4.4 | [LLM-Adapters](https://arxiv.org/abs/2304.01933) |
+| 4.3 | | | [ChatML](https://github.com/openai/openai-python/blob/main/chatml.md) |
 | 4.3 | | [Koala](https://bair.berkeley.edu/blog/2023/04/03/koala/) |
 | 4.2 |  [Code Self-Improvement](https://arxiv.org/abs/2304.01228) |
 | 4.2 | | | [ChuanhuChatGPT](https://github.com/GaiZhenbiao/ChuanhuChatGPT) |
 | 4.1 |  |  [LMFlow](https://github.com/OptimalScale/LMFlow) |
 | 3.31 | [Choose Your Weapon](https://arxiv.org/abs/2304.06035) |
 | 3.30 | [Humans in Humans Out](https://arxiv.org/abs/2303.17276) |
+| 3.30 | | [galpaca-30b](https://huggingface.co/GeorgiaTechResearchInstitute/galpaca-30b) |
 | 3.30 | | [BloombergGPT](https://arxiv.org/abs/2303.17564) |
 | 3.30 | | [Auto-GPT](https://github.com/Torantulino/Auto-GPT) |
 | 3.29 | | | [guardrails](https://github.com/ShreyaR/guardrails) & [lmql](https://github.com/eth-sri/lmql) & [kor](https://github.com/eyurtsev/kor) |
@@ -101,7 +105,7 @@ Decide whether include them and determine dates:
 | 4.18 | [SPQA](https://danielmiessler.com/blog/spqa-ai-architecture-replace-existing-software/) |
 | 4.9 | | |  [spaCy](https://github.com/explosion/spaCy) |
 | 3.31 | | |  [simple-llm-finetuner](https://github.com/lxe/simple-llm-finetuner) |
-|    3.1     |        | | [lvwerra/trl](https://github.com/lvwerra/trl) |
+| 3.19 | | [Web AI](https://github.com/visheratin/web-ai) | 
 | 1.6 |  |  [NeevaAI](https://neeva.com/blog/introducing-neevaai) |
 
 ## Related curated lists
@@ -109,6 +113,7 @@ Decide whether include them and determine dates:
 ### Papers & Notes
 
 - [thunlp/PromptPapers](https://github.com/thunlp/PromptPapers) - Must-read papers on prompt-based tuning for pre-trained language models.
+- [foocker/deeplearningtheory](https://github.com/foocker/deeplearningtheory) 
 - [dair-ai/ML-Course-Notes](https://github.com/dair-ai/ML-Course-Notes) - 🎓 Sharing machine learning course / lecture notes.
 
 ### Models
@@ -121,11 +126,13 @@ Decide whether include them and determine dates:
 ### Training
 
 - [zhilizju/Awesome-instruction-tuning](https://github.com/zhilizju/Awesome-instruction-tuning) - A curated list of awesome instruction tuning datasets, models, papers and repositories.
+- [yaodongC/awesome-instruction-dataset](https://github.com/yaodongC/awesome-instruction-dataset) - A collection of open-source dataset to train instruction-following LLMs (ChatGPT,LLaMA,Alpaca)
 - [visenger/awesome-mlops](https://github.com/visenger/awesome-mlops) - A curated list of references for MLOps
 
 ### Reasoning
 
 - [lupantech/dl4math](https://github.com/lupantech/dl4math) - Resources of deep learning for mathematical reasoning (DL4MATH).
+- [tensorush/Awesome-Maths-Learning](https://github.com/tensorush/Awesome-Maths-Learning) - :sunglasses: :scroll: Collection of the most awesome Maths learning resources in the form of notes, videos and cheatsheets.
 
 ### Prompting
 
