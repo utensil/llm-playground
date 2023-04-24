@@ -63,7 +63,7 @@ if [ ! -d "text-generation-webui" ]; then
   git clone https://github.com/oobabooga/text-generation-webui
 fi
 
-# cd $WORKSPACE/text-generation-webui/
+cd $WORKSPACE/text-generation-webui/
 
 # git pull
 
