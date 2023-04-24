@@ -9,6 +9,8 @@ parser.add_argument('--pull', type=bool, default=False, help='Whether to pull be
 args = parser.parse_args()
 
 if __name__ == '__main__':
+    print('This file is deprecated, the behavior is compatible with notebooks earlier than 2023-04-24')
+    print('Use storage.py instead')
     # determine the root of the repo and cd to it
     ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
     os.chdir(ROOT)
