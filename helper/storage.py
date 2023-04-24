@@ -4,9 +4,9 @@ import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument('REPO', type=str, default='utensil/storage', nargs='?')
-parser.add_argument('-p', '--pull', type=bool, default=False, help='Whether to pull before push')
-parser.add_argument('-u', '--upload', type=bool, default=False, help='Whether to upload local changes')
-parser.add_argument('-l', '--lfs', type=bool, default=False, help='Whether to pull LFS files')
+parser.add_argument('-p', '--pull', type=bool, nargs='?', default=False, const=True, help='Whether to pull before push')
+parser.add_argument('-u', '--upload', type=bool, nargs='?', default=False, const=True, help='Whether to upload local changes')
+parser.add_argument('-l', '--lfs', type=bool, nargs='?', default=False, const=True, help='Whether to pull LFS files')
 
 args = parser.parse_args()
 
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     remote_repo = args.REPO
     local_repo = remote_repo.split('/')[-1]
 
-    repo = Repository(local_dir=local_repo, clone_from=remote_repo, repo_type='dataset', skip_lfs_files=!args.lfs, use_auth_token=HF_TOKEN)
+    repo = Repository(local_dir=local_repo, clone_from=remote_repo, repo_type='dataset', skip_lfs_files=not args.lfs, use_auth_token=HF_TOKEN)
 
     if args.pull:
         repo.git_pull(args.lfs)
