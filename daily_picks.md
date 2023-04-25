@@ -13,6 +13,10 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 
 |    Date    | 📚Papers | 🚀News                                                 | ⚡Discoveries | 🧠Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
+| 4.26 | [Transformers](https://arxiv.org/abs/2304.10557)
+| 4.26 | | | [HELM](https://github.com/stanford-crfm/helm) & [benchmarks](https://twitter.com/abacaj/status/1648881680835387392)
+| 4.26 | | | [Silent Bugs](https://ppwwyyxx.com/blog/2020/Fight-Against-Silent-Bugs-in-Deep-Learning-Libraries/) |
+| 4.26 | | | [Kernl](https://www.kernl.ai/) |
 | 4.21 | | | [137 emergent abilities](https://www.jasonwei.net/blog/emergence) |
 | 4.21 | | | Training [logbook](https://github.com/facebookresearch/metaseq/tree/main/projects/OPT/chronicles) & [metric](https://wandb.ai/eleutherai/neox) |
 | 4.21 | | | [axolotl](https://github.com/winglian/axolotl) & [genv](https://github.com/run-ai/genv) |
