@@ -13,7 +13,9 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 
 |    Date    | 📚Papers | 🚀News                                                 | ⚡Discoveries | 🧠Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
-| 4.26 | [Transformers](https://arxiv.org/abs/2304.10557)
+| 4.28 | [Iterative Bootstrapping](https://arxiv.org/abs/2304.11657) |
+| 4.27 | [Formal Transformers](https://arxiv.org/abs/2207.09238) |
+| 4.26 | [Transformers](https://arxiv.org/abs/2304.10557) |
 | 4.26 | | | [HELM](https://github.com/stanford-crfm/helm) & [benchmarks](https://twitter.com/abacaj/status/1648881680835387392)
 | 4.26 | | | [Silent Bugs](https://ppwwyyxx.com/blog/2020/Fight-Against-Silent-Bugs-in-Deep-Learning-Libraries/) |
 | 4.26 | | | [Kernl](https://www.kernl.ai/) |
@@ -77,6 +79,7 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 | 3.28 | | [Cerebras-GPT](https://www.cerebras.net/blog/cerebras-gpt-a-family-of-open-compute-efficient-large-language-models/) |
 | 3.27 | | [LeCun's talk](https://twitter.com/ylecun/status/1640133789199347713) |
 | 3.26 | [Low-Rank Simplicity Bias](https://openreview.net/forum?id=dn4B7Mes2z) |
+| 3.25 | [APE](https://arxiv.org/abs/2211.01910) |
 | 3.24 | | [Dolly](https://www.databricks.com/blog/2023/03/24/hello-dolly-democratizing-magic-chatgpt-open-models.html) |
 | 3.23 | | | [dalai](https://github.com/cocktailpeanut/dalai)[^4] |
 | 3.23 | | [ChatGPT Plugins](https://openai.com/blog/chatgpt-plugins) |
@@ -116,6 +119,7 @@ Decide whether include them and determine dates:
 
 ### Papers & Notes
 
+- [The Practical Guides for Large Language Models](https://github.com/Mooler0410/LLMsPracticalGuide) - A curated list of practical guide resources of LLMs. 
 - [thunlp/PromptPapers](https://github.com/thunlp/PromptPapers) - Must-read papers on prompt-based tuning for pre-trained language models.
 - [foocker/deeplearningtheory](https://github.com/foocker/deeplearningtheory) 
 - [dair-ai/ML-Course-Notes](https://github.com/dair-ai/ML-Course-Notes) - 🎓 Sharing machine learning course / lecture notes.
