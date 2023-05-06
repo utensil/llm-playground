@@ -21,7 +21,7 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 | 5.3 | | [OpenLLaMA 7B](https://lmsys.org/blog/2023-05-03-arena/) |
 | 5.3 | | [Chatbot Arena](https://github.com/openlm-research/open_llama) |
 | 4.29 | | [Lamini 12B](https://lamini.ai/blog/introducing-lamini) |
-| 4.26 | | [StableVicuna 13B](https://stability.ai/blog/stablevicuna-open-source-rlhf-chatbot)[^6] |
+| 4.28 | | [StableVicuna 13B](https://stability.ai/blog/stablevicuna-open-source-rlhf-chatbot)[^6] |
 | 4.28 | [Causal Reasoning & LLM](https://arxiv.org/abs/2305.00050) |
 | 4.28 | [Iterative Bootstrapping](https://arxiv.org/abs/2304.11657) |
 | 4.27 | [Formal Transformers](https://arxiv.org/abs/2207.09238) |
