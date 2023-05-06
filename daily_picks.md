@@ -13,6 +13,16 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 
 |    Date    | 📚Papers | 🚀News                                                 | ⚡Discoveries | 🧠Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
+| 5.6 | | [GPT4All 13B Snoozy](https://twitter.com/andriy_mulyar/status/1654544917035720705) |
+| 5.5 | | [RedPajama-INCITE 7B](https://www.together.xyz/blog/redpajama-models-v1) |
+| 5.5 | | [OpenAlpaca](https://github.com/yxuansu/OpenAlpaca) |
+| 5.5 | | [MPT-7B](https://www.mosaicml.com/blog/mpt-7b) |
+| 5.4 | | [StarCoder-15B](https://huggingface.co/blog/starcoder) |
+| 5.3 | | [OpenLLaMA 7B](https://lmsys.org/blog/2023-05-03-arena/) |
+| 5.3 | | [Chatbot Arena](https://github.com/openlm-research/open_llama) |
+| 4.29 | | [Lamini 12B](https://lamini.ai/blog/introducing-lamini) |
+| 4.26 | | [StableVicuna 13B](https://stability.ai/blog/stablevicuna-open-source-rlhf-chatbot)[^6] |
+| 4.28 | [Causal Reasoning & LLM](https://arxiv.org/abs/2305.00050) |
 | 4.28 | [Iterative Bootstrapping](https://arxiv.org/abs/2304.11657) |
 | 4.27 | [Formal Transformers](https://arxiv.org/abs/2207.09238) |
 | 4.26 | [Transformers](https://arxiv.org/abs/2304.10557) |
@@ -76,6 +86,7 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 | 3.29 | | [GPT4All](https://github.com/nomic-ai/gpt4all) |
 | 3.29 | | [LLaMA-Adapter](https://arxiv.org/abs/2303.16199) |
 | 3.29 | | | [llama_index](https://github.com/jerryjliu/llama_index) | 
+| 3.28 | | [OpenFlamingo](https://laion.ai/blog/open-flamingo/) |
 | 3.28 | | [Cerebras-GPT](https://www.cerebras.net/blog/cerebras-gpt-a-family-of-open-compute-efficient-large-language-models/) |
 | 3.27 | | [LeCun's talk](https://twitter.com/ylecun/status/1640133789199347713) |
 | 3.26 | [Low-Rank Simplicity Bias](https://openreview.net/forum?id=dn4B7Mes2z) |
@@ -119,7 +130,7 @@ Decide whether include them and determine dates:
 
 ### Papers & Notes
 
-- [The Practical Guides for Large Language Models](https://github.com/Mooler0410/LLMsPracticalGuide) - A curated list of practical guide resources of LLMs. 
+- [Mooler0410/LLMsPracticalGuide](https://github.com/Mooler0410/LLMsPracticalGuide) - A curated list of practical guide resources of LLMs. 
 - [thunlp/PromptPapers](https://github.com/thunlp/PromptPapers) - Must-read papers on prompt-based tuning for pre-trained language models.
 - [foocker/deeplearningtheory](https://github.com/foocker/deeplearningtheory) 
 - [dair-ai/ML-Course-Notes](https://github.com/dair-ai/ML-Course-Notes) - 🎓 Sharing machine learning course / lecture notes.
@@ -130,11 +141,14 @@ Decide whether include them and determine dates:
 - [imaurer/awesome-decentralized-llm](https://github.com/imaurer/awesome-decentralized-llm) - Collection of LLM resources that can be used to build products you can "own" or to perform reproducible research.
 - [nichtdax/awesome-totally-open-chatgpt](https://github.com/nichtdax/awesome-totally-open-chatgpt) - A list of totally open alternatives to ChatGPT
 - [FreedomIntelligence/LLMZoo](https://github.com/FreedomIntelligence/LLMZoo) - ⚡LLM Zoo is a project that provides data, models, and evaluation benchmark for large language models.⚡
+- [arjunbansal/awesome-oss-llm-ift-rlhf](https://github.com/arjunbansal/awesome-oss-llm-ift-rlhf) - Collection of open source implementations of LLMs with IFT and RLHF that are striving to get to ChatGPT level of performance
+- [stanford-crfm/ecosystem-graphs](https://github.com/stanford-crfm/ecosystem-graphs) - an ongoing effort to track the foundation model ecosystem
 
 ### Training
 
 - [zhilizju/Awesome-instruction-tuning](https://github.com/zhilizju/Awesome-instruction-tuning) - A curated list of awesome instruction tuning datasets, models, papers and repositories.
 - [yaodongC/awesome-instruction-dataset](https://github.com/yaodongC/awesome-instruction-dataset) - A collection of open-source dataset to train instruction-following LLMs (ChatGPT,LLaMA,Alpaca)
+- [PhoebusSi/Alpaca-CoT](https://github.com/PhoebusSi/Alpaca-CoT) - We unified the interfaces of instruction-tuning data (e.g., CoT data), multiple LLMs and parameter-efficient methods (e.g., lora, p-tuning) together for easy use
 - [visenger/awesome-mlops](https://github.com/visenger/awesome-mlops) - A curated list of references for MLOps
 
 ### Reasoning
@@ -159,3 +173,5 @@ Decide whether include them and determine dates:
 [^4]: Helped me testing LLaMA and Alpaca locally
 
 [^5]: Meerkat is a Python library for interactively exploring unstructured data with foundation models that understand them, you can also seamlessly switch between augmented data frames and reactive GUIs for easy verification and feedback.
+
+[^6]: The AI World’s First Open Source RLHF LLM Chatbot
