@@ -18,6 +18,7 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 | 5.5 | | [OpenAlpaca](https://github.com/yxuansu/OpenAlpaca) |
 | 5.5 | | [MPT-7B](https://www.mosaicml.com/blog/mpt-7b) |
 | 5.4 | | [StarCoder-15B](https://huggingface.co/blog/starcoder) |
+| 5.3 | | [replit-code-v1-3b](https://huggingface.co/replit/replit-code-v1-3b) |
 | 5.3 | | [OpenLLaMA 7B](https://lmsys.org/blog/2023-05-03-arena/) |
 | 5.3 | | [Chatbot Arena](https://github.com/openlm-research/open_llama) |
 | 4.29 | | [Lamini 12B](https://lamini.ai/blog/introducing-lamini) |
