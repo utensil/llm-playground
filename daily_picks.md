@@ -13,12 +13,12 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 
 |    Date    | 📚Papers | 🚀News                                                 | ⚡Discoveries | 🧠Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
-| | [SELF-ALIGN](https://arxiv.org/abs/2305.03047) | [IBM Dromedary 65B](https://mitibmdemos.draco.res.ibm.com/dromedary) |
 | 5.6 | | [GPT4All 13B Snoozy](https://twitter.com/andriy_mulyar/status/1654544917035720705) |
 | 5.6 | | | [MEMIT](https://arxiv.org/abs/2210.07229) & [REMEDI](https://arxiv.org/abs/2304.00740) |
 | 5.5 | | [RedPajama-INCITE 7B](https://www.together.xyz/blog/redpajama-models-v1) |
 | 5.5 | | [OpenAlpaca](https://github.com/yxuansu/OpenAlpaca) |
 | 5.5 | [ALiBi](https://arxiv.org/abs/2108.12409) & [Lion](https://arxiv.org/abs/2302.06675) | [MPT-7B](https://www.mosaicml.com/blog/mpt-7b) | [Composer](https://github.com/mosaicml/composer) & [StreamingDataset](https://github.com/mosaicml/streaming) && [LLM Foundry](https://github.com/mosaicml/llm-foundry) |
+| 5.5 | [SELF-ALIGN](https://arxiv.org/abs/2305.03047) | [IBM Dromedary 65B](https://mitibmdemos.draco.res.ibm.com/dromedary) |
 | 5.4 | [Multi Query Attention](https://arxiv.org/abs/1911.02150) & [Fill-in-the-Middle objective](https://arxiv.org/abs/2207.14255) | [StarCoder-15B](https://huggingface.co/blog/starcoder) | [bigcode/Megatron-LM](https://github.com/bigcode-project/Megatron-LM) |
 | 5.3 | [FasterTransformer](https://github.com/NVIDIA/FasterTransformer) | [replit-code-v1-3b](https://huggingface.co/replit/replit-code-v1-3b) |
 | 5.3 | | [OpenLLaMA 7B](https://lmsys.org/blog/2023-05-03-arena/) |
