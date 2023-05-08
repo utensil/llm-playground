@@ -13,14 +13,18 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 
 |    Date    | 📚Papers | 🚀News                                                 | ⚡Discoveries | 🧠Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
+| | [SELF-ALIGN](https://arxiv.org/abs/2305.03047) | [IBM Dromedary 65B](https://mitibmdemos.draco.res.ibm.com/dromedary) |
 | 5.6 | | [GPT4All 13B Snoozy](https://twitter.com/andriy_mulyar/status/1654544917035720705) |
+| 5.6 | | | [MEMIT](https://arxiv.org/abs/2210.07229) & [REMEDI](https://arxiv.org/abs/2304.00740) |
 | 5.5 | | [RedPajama-INCITE 7B](https://www.together.xyz/blog/redpajama-models-v1) |
 | 5.5 | | [OpenAlpaca](https://github.com/yxuansu/OpenAlpaca) |
-| 5.5 | | [MPT-7B](https://www.mosaicml.com/blog/mpt-7b) |
-| 5.4 | | [StarCoder-15B](https://huggingface.co/blog/starcoder) |
-| 5.3 | | [replit-code-v1-3b](https://huggingface.co/replit/replit-code-v1-3b) |
+| 5.5 | [ALiBi](https://arxiv.org/abs/2108.12409) & [Lion](https://arxiv.org/abs/2302.06675) | [MPT-7B](https://www.mosaicml.com/blog/mpt-7b) | [Composer](https://github.com/mosaicml/composer) & [StreamingDataset](https://github.com/mosaicml/streaming) && [LLM Foundry](https://github.com/mosaicml/llm-foundry) |
+| 5.4 | [Multi Query Attention](https://arxiv.org/abs/1911.02150) & [Fill-in-the-Middle objective](https://arxiv.org/abs/2207.14255) | [StarCoder-15B](https://huggingface.co/blog/starcoder) | [bigcode/Megatron-LM](https://github.com/bigcode-project/Megatron-LM) |
+| 5.3 | [FasterTransformer](https://github.com/NVIDIA/FasterTransformer) | [replit-code-v1-3b](https://huggingface.co/replit/replit-code-v1-3b) |
 | 5.3 | | [OpenLLaMA 7B](https://lmsys.org/blog/2023-05-03-arena/) |
 | 5.3 | | [Chatbot Arena](https://github.com/openlm-research/open_llama) |
+| 5.3 | [Distilling Step-by-Step](https://arxiv.org/abs/2305.02301) |
+| 5.2 | [Loss Landscapes](https://openreview.net/forum?id=QC10RmRbZy9) |
 | 4.29 | | [Lamini 12B](https://lamini.ai/blog/introducing-lamini) |
 | 4.28 | | [StableVicuna 13B](https://stability.ai/blog/stablevicuna-open-source-rlhf-chatbot)[^6] |
 | 4.28 | [Causal Reasoning & LLM](https://arxiv.org/abs/2305.00050) |
@@ -35,9 +39,10 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 | 4.21 | | | [axolotl](https://github.com/winglian/axolotl) & [genv](https://github.com/run-ai/genv) |
 | 4.20 |  [Verifiability](https://arxiv.org/abs/2304.09848) |
 | 4.19 | | |  [GPTCache](https://github.com/zilliztech/GPTCache) |
-| 4.19 | |  [StableLM](https://stability.ai/blog/stability-ai-launches-the-first-of-its-stablelm-suite-of-language-models) |
+| 4.19 | [FlashAttention](https://arxiv.org/abs/2205.14135) |  [StableLM](https://stability.ai/blog/stability-ai-launches-the-first-of-its-stablelm-suite-of-language-models)  | [GPT-NeoX](https://github.com/EleutherAI/gpt-neox) & [Megatron](https://github.com/NVIDIA/Megatron-LM) |
 | 4.19 | | |  [meerkat](https://github.com/HazyResearch/meerkat)[^5] |
 | 4.19 | | | [CAMEL](https://github.com/lightaime/camel) & [chatarena](https://github.com/chatarena/chatarena) |
+| 4.18 | [FT v.s. LoRA](https://arxiv.org/abs/2304.08109) | [BELLE](https://github.com/LianjiaTech/BELLE) |
 | 4.18 | | [LLaVA](https://github.com/haotian-liu/LLaVA) |
 | 4.17 | | |   [Alpaca-CoT](https://github.com/PhoebusSi/Alpaca-CoT) |
 | 4.17 | |  [RedPajama-Data](https://github.com/togethercomputer/RedPajama-Data) |
