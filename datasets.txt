@@ -91,9 +91,36 @@ https://github.com/yizhongw/self-instruct
 https://github.com/lamini-ai/lamini
 https://github.com/nelson-liu/evaluating-verifiability-in-generative-search-engines
 
+https://github.com/thu-coai/Safety-Prompts
+
+
+
+https://github.com/csitfun/LogiQA2.0
+
+https://github.com/nlpdata/c3
+https://github.com/nlpdata/dream
+
+https://github.com/terryyz/llm-code-eval
+
+ehartford/WizardLM_alpaca_evol_instruct_70k_unfiltered
+nomic-ai/gpt4all-j-prompt-generations
+bigcode/ta-prompt
+MBZUAI/LaMini-instruction
+OpenAssistant/oasst1
+
+# has extra download
+
+https://github.com/brightmart/nlp_chinese_corpus
+https://github.com/FranxYao/chain-of-thought-hub
+
 # TODO: need extra download
 
+https://github.com/fighting41love/funNLP
+
 # need filter too
+
+bigcode/the-stack
+
 togethercomputer/RedPajama-Data-1T
 
 https://github.com/wellecks/naturalproofs
