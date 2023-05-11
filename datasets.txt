@@ -110,6 +110,8 @@ OpenAssistant/oasst1
 
 # has extra download
 
+https://github.com/wellecks/naturalproofs
+
 https://github.com/brightmart/nlp_chinese_corpus
 https://github.com/FranxYao/chain-of-thought-hub
 
@@ -122,8 +124,6 @@ https://github.com/fighting41love/funNLP
 bigcode/the-stack
 
 togethercomputer/RedPajama-Data-1T
-
-https://github.com/wellecks/naturalproofs
 
 # TODO: too big, to foundational, need to filter and dedup
 
