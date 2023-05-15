@@ -1,3 +1,25 @@
+# Tested with the following commands
+#
+# 1. One complete run
+#
+# > python helper/download-huge.py bigcode/the-stack 'data/arc/*' 'data/cmake/*'|grep -v Redirecting
+# Resume downloading of 0 LFS files
+# Found 4 LFS files to download from 4 matched files
+#
+# 2. Interupt and resume downloading
+#
+# Resume downloading of 4 LFS files
+# Found 1 LFS files to download from 4 matched files
+#
+# 3. Remove a file and resume downloading
+#
+# > rm datasets/bigcode_the-stack/data/cmake/train-00002-of-00003.parquet
+# > python helper/download-huge.py bigcode/the-stack 'data/arc/*' 'data/cmake/*'|grep -v Redirecting
+#
+# Resume downloading of 5 LFS files
+# Found 0 LFS files to download from 3 matched files
+
+
 from huggingface_hub import Repository, repository
 import argparse
 import os
@@ -38,13 +60,16 @@ def get_file_by_aria2(url_info, output_folder):
 
     output_file = output_folder / Path(filename)
 
-    if output_file.exists() and output_file.stat().st_size == total_size:
+    if output_file.exists() and output_file.stat().st_size == total_size and not (output_folder / Path(f"{filename}.aria2")).exists():
         print(f"Downloaded: {output_file}")
         return
 
     aria_command = f"aria2c -c -x 16 -s 16 -k 1M {url} -d {output_folder} -o {filename}"
 
     print(f"Running: {aria_command}")
+
+    token = os.environ.get("HUGGINGFACE_TOKEN")
+    aria_command = f"{aria_command} --header='authorization: Bearer {token}'"
     # # call command line aria2c to download
     subprocess.run(aria_command, shell=True, check=True)
 
@@ -62,7 +87,7 @@ def parse_lfs_file(file, root, repo_type, repo, branch):
     url_info = None
 
     if not file.is_dir() and file.stat().st_size < 2048:
-        with open(file, 'r') as f:
+        with open(file, 'r', encoding='latin1') as f:
             lines = f.readlines()
             for line in lines:
                 if line.startswith('version https://git-lfs.github.com/spec/'):
@@ -76,14 +101,18 @@ def parse_lfs_file(file, root, repo_type, repo, branch):
     return url_info
 
 def get_download_links(paths, output_folder, repo_type, remote_repo, branch):
+    all_files = []
     lfs_files = []
     for path_pattern in paths:
         files = output_folder.glob(path_pattern)
         for file in files:
+            fname = f'{file.relative_to(output_folder)}'
+            if not fname.endswith('.aria2'):
+                all_files.append(fname)
             url_info = parse_lfs_file(file, output_folder, repo_type, remote_repo, branch)
             if url_info is not None:
                 lfs_files.append(url_info)
-    return lfs_files
+    return lfs_files, all_files
 
 if __name__ == '__main__':
     # determine the root of the repo and cd to it
@@ -128,15 +157,27 @@ if __name__ == '__main__':
 
     links_file = output_folder / 'links.json'
 
+    lfs_files, all_files = get_download_links(args.PATHS, output_folder, repo_type, remote_repo, branch)
+
     lfs_files = []
 
-    # TODO expire logic
+    # This is to prevent partial download from losing LFS information
+    lfs_files_old = []
     if links_file.exists():    
         with open(links_file, 'r') as f:
-            lfs_files = json.load(f)
-    else:
-        lfs_files = get_download_links(args.PATHS, output_folder, repo_type, remote_repo, branch)
-        with open(links_file, 'w') as f:
-            json.dump(lfs_files, f)
+            lfs_files_old = json.load(f)
+            lfs_files.extend(lfs_files_old)
 
-    download_files(lfs_files, output_folder, args.threads)
+    lfs_files_new, all_files = get_download_links(args.PATHS, output_folder, repo_type, remote_repo, branch)
+    lfs_files.extend(lfs_files_new)
+
+    with open(links_file, 'w') as f:
+        json.dump(lfs_files, f)
+
+    print(f"Resume downloading of {len(lfs_files_old)} LFS files")
+
+    download_files(lfs_files_old, output_folder, args.threads)
+
+    print(f"Found {len(lfs_files_new)} LFS files to download from {len(all_files)} matched files")
+
+    download_files(lfs_files_new, output_folder, args.threads)
