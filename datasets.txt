@@ -108,6 +108,10 @@ bigcode/ta-prompt
 MBZUAI/LaMini-instruction
 OpenAssistant/oasst1
 
+junelee/wizard_vicuna_70k
+ehartford/wizard_vicuna_70k_unfiltered
+hoskinson-center/minif2f-lean4
+
 # has extra download
 
 https://github.com/wellecks/naturalproofs
