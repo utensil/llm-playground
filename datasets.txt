@@ -119,15 +119,17 @@ https://github.com/wellecks/naturalproofs
 https://github.com/brightmart/nlp_chinese_corpus
 https://github.com/FranxYao/chain-of-thought-hub
 
+# selective download
+
+# 'data/agda/*'  'data/coq/*' 'data/c2hs-haskell/*' 'data/f-sharp/*' 'data/idris/*' 'data/isabelle/*' 'data/julia/*' 'data/kotlin/*' 'data/lean/*'  'data/literate-agda/*' 'data/literate-haskell/*' 'data/markdown/*' 'data/mathematica/*' 'data/prolog/*' 'data/restructuredtext/*' 'data/rust/*' 'data/sage/*' 'data/tex/*'
+bigcode/the-stack
+
+# wiki.jsonl book.jsonl filtered_08cdfa755e6d4d89b673d5bd1acee5f6.sampled.jsonl arxiv_*.jsonl
+togethercomputer/RedPajama-Data-1T
+
 # TODO: need extra download
 
 https://github.com/fighting41love/funNLP
-
-# need filter too
-
-bigcode/the-stack
-
-togethercomputer/RedPajama-Data-1T
 
 # TODO: too big, to foundational, need to filter and dedup
 
