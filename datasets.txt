@@ -112,7 +112,23 @@ junelee/wizard_vicuna_70k
 ehartford/wizard_vicuna_70k_unfiltered
 hoskinson-center/minif2f-lean4
 
-
+mosaicml/dolly_hhrlhf
+MBZUAI/Bactrian-X
+teknium/GPT4-LLM-Cleaned
+spdenisov/tatoeba
+spdenisov/udt_alpaca
+spdenisov/enwiktionary
+0x22almostEvil/multilingual-wikihow-qa-16k
+0x22almostEvil/reasoning-gsm-qna-oa
+0x22almostEvil/reasoning_bg_oa
+0x22almostEvil/tatoeba-mt-qna-oa
+Helsinki-NLP/tatoeba_mt
+clips/20Q
+allenai/soda
+victor123/evol_instruct_70k
+allenai/objaverse
+cryscan/multilingual-share
+stanfordnlp/SHP
 
 # has extra download
 
@@ -136,11 +152,19 @@ m8than/normalised_chatml_rwkvready
 
 # TODO: need extra download
 
+allenai/lila
+
 https://github.com/fighting41love/funNLP
 
 https://github.com/X-PLUG/mPLUG-Owl
 
 # TODO: too big, to foundational, need to filter and dedup
+
+# SirNeural/flan_v2
+
+# https://huggingface.co/datasets/allenai/c4/tree/mC4_3.1.0/multilingual
+# allenai/c4
+# allenai/nllb
 
 # oscar-corpus/OSCAR-2201
 
