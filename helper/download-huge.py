@@ -92,12 +92,13 @@ def parse_lfs_file(file, root, repo_type, repo, branch):
             for line in lines:
                 if line.startswith('version https://git-lfs.github.com/spec/'):
                     url_info = {}
+                    url_info["path"] = f"{fname}"
+                    url_info["link"] = f"{base_url}{repo}/resolve/{branch}/{fname}"
                 elif line.startswith('oid sha256:'):
                     url_info["sha256sum"] = line.split('sha256:')[1].strip()
                 elif line.startswith('size '):
-                    url_info["path"] = f"{fname}"
                     url_info["size"] = int(line.split('size ')[1].strip())
-                    url_info["link"] = f"{base_url}{repo}/resolve/{branch}/{fname}"
+
     return url_info
 
 def get_download_links(paths, output_folder, repo_type, remote_repo, branch):
