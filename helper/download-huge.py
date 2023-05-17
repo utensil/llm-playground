@@ -88,8 +88,7 @@ def parse_lfs_file(file, root, repo_type, repo, branch):
 
     if not file.is_dir() and file.stat().st_size < 2048:
         with open(file, 'r', encoding='latin1') as f:
-            lines = f.readlines(10)
-            for line in lines:
+            for line in f:
                 if line.startswith('version https://git-lfs.github.com/spec/'):
                     url_info = {}
                     url_info["path"] = f"{fname}"
@@ -98,6 +97,9 @@ def parse_lfs_file(file, root, repo_type, repo, branch):
                     url_info["sha256sum"] = line.split('sha256:')[1].strip()
                 elif line.startswith('size '):
                     url_info["size"] = int(line.split('size ')[1].strip())
+                    break
+                else:
+                    break
 
     return url_info
 
