@@ -88,7 +88,7 @@ def parse_lfs_file(file, root, repo_type, repo, branch):
 
     if not file.is_dir() and file.stat().st_size < 2048:
         with open(file, 'r', encoding='latin1') as f:
-            lines = f.readlines(5)
+            lines = f.readlines(10)
             for line in lines:
                 if line.startswith('version https://git-lfs.github.com/spec/'):
                     url_info = {}
