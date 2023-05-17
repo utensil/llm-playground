@@ -112,6 +112,8 @@ junelee/wizard_vicuna_70k
 ehartford/wizard_vicuna_70k_unfiltered
 hoskinson-center/minif2f-lean4
 
+
+
 # has extra download
 
 https://github.com/wellecks/naturalproofs
@@ -129,6 +131,9 @@ bigcode/the-stack
 # wiki.jsonl book.jsonl filtered_08cdfa755e6d4d89b673d5bd1acee5f6.sampled.jsonl arxiv_*.jsonl
 togethercomputer/RedPajama-Data-1T
 
+# 'preprocessed/adult/*' 'preprocessed/chain_of_thought/*' 'preprocessed/conversation/*' 'preprocessed/instruct/*' 'preprocessed/knowledge/*' 'preprocessed/rlhf/*' 'preprocessed/summarisation/*' 'preprocessed/system/*'
+m8than/normalised_chatml_rwkvready
+
 # TODO: need extra download
 
 https://github.com/fighting41love/funNLP
@@ -136,6 +141,8 @@ https://github.com/fighting41love/funNLP
 https://github.com/X-PLUG/mPLUG-Owl
 
 # TODO: too big, to foundational, need to filter and dedup
+
+# oscar-corpus/OSCAR-2201
 
 # sil-ai/bloom-lm
 # EleutherAI/the_pile
