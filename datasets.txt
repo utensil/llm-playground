@@ -122,13 +122,15 @@ spdenisov/enwiktionary
 0x22almostEvil/reasoning-gsm-qna-oa
 0x22almostEvil/reasoning_bg_oa
 0x22almostEvil/tatoeba-mt-qna-oa
-Helsinki-NLP/tatoeba_mt
 clips/20Q
 allenai/soda
 victor123/evol_instruct_70k
-allenai/objaverse
 cryscan/multilingual-share
 stanfordnlp/SHP
+
+wangrui6/Zhihu-KOL
+liyucheng/zhihu_rlhf_3k
+liyucheng/zhihu_26k
 
 # has extra download
 
@@ -138,6 +140,21 @@ https://github.com/brightmart/nlp_chinese_corpus
 https://github.com/FranxYao/chain-of-thought-hub
 
 https://github.com/Troyanovsky/Local-LLM-comparison
+
+# should have filted
+
+Helsinki-NLP/tatoeba_mt
+
+# so many files
+allenai/objaverse
+
+# huge download
+
+# '*'
+RyokoAI/CNNovel125K
+RyokoAI/Fandom23K
+RyokoAI/ScribbleHub17K
+RyokoAI/Honeyfeed3600
 
 # selective download
 
