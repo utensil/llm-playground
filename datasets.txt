@@ -132,6 +132,17 @@ wangrui6/Zhihu-KOL
 liyucheng/zhihu_rlhf_3k
 liyucheng/zhihu_26k
 
+PKU-Alignment/PKU-SafeRLHF-10K
+
+allenai/prosocial-dialog
+roneneldan/TinyStories
+sambanovasystems/xOA22
+sambanovasystems/x-self-instruct-seed-32
+IlyaGusev/gpt_roleplay_realm
+iamketan25/roleplay-instructions-dataset
+huggingface-tools/default-endpoints
+ashiyakatuka11/empathetic_dialogues_context
+
 # has extra download
 
 https://github.com/wellecks/naturalproofs
@@ -141,12 +152,24 @@ https://github.com/FranxYao/chain-of-thought-hub
 
 https://github.com/Troyanovsky/Local-LLM-comparison
 
+# for now:
+# https://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/xml/en.zip
+open_subtitles
+
+# also https://cloud.tsinghua.edu.cn/d/a5a16f2381e7439eb475/
+https://github.com/thu-coai/LOT-LongLM
+
+https://github.com/StevenGrove/GPT4Tools
+https://github.com/HKUNLP/UnifiedSKG
+https://github.com/RUCAIBox/StructGPT
+
 # should have filted
 
 Helsinki-NLP/tatoeba_mt
 
-# so many files
+# so many files...
 allenai/objaverse
+NTU-NLP-sg/xCodeEval
 
 # huge download
 
@@ -155,6 +178,9 @@ RyokoAI/CNNovel125K
 RyokoAI/Fandom23K
 RyokoAI/ScribbleHub17K
 RyokoAI/Honeyfeed3600
+
+# '*'
+roneneldan/TinyStories
 
 # selective download
 
