@@ -143,6 +143,10 @@ iamketan25/roleplay-instructions-dataset
 huggingface-tools/default-endpoints
 ashiyakatuka11/empathetic_dialogues_context
 
+Abirate/english_quotes
+openaccess-ai-collective/oasst1-guanaco-extended
+winddude/reddit_finance_43_250k
+
 # has extra download
 
 https://github.com/wellecks/naturalproofs
@@ -193,6 +197,14 @@ togethercomputer/RedPajama-Data-1T
 # 'preprocessed/adult/*' 'preprocessed/chain_of_thought/*' 'preprocessed/conversation/*' 'preprocessed/instruct/*' 'preprocessed/knowledge/*' 'preprocessed/rlhf/*' 'preprocessed/summarisation/*' 'preprocessed/system/*'
 m8than/normalised_chatml_rwkvready
 
+#
+tiiuae/falcon-refinedweb
+
+# TODO: selective download
+
+# 'en/*' 'zh/*'
+bigscience/xP3
+
 # TODO: need extra download
 
 allenai/lila
@@ -223,6 +235,7 @@ https://github.com/X-PLUG/mPLUG-Owl
 # wikipedia
 # the_pile_books3
 # pg19
+
 
 # TODO
 
