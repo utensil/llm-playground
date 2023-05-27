@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+  pytorch:
+    image: runpod/pytorch:3.10-1.13.1-116
+    command: |
+      bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/prepare_runpod_pytorch.sh -sSf | bash"
+    env_file: .env
+    ports:
+      - "7860:7860"
+      - "8888:8888"
+    stdin_open: true
+    tty: true

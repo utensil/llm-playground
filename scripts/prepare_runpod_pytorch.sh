@@ -52,7 +52,7 @@ mkdir -p $WORKSPACE/llm-playground/models
 mkdir -p $WORKSPACE/llm-playground/loras
 mkdir -p $WORKSPACE/llm-playground/datasets
 
-python ./helper/upload.py
+python ./helper/storage.py
 
 # cd notebooks
 # pip3 install -r requirements.txt
