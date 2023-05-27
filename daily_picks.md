@@ -12,14 +12,33 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 
 |    Date    | 📚Papers | 🚀News                                                 | ⚡Discoveries | 🧠Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
+| 5.26 | | [Falcon 7B/40B & RefinedWeb](https://huggingface.co/tiiuae/falcon-40b-instruct) |  |
 | 5.26 | | [Gorilla](https://gorilla.cs.berkeley.edu/) | [TF Agents](https://github.com/huggingface/transformers/pull/23214) |
 | 5.24 | [Recursively](https://arxiv.org/abs/2305.14699) | |
+| 5.23 | [VanillaNet](https://arxiv.org/abs/2305.14342) | |
 | 5.23 | [Sophia](https://arxiv.org/abs/2305.14342) | |
 | 5.23 | [QLoRA](https://huggingface.co/blog/4bit-transformers-bitsandbytes) | [guanaco-65B](https://huggingface.co/TheBloke/guanaco-65B-HF) |
-| 5.22| | [GPT4All 13B Snoozy](https://twitter.com/andriy_mulyar/status/1654544917035720705) |
-| 5.18 | | [LIMA](https://arxiv.org/abs/2305.11206) |
-| 5.17 | | [Safe-RLHF](https://github.com/PKU-Alignment/safe-rlhf) |
-| 5.17 | | [ToT](https://arxiv.org/abs/2305.10601) |
+| 5.22 | [RWKV](https://arxiv.org/abs/2305.13048) |
+| 5.22 | | [GPT4All 13B Snoozy](https://twitter.com/andriy_mulyar/status/1654544917035720705) |
+| 5.21 | | | [The Little Book](https://fleuret.org/public/lbdl.pdf) |
+| 5.20 | [Thought Forest](https://arxiv.org/abs/2302.06706) |
+| 5.20 | |  [248 H100 SXM5s](https://twitter.com/boborado/status/1659608452849897472?s=20) | [Cooperation](https://arxiv.org/abs/2305.10449) & [Hyena](https://arxiv.org/abs/2302.10866) |
+| 5.20 | [CodeCompose](https://arxiv.org/abs/2305.12050) |
+| 5.18 | [Meaning](https://arxiv.org/abs/2305.11169) |
+| 5.18 | [LIMA](https://arxiv.org/abs/2305.11206) |
+| 5.18 | [Embodied Experiences](https://arxiv.org/abs/2305.10626) |
+| 5.17 | [DoReMi](https://arxiv.org/abs/2305.10429) |
+| 5.17 | [Safe-RLHF](https://github.com/PKU-Alignment/safe-rlhf) |
+| 5.17 | [ToT](https://arxiv.org/abs/2305.10601) |
+| 5.16 | [StructGPT](https://arxiv.org/abs/2305.09645) |
+| 5.15 | | | [{{Guidance}}](https://github.com/microsoft/guidance) |
+| 5.13 | |  [Prompt Leak](https://twitter.com/marvinvonhagen/status/1657060506371346432) |
+| 5.13 | |  [CodeT5+](https://github.com/salesforce/CodeT5/tree/main/CodeT5%2B) |
+| 5.12 | | | [spacy-llm](https://github.com/explosion/spacy-llm) |
+| 5.12 | [TinyStories](https://arxiv.org/abs/2305.07759) |
+| 5.12 | [MEGABYTE](https://arxiv.org/abs/2305.07185) |
+| 5.10 | |  [IMAGEBIND](https://ai.facebook.com/blog/imagebind-six-modalities-binding-ai/) |
+| 5.10 | | | [Named Tensor Notation](https://namedtensor.github.io/) |
 | 5.6 | | [MMS](https://github.com/facebookresearch/fairseq/tree/main/examples/mms) |
 | 5.6 | | | [MEMIT](https://arxiv.org/abs/2210.07229) & [REMEDI](https://arxiv.org/abs/2304.00740) |
 | 5.5 | | [RedPajama-INCITE 7B](https://www.together.xyz/blog/redpajama-models-v1) |
@@ -152,6 +171,7 @@ Decide whether include them and determine dates:
 - [foocker/deeplearningtheory](https://github.com/foocker/deeplearningtheory) 
 - [dair-ai/ML-Course-Notes](https://github.com/dair-ai/ML-Course-Notes) - 🎓 Sharing machine learning course / lecture notes.
 - [ml4code](https://ml4code.github.io/papers.html) - A Survey of Machine Learning for Big Code and Naturalness
+- [Everything-LLMs-And-Robotics](https://github.com/jrin771/Everything-LLMs-And-Robotics) - The world's largest GitHub Repository for LLMs + Robotics
 
 ### Models
 
