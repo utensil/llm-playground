@@ -10,21 +10,32 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 - News are dated by the time they happened. Discoveries and papers are dated by the time I noticeed their importance[^1].
 - Style: only key words in the table, extra info should be available via the link or the food note.
 
-
 |    Date    | 📚Papers | 🚀News                                                 | ⚡Discoveries | 🧠Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
-| 5.6 | | [GPT4All 13B Snoozy](https://twitter.com/andriy_mulyar/status/1654544917035720705) |
+| 5.26 | | [Gorilla](https://gorilla.cs.berkeley.edu/) | [TF Agents](https://github.com/huggingface/transformers/pull/23214) |
+| 5.24 | [Recursively](https://arxiv.org/abs/2305.14699) | |
+| 5.23 | [Sophia](https://arxiv.org/abs/2305.14342) | |
+| 5.23 | [QLoRA](https://huggingface.co/blog/4bit-transformers-bitsandbytes) | [guanaco-65B](https://huggingface.co/TheBloke/guanaco-65B-HF) |
+| 5.22| | [GPT4All 13B Snoozy](https://twitter.com/andriy_mulyar/status/1654544917035720705) |
+| 5.18 | | [LIMA](https://arxiv.org/abs/2305.11206) |
+| 5.17 | | [Safe-RLHF](https://github.com/PKU-Alignment/safe-rlhf) |
+| 5.17 | | [ToT](https://arxiv.org/abs/2305.10601) |
+| 5.6 | | [MMS](https://github.com/facebookresearch/fairseq/tree/main/examples/mms) |
 | 5.6 | | | [MEMIT](https://arxiv.org/abs/2210.07229) & [REMEDI](https://arxiv.org/abs/2304.00740) |
 | 5.5 | | [RedPajama-INCITE 7B](https://www.together.xyz/blog/redpajama-models-v1) |
 | 5.5 | | [OpenAlpaca](https://github.com/yxuansu/OpenAlpaca) |
 | 5.5 | [ALiBi](https://arxiv.org/abs/2108.12409) & [Lion](https://arxiv.org/abs/2302.06675) | [MPT-7B](https://www.mosaicml.com/blog/mpt-7b) | [Composer](https://github.com/mosaicml/composer) & [StreamingDataset](https://github.com/mosaicml/streaming) && [LLM Foundry](https://github.com/mosaicml/llm-foundry) |
 | 5.5 | [SELF-ALIGN](https://arxiv.org/abs/2305.03047) | [IBM Dromedary 65B](https://mitibmdemos.draco.res.ibm.com/dromedary) |
+| 5.4 | [APO](https://arxiv.org/abs/2305.03495) |
 | 5.4 | [Multi Query Attention](https://arxiv.org/abs/1911.02150) & [Fill-in-the-Middle objective](https://arxiv.org/abs/2207.14255) | [StarCoder-15B](https://huggingface.co/blog/starcoder) | [bigcode/Megatron-LM](https://github.com/bigcode-project/Megatron-LM) |
+| 5.3 | [Sourcegraph Cody](https://about.sourcegraph.com/cody) | 
 | 5.3 | [FasterTransformer](https://github.com/NVIDIA/FasterTransformer) | [replit-code-v1-3b](https://huggingface.co/replit/replit-code-v1-3b) |
 | 5.3 | | [OpenLLaMA 7B](https://lmsys.org/blog/2023-05-03-arena/) |
 | 5.3 | | [Chatbot Arena](https://github.com/openlm-research/open_llama) |
 | 5.3 | [Distilling Step-by-Step](https://arxiv.org/abs/2305.02301) |
+| 5.2 | [Unlimiformer](https://arxiv.org/abs/2305.01625) |
 | 5.2 | [Loss Landscapes](https://openreview.net/forum?id=QC10RmRbZy9) |
+| 5.1 | [Self-Notes](https://arxiv.org/abs/2305.00833) |
 | 4.29 | | [Lamini 12B](https://lamini.ai/blog/introducing-lamini) |
 | 4.28 | | [StableVicuna 13B](https://stability.ai/blog/stablevicuna-open-source-rlhf-chatbot)[^6] |
 | 4.28 | [Causal Reasoning & LLM](https://arxiv.org/abs/2305.00050) |
@@ -140,6 +151,7 @@ Decide whether include them and determine dates:
 - [thunlp/PromptPapers](https://github.com/thunlp/PromptPapers) - Must-read papers on prompt-based tuning for pre-trained language models.
 - [foocker/deeplearningtheory](https://github.com/foocker/deeplearningtheory) 
 - [dair-ai/ML-Course-Notes](https://github.com/dair-ai/ML-Course-Notes) - 🎓 Sharing machine learning course / lecture notes.
+- [ml4code](https://ml4code.github.io/papers.html) - A Survey of Machine Learning for Big Code and Naturalness
 
 ### Models
 
