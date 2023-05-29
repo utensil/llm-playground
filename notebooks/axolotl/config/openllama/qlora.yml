@@ -16,20 +16,20 @@ adapter: qlora
 lora_model_dir:
 sequence_len: 2048
 max_packed_sequence_len:
-lora_r: 8
+lora_r: 16
 lora_alpha: 32
 lora_dropout: 0.05
 lora_target_modules:
 lora_target_linear: true
 lora_fan_in_fan_out:
-wandb_project: openllama-qlora
-wandb_watch:
+wandb_project: openllama-qlora-model
+wandb_watch: all
 wandb_run_id:
-wandb_log_model:
+wandb_log_model: checkpoint
 output_dir: ./qlora-out
 batch_size: 1
 micro_batch_size: 1
-num_epochs: 4
+num_epochs: 1
 optimizer: paged_adamw_32bit
 torchdistx_path:
 lr_scheduler: cosine
@@ -42,6 +42,7 @@ tf32: true
 gradient_checkpointing: true
 early_stopping_patience:
 resume_from_checkpoint:
+auto_resume_from_checkpoints: true
 local_rank:
 logging_steps: 1
 xformers_attention: true
@@ -50,7 +51,7 @@ gptq_groupsize:
 gptq_model_v1:
 warmup_steps: 10
 eval_steps: 20
-save_steps:
+save_steps: 100
 debug:
 deepspeed:
 weight_decay: 0.0
