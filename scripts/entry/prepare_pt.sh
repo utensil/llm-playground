@@ -8,14 +8,14 @@
 #
 # To run this in RunPod with `runpod/pytorch:3.10-1.13.1-116`, set
 # Expose HTTP Ports (Max 10): 7860,8888
-# docker command: `bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/prepare_runpod_pytorch.sh -sSf | bash"`
+# docker command: `bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/prepare_pt.sh -sSf | bash"`
 # WEBUI chatbot
 # JUPYTER_PASSWORD change to your secret
 # HUGGINGFACE_TOKEN change to your token from https://huggingface.co/settings/tokens
 # SUDO nosudo
 # WORKSPACE /workspace/
 #
-# To test this in Codespaces, run `cd /workspaces/ && WORKSPACE=/workspaces/ llm-playground/scripts/prepare_runpod_pytorch.sh`
+# To test this in Codespaces, run `cd /workspaces/ && WORKSPACE=/workspaces/ llm-playground/scripts/entry/prepare_pt.sh`
 
 set -euxo pipefail
 
