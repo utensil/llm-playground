@@ -10,6 +10,7 @@
 # HUGGINGFACE_TOKEN change to your token from https://huggingface.co/settings/tokens
 # SUDO nosudo
 # WORKSPACE /workspace/
+# WANDB_API_KEY change to your key from https://wandb.ai/authorize
 #
 # To test this in Codespaces, run `cd /workspaces/ && WORKSPACE=/workspaces/ llm-playground/scripts/entry/prepare_ax.sh`
 
@@ -52,6 +53,8 @@ python ./helper/storage.py
 
 bash $WORKSPACE/llm-playground/scripts/prepare_jupyter.sh
 bash $WORKSPACE/llm-playground/scripts/prepare_qlora.sh
+
+cp -r $WORKSPACE/llm-playground/notebooks/axolotl/config/* $WORKSPACE/axolotl/examples/
 
 JUPYTER_PASSWORD=${JUPYTER_PASSWORD:-"pytorch"}
 
