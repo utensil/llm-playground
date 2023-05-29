@@ -1,10 +1,10 @@
 # Assuming image: winglian/axolotl-runpod:main-cu118-2.0.0
 
 # TODO: maybe no -U or make it optional
-pip install -q bitsandbytes
-pip install -q git+https://github.com/huggingface/transformers.git 
-pip install -q git+https://github.com/huggingface/peft.git
-pip install -q git+https://github.com/huggingface/accelerate.git
+pip install -q -U bitsandbytes
+pip install -q -U git+https://github.com/huggingface/transformers.git 
+pip install -q -U git+https://github.com/huggingface/peft.git
+pip install -q -U git+https://github.com/huggingface/accelerate.git
 pip install -q datasets
 pip install -q einops scipy wandb
 

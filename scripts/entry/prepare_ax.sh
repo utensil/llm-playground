@@ -51,6 +51,7 @@ mkdir -p $WORKSPACE/llm-playground/datasets
 python ./helper/storage.py
 
 bash $WORKSPACE/llm-playground/scripts/prepare_jupyter.sh
+bash $WORKSPACE/llm-playground/scripts/prepare_qlora.sh
 
 JUPYTER_PASSWORD=${JUPYTER_PASSWORD:-"pytorch"}
 
