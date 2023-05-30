@@ -29,7 +29,7 @@ wandb_watch:
 wandb_run_id:
 wandb_log_model: checkpoint
 output_dir: ./qlora-out
-batch_size: 4
+batch_size: 16
 micro_batch_size: 4
 num_epochs: 1
 optimizer: paged_adamw_32bit
