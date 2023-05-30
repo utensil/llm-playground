@@ -138,6 +138,8 @@ Abirate/english_quotes
 openaccess-ai-collective/oasst1-guanaco-extended
 winddude/reddit_finance_43_250k
 
+https://github.com/lupantech/PromptPG
+
 # has extra download
 
 https://github.com/wellecks/naturalproofs
