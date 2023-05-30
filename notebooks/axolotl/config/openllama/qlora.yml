@@ -25,7 +25,7 @@ lora_target_modules:
 lora_target_linear: true
 lora_fan_in_fan_out:
 wandb_project: openllama-qlora-model
-wandb_watch: all
+wandb_watch:
 wandb_run_id:
 wandb_log_model: checkpoint
 output_dir: ./qlora-out
