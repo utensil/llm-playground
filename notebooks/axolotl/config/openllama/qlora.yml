@@ -24,14 +24,14 @@ lora_dropout: 0.05
 lora_target_modules:
 lora_target_linear: true
 lora_fan_in_fan_out:
-wandb_project: openllama-qlora-gsm8k
+wandb_project: openllama-qlora-gsm8k-16
 wandb_watch:
 wandb_run_id:
 wandb_log_model: checkpoint
 output_dir: ./qlora-out
-batch_size: 16
-micro_batch_size: 4
-num_epochs: 1
+batch_size: 128
+micro_batch_size: 32
+num_epochs: 2
 optimizer: paged_adamw_32bit
 torchdistx_path:
 lr_scheduler: cosine
@@ -52,8 +52,8 @@ flash_attention:
 gptq_groupsize:
 gptq_model_v1:
 warmup_steps: 10
-eval_steps: 20
-save_steps: 100
+eval_steps: 5
+save_steps: 10
 debug:
 deepspeed:
 weight_decay: 0.0
