@@ -139,6 +139,7 @@ openaccess-ai-collective/oasst1-guanaco-extended
 winddude/reddit_finance_43_250k
 
 https://github.com/lupantech/PromptPG
+openllmplayground/pandagpt_visual_instruction_dataset
 
 # has extra download
 
@@ -173,6 +174,7 @@ Helsinki-NLP/tatoeba_mt
 
 # partial download
 allenai/objaverse
+# huge 'data/*'
 tiiuae/falcon-refinedweb
 
 # TODO: partial download
