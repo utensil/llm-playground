@@ -24,13 +24,13 @@ lora_dropout: 0.05
 lora_target_modules:
 lora_target_linear: true
 lora_fan_in_fan_out:
-wandb_project: openllama-qlora-model
+wandb_project: openllama-qlora-gsm8k
 wandb_watch:
 wandb_run_id:
 wandb_log_model: checkpoint
 output_dir: ./qlora-out
-batch_size: 1
-micro_batch_size: 1
+batch_size: 4
+micro_batch_size: 4
 num_epochs: 1
 optimizer: paged_adamw_32bit
 torchdistx_path:
