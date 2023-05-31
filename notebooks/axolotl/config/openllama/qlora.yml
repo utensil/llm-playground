@@ -102,7 +102,7 @@ wandb_log_model: checkpoint
 output_dir: ./qlora-out
 batch_size: 36
 micro_batch_size: 12
-num_epochs: 2
+num_epochs: 3
 optimizer: paged_adamw_32bit
 torchdistx_path:
 lr_scheduler: cosine
@@ -113,12 +113,14 @@ bf16: true
 fp16: false
 tf32: true
 gradient_checkpointing: true
-early_stopping_patience:
+# stop training after this many evaluation losses have increased in a row
+# https://huggingface.co/transformers/v4.2.2/_modules/transformers/trainer_callback.html#EarlyStoppingCallback
+early_stopping_patience: 3
 resume_from_checkpoint:
 auto_resume_from_checkpoints: true
 local_rank:
 logging_steps: 1
-xformers_attention: true
+xformers_attention: false
 flash_attention:
 gptq_groupsize:
 gptq_model_v1:
