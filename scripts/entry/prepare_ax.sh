@@ -52,6 +52,7 @@ mkdir -p $WORKSPACE/llm-playground/datasets
 python ./helper/storage.py
 
 bash $WORKSPACE/llm-playground/scripts/prepare_jupyter.sh
+bash $WORKSPACE/llm-playground/scripts/prepare_training.sh
 bash $WORKSPACE/llm-playground/scripts/prepare_qlora.sh
 
 cp -r $WORKSPACE/llm-playground/notebooks/axolotl/config/* $WORKSPACE/axolotl/examples/
