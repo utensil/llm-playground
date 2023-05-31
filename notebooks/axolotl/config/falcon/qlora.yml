@@ -1,5 +1,5 @@
-base_model: tiiuae/falcon-rw-1b
-base_model_config: tiiuae/falcon-rw-1b
+base_model: tiiuae/falcon-7b
+base_model_config: tiiuae/falcon-7b
 trust_remote_code: true
 model_type: AutoModelForCausalLM
 tokenizer_type: AutoTokenizer
@@ -99,7 +99,7 @@ lora_fan_in_fan_out:
 wandb_project: falcon-qlora
 wandb_watch:
 wandb_run_id:
-wandb_log_model: checkpoint
+wandb_log_model:
 output_dir: ./qlora-out
 batch_size: 8
 micro_batch_size: 4
