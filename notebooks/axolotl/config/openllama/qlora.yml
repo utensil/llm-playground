@@ -101,7 +101,7 @@ wandb_run_id:
 wandb_log_model: checkpoint
 output_dir: ./qlora-out
 batch_size: 36
-micro_batch_size: 12
+micro_batch_size: 9
 num_epochs: 3
 optimizer: paged_adamw_32bit
 torchdistx_path:
