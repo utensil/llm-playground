@@ -1,5 +1,5 @@
 base_model: tiiuae/falcon-40b
-base_model_config: tiiuae/falcon-40b
+base_model_config: `tiiuae/falcon-40b`
 trust_remote_code: true
 model_type: AutoModelForCausalLM
 tokenizer_type: AutoTokenizer
