@@ -1,5 +1,5 @@
-base_model: tiiuae/falcon-7b
-base_model_config: tiiuae/falcon-7b
+base_model: tiiuae/falcon-40b
+base_model_config: tiiuae/falcon-40b
 trust_remote_code: true
 model_type: AutoModelForCausalLM
 tokenizer_type: AutoTokenizer
@@ -30,7 +30,7 @@ wandb_watch:
 wandb_run_id:
 wandb_log_model:
 output_dir: ./qlora-out
-micro_batch_size: 4
+micro_batch_size: 1
 gradient_accumulation_steps: 2
 num_epochs: 3
 optimizer: paged_adamw_32bit
@@ -50,7 +50,7 @@ resume_from_checkpoint:
 auto_resume_from_checkpoints: true
 local_rank:
 logging_steps: 1
-xformers_attention: false
+xformers_attention: true
 flash_attention:
 gptq_groupsize:
 gptq_model_v1:
