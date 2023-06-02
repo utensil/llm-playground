@@ -135,3 +135,4 @@ datasets
 storage
 notebooks/test_download_huge.ipynb
 **/.DS_Store
+**/.ipynb_checkpoints
