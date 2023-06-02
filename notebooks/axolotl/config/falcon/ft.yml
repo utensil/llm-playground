@@ -27,35 +27,37 @@ wandb_project:
 wandb_watch:
 wandb_run_id:
 wandb_log_model:
-output_dir: ./Falcon-7b
-gradient_accumulation_steps: 4
-micro_batch_size: 4
-eval_batch_size: 4
+output_dir: ./ft-out
+micro_batch_size: 1
+gradient_accumulation_steps: 2
 num_epochs: 4
 optimizer: adamw_bnb_8bit
 torchdistx_path:
 lr_scheduler: cosine
-learning_rate: 0.00003
+learning_rate: 0.0002
 train_on_inputs: false
 group_by_length: false
 bf16: true
 fp16: false
 tf32: true
 gradient_checkpointing: true
-early_stopping_patience:
+# stop training after this many evaluation losses have increased in a row
+# https://huggingface.co/transformers/v4.2.2/_modules/transformers/trainer_callback.html#EarlyStoppingCallback
+early_stopping_patience: 3
 resume_from_checkpoint:
+auto_resume_from_checkpoints: true
 local_rank:
 logging_steps: 1
 xformers_attention: true
 flash_attention:
 gptq_groupsize:
 gptq_model_v1:
-warmup_steps: 40
+warmup_steps: 10
 eval_steps: 5
-save_steps: 43
+save_steps: 10
 debug:
 deepspeed:
-weight_decay: 0.0
+weight_decay: 0.000001
 fsdp:
 fsdp_config:
 special_tokens:
