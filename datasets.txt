@@ -154,6 +154,20 @@ yankscally/midiset
 sileod/mindgames
 spdenisov/wsd_semcor
 code_x_glue_ct_code_to_text
+GaussianMixture/oasst_alpaca_sharegpt_dataset
+shibing624/medical
+BelleGroup/train_3.5M_CN
+shibing624/alpaca-zh
+Chinese-Vicuna/guanaco_belle_merge_v1.0
+FreedomIntelligence/HuatuoGPT-sft-data-v1
+philschmid/sharegpt-raw
+Hello-SimpleAI/HC3
+teknium/GPTeacher-General-Instruct
+metaeval/ScienceQA_text_only
+riddle_sense
+camel-ai/physics
+camel-ai/chemistry
+camel-ai/math
 
 
 # TODO extra download
