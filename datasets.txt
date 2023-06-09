@@ -141,6 +141,24 @@ winddude/reddit_finance_43_250k
 https://github.com/lupantech/PromptPG
 openllmplayground/pandagpt_visual_instruction_dataset
 
+timdettmers/openassistant-guanaco
+ehartford/samantha-data
+ehartford/based
+renumics/cifar100-enriched
+kaiokendev/SuperCOT-dataset
+tiedong/goat
+nomic-ai/gpt4all_prompt_generations_with_p3
+P1ayer-1/chatgpt-conversations-chatlogs.net
+achang/plot_qa
+yankscally/midiset
+sileod/mindgames
+spdenisov/wsd_semcor
+code_x_glue_ct_code_to_text
+
+
+# TODO extra download
+Alignment-Lab-AI/AILabAssistant
+
 # has extra download
 
 https://github.com/wellecks/naturalproofs
