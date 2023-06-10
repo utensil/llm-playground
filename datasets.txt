@@ -164,11 +164,14 @@ philschmid/sharegpt-raw
 Hello-SimpleAI/HC3
 teknium/GPTeacher-General-Instruct
 metaeval/ScienceQA_text_only
+hellaswag
 riddle_sense
+camel-ai/math
+camel-ai/biology
 camel-ai/physics
 camel-ai/chemistry
-camel-ai/math
-
+winglian/evals
+ewof/code-alpaca-instruct-unfiltered
 
 # TODO extra download
 Alignment-Lab-AI/AILabAssistant
