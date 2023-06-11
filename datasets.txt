@@ -173,8 +173,38 @@ camel-ai/chemistry
 winglian/evals
 ewof/code-alpaca-instruct-unfiltered
 
+ewof/code-alpaca-instruct-unfiltered
+64bits/lex_fridman_podcast_for_llm_vicuna
+
+https://github.com/GJBroughton/Star_Trek_Scripts
+
+https://github.com/shibing624/MedicalGPT
+tasksource/oasst1_pairwise_rlhf_reward
+Dahoas/full-hh-rlhf
+Dahoas/static-hh
+Dahoas/rm-static
+liswei/rm-static-zhTW
+yitingxie/rlhf-reward-datasets
+
+# flan/v2/*data
+https://github.com/google-research/FLAN
+conceptofmind/flan2021_submix_original
+conceptofmind/t0_submix_original
+conceptofmind/niv2_submix_original
+conceptofmind/cot_submix_original
+conceptofmind/dialog_submix_original
+
+https://github.com/michiyasunaga/DrRepair
+https://github.com/google-research-datasets/Taskmaster
+
+
 # TODO extra download
 Alignment-Lab-AI/AILabAssistant
+
+# huge extra downloads, TODO subreddit
+https://github.com/CornellNLP/ConvoKit
+
+
 
 # has extra download
 
@@ -202,6 +232,9 @@ https://github.com/thu-coai/LOT-LongLM
 https://github.com/StevenGrove/GPT4Tools
 https://github.com/HKUNLP/UnifiedSKG
 https://github.com/RUCAIBox/StructGPT
+
+# gsutil -m cp -r gs://dm-code_contests /local
+https://github.com/deepmind/code_contests
 
 # should have filted
 
