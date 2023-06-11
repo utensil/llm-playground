@@ -194,9 +194,14 @@ conceptofmind/niv2_submix_original
 conceptofmind/cot_submix_original
 conceptofmind/dialog_submix_original
 
-https://github.com/michiyasunaga/DrRepair
 https://github.com/google-research-datasets/Taskmaster
+https://github.com/OFA-Sys/ExpertLLaMA
 
+https://github.com/ziliwangnlp/RefGPT
+Mutonix/RefGPT-Fact
+Mutonix/RefGPT-Code-ds
+Mutonix/RefGPT-Code-cr
+Mutonix/RefGPT-Code-bg
 
 # TODO extra download
 Alignment-Lab-AI/AILabAssistant
@@ -233,7 +238,11 @@ https://github.com/StevenGrove/GPT4Tools
 https://github.com/HKUNLP/UnifiedSKG
 https://github.com/RUCAIBox/StructGPT
 
-# gsutil -m cp -r gs://dm-code_contests /local
+# download_raw_data.sh + download_preprocessed_data.sh 
+https://github.com/michiyasunaga/DrRepair
+
+# https://cloud.google.com/sdk/docs/install-sdk#linux
+# gsutil -m cp -r gs://dm-code_contests local_location
 https://github.com/deepmind/code_contests
 
 # should have filted
