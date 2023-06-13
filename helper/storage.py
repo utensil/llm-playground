@@ -4,6 +4,7 @@ import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument('REPO', type=str, default='utensil/storage', nargs='?')
+parser.add_argument('-m', '--model', type=bool, nargs='?', default=False, const=True, help='Set repo type to model (default: dataset)')
 parser.add_argument('-p', '--pull', type=bool, nargs='?', default=False, const=True, help='Whether to pull before push')
 parser.add_argument('-u', '--upload', type=bool, nargs='?', default=False, const=True, help='Whether to upload local changes')
 parser.add_argument('-l', '--lfs', type=bool, nargs='?', default=False, const=True, help='Whether to pull LFS files')
@@ -21,7 +22,9 @@ if __name__ == '__main__':
     remote_repo = args.REPO
     local_repo = remote_repo.split('/')[-1]
 
-    repo = Repository(local_dir=local_repo, clone_from=remote_repo, repo_type='dataset', skip_lfs_files=not args.lfs, use_auth_token=HF_TOKEN)
+    repo_type = 'model' if args.model else 'dataset'
+
+    repo = Repository(local_dir=local_repo, clone_from=remote_repo, repo_type=repo_type, skip_lfs_files=not args.lfs, use_auth_token=HF_TOKEN)
 
     if args.pull:
         repo.git_pull(args.lfs)
