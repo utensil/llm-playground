@@ -8,7 +8,6 @@
 # docker command: `bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/prepare_ax.sh -sSf | bash"`
 # JUPYTER_PASSWORD change to your secret
 # HUGGINGFACE_TOKEN change to your token from https://huggingface.co/settings/tokens
-# SUDO nosudo
 # WORKSPACE /workspace/
 # WANDB_API_KEY change to your key from https://wandb.ai/authorize
 #
@@ -29,7 +28,11 @@ fi
 cd llm-playground
 
 export DEBIAN_FRONTEND=noninteractive
-./helper/prepare.sh
+
+apt-get update
+apt-get install -y aria2
+git lfs install
+pip install requests huggingface_hub
 
 cd $WORKSPACE/llm-playground
 
@@ -50,9 +53,11 @@ mkdir -p $WORKSPACE/llm-playground/datasets
 
 python ./helper/storage.py
 
-bash $WORKSPACE/llm-playground/scripts/prepare_jupyter.sh
-bash $WORKSPACE/llm-playground/scripts/prepare_training.sh
-bash $WORKSPACE/llm-playground/scripts/prepare_qlora.sh
+# prepare jupyter
+pip install jupyterhub notebook jupyterlab jupyterlab-git ipywidgets
+
+# prepare monitoring GPU
+pip install nvitop
 
 cp -r $WORKSPACE/llm-playground/notebooks/axolotl/config/* $WORKSPACE/axolotl/examples/
 
