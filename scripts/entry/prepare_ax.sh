@@ -3,7 +3,7 @@
 # Container source: https://github.com/OpenAccess-AI-Collective/axolotl/blob/main/docker/Dockerfile-runpod
 #
 #
-# To run this in RunPod with `winglian/axolotl-runpod:main-cu118-2.0.0`, set
+# To run this in RunPod with `winglian/axolotl-runpod:main-py3.10-cu118-2.0.0`, set
 # Expose HTTP Ports (Max 10): 7860,8888
 # docker command: `bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/prepare_ax.sh -sSf | bash"`
 # JUPYTER_PASSWORD change to your secret
@@ -52,7 +52,6 @@ python ./helper/storage.py
 
 bash $WORKSPACE/llm-playground/scripts/prepare_jupyter.sh
 bash $WORKSPACE/llm-playground/scripts/prepare_training.sh
-bash $WORKSPACE/llm-playground/scripts/prepare_qlora.sh
 
 cp -r $WORKSPACE/llm-playground/notebooks/axolotl/config/* $WORKSPACE/axolotl/examples/
 
