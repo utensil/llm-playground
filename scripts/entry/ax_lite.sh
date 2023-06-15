@@ -34,6 +34,10 @@ cp -r axolotl-update/* axolotl
 cd axolotl
 # but don't install yet
 # pip install -e .
+
+mkdir -p /content/
+cd /content/ && git clone https://github.com/utensil/llm-playground
+
 cd $WORKSPACE
 
 # don't update peft
