@@ -203,13 +203,31 @@ Mutonix/RefGPT-Code-ds
 Mutonix/RefGPT-Code-cr
 Mutonix/RefGPT-Code-bg
 
+PocketDoc/Alpaca_Evol_Instruct_Cleaned
+GAIR/lima
+PocketDoc/DansPileOfSets
+WizardLM/WizardLM_evol_instruct_V2_196k
+# TODO: pending approval
+dmayhem93/orca-chatgpt-50k
+
 # TODO extra download
+#   SirNeural/flan_v2
+#   conceptofmind/flan_dialog_submix
+#   vietgpt/OIG_mathqa_flanv2_en
+#   neural_code_search
+#   ccdv/arxiv-summarization
+#   neulab/conala
+#   reshinthadith/synthetic_program_synthesis_python_1M
+#   fiveflow/cot_ranking
+#   squad_adversarial
 Alignment-Lab-AI/AILabAssistant
+
+tasksource/tasksource-instruct-v0
+tasksource/zero-shot-label-nli
+tasksource/icl-symbol-tuning-instruct
 
 # huge extra downloads, TODO subreddit
 https://github.com/CornellNLP/ConvoKit
-
-
 
 # has extra download
 
