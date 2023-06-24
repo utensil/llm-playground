@@ -48,5 +48,6 @@ jobs:
     - name: train tasks
       run: |
         pwd
-        ls
-        echo ${{ needs.changes.outputs.task_files }}
+        ls -lhta .
+        git status
+        cat ${{ needs.changes.outputs.task_files }}
