@@ -31,7 +31,7 @@ jobs:
         # Therefore we specify we are only interested in added or modified files.
         filters: |
           task:
-            - added|modified: 'tasks/*.yml'
+            - added|modified: 'tasks/**/*.yml'
   train:
     name: axolotl-runpod-runner
     runs-on: ubuntu-latest
