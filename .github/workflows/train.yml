@@ -1,0 +1,51 @@
+on:
+  push:
+    branches:
+    - main
+  workflow_dispatch:
+  
+jobs:
+  # JOB to run change detection
+  changes:
+    runs-on: ubuntu-latest
+    # Required permissions
+    permissions:
+      pull-requests: read
+    # Set job outputs to values from filter step
+    outputs:
+      task: ${{ steps.filter.outputs.task }}
+      task_files: ${{ steps.filter.outputs.task_files }}
+    steps:
+    # For pull requests it's not necessary to checkout the code
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        # Enable listing of files matching each filter.
+        # Paths to files will be available in `${FILTER_NAME}_files` output variable.
+        # Paths will be escaped and space-delimited.
+        # Output is usable as command-line argument list in Linux shell
+        list-files: shell
+
+        # In this example changed files will be checked by linter.
+        # It doesn't make sense to lint deleted files.
+        # Therefore we specify we are only interested in added or modified files.
+        filters: |
+          task:
+            - added|modified: 'tasks/*.yml'
+  train:
+    name: axolotl-runpod-runner
+    runs-on: ubuntu-latest
+    needs: changes
+    if: ${{ needs.changes.outputs.task == 'true' }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup Python
+      uses: actions/setup-python@v4.6.1
+      with:
+        # Version range or exact version of Python or PyPy to use, using SemVer's version range syntax. Reads from .python-version if unset.
+        python-version: 3 # optional
+        # Used to specify a package manager for caching in the default directory. Supported values: pip, pipenv, poetry.
+        cache: pip # optional
+    - name: train tasks
+      run: echo ${{ needs.changes.outputs.task_files }}
