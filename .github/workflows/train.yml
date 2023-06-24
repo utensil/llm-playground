@@ -48,4 +48,7 @@ jobs:
         # Used to specify a package manager for caching in the default directory. Supported values: pip, pipenv, poetry.
         cache: pip # optional
     - name: train tasks
-      run: echo ${{ needs.changes.outputs.task_files }}
+      run: |
+        pwd
+        ls
+        echo ${{ needs.changes.outputs.task_files }}
