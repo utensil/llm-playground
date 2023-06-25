@@ -1,3 +1,4 @@
+task: 11
 runpod:
   entry_url: https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite.sh
   gpu: "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA A100-SXM4-80GB"
