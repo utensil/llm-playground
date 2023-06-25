@@ -4,12 +4,12 @@ runpod:
   gpu: "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA A100-SXM4-80GB"
   cloud_type: "SECURE" # "ALL" "COMMUNITY"
   max_bid_per_gpu: 2.0
-  template_id: '35h1we62g7'
   gpu_count: 1
   min_vcpu_count: 8
-  min_memory_in_gb: 30
+  min_memory_in_gb: 29
   min_download: 2000
   min_upload: 1500
+  terminate_after: 720
   env:
     TEST_ENV: happy
 
