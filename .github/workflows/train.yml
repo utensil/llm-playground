@@ -53,4 +53,4 @@ jobs:
         ls -lhta .
         git status
         export TASK_ID=`git rev-parse --short HEAD`
-        echo ${{ needs.changes.outputs.task_files }} | xargs -d ' ' -l1 " echo 'Training task $TASK_ID: "
+        echo ${{ needs.changes.outputs.task_files }} | xargs -d ' ' -l1 echo "Training task $TASK_ID: "
