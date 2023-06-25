@@ -51,5 +51,6 @@ jobs:
         # pwd
         # ls -lhta .
         # git status
+        pip install -r helper/requirements-runpod.txt
         export TASK_ID=`git rev-parse --short HEAD`
         echo ${{ needs.changes.outputs.task_files }} | xargs -d ' ' -l1 python helper/train-runpod.py "Training task $TASK_ID: "
