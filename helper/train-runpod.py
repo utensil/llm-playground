@@ -41,9 +41,10 @@ logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
 # os.environ["RUNPOD_DEBUG"] = 'true'
 
 def train_on_runpod(
-    config: Path,
+    config,
     **kwargs,
 ):
+    config = Path(config.strip())
     logging.info(f"Train on runpod with config: {config}")
 
     # load the config from the yaml file
