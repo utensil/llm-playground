@@ -3,6 +3,7 @@
     "remoteEnv": {
         "HUGGINGFACE_TOKEN": "${localEnv:HUGGINGFACE_TOKEN}",
         "RUNPOD_API_KEY": "${localEnv:RUNPOD_API_KEY}",
+        "RUNPOD_SSH_KEY": "${localEnv:RUNPOD_SSH_KEY}",
         "WORKSPACE": "/workspaces/"
     }
 }

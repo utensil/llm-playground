@@ -10,15 +10,20 @@ import json
 import time
 import runpod
 from datetime import datetime, timezone, timedelta
+import signal
+from tqdm import tqdm
 
 AXOLOTL_RUNPOD_IMAGE = 'winglian/axolotl-runpod:main-py3.9-cu118-2.0.0'
+AXOLOTL_RUNPOD_IMAGE_SIZE_IN_GB = 12.5
+AXOLOTL_RUNPOD_IMAGE_SIZE = AXOLOTL_RUNPOD_IMAGE_SIZE_IN_GB * 1024 # In MB
 DEFAULT_TEMPLATE_ID = '758uq6u5fc'
 MAX_BID_PER_GPU = 2.0
 
 POLL_PERIOD = 5 # 5 seconds
 MAX_WAIT_TIME = 60 * 10 # 10 minutes
 
-DEFAULT_TERMINATE_AFTER = 60 * 15 # 15 minutes to prevent accidental starting a pod and forgot to terminate
+DEFAULT_STOP_AFTER = 60 * 15 # 15 minutes to prevent accidental starting a pod and forgot to stop
+DEFAULT_TERMINATE_AFTER = 60 * 60 * 24 # 24 hours to prevent accidental starting a pod and forgot to terminate
 
 class DictDefault(Dict):
     """
@@ -90,10 +95,18 @@ def train_on_runpod(
         entry = None
         
         if runpod_cfg.entry is not None:
-            # TODO: a better way to escape the entry
+            # TODO: find a better way to escape the entry
             entry = json.dumps(runpod_cfg.entry)[1:-1]
 
-        terminate_after = (datetime.now(timezone.utc) + timedelta(seconds=runpod_cfg.terminate_after or DEFAULT_TERMINATE_AFTER)).strftime('"%Y-%m-%dT%H:%M:%SZ"')
+        if runpod_cfg.stop_after == -1:
+            stop_after = None
+        else:
+            stop_after = (datetime.now(timezone.utc) + timedelta(seconds=runpod_cfg.stop_after or DEFAULT_STOP_AFTER)).strftime('"%Y-%m-%dT%H:%M:%SZ"')
+
+        if runpod_cfg.terminate_after == -1:
+            terminate_after = None
+        else:
+            terminate_after = (datetime.now(timezone.utc) + timedelta(seconds=runpod_cfg.terminate_after or DEFAULT_TERMINATE_AFTER)).strftime('"%Y-%m-%dT%H:%M:%SZ"')
 
         pod = runpod.create_spot_pod(f'Training {config}',
                                      AXOLOTL_RUNPOD_IMAGE,
@@ -108,31 +121,54 @@ def train_on_runpod(
                                      min_upload=runpod_cfg.min_upload or 1500,
                                      docker_args=entry,
                                      env=env,
+                                     stop_after=stop_after,
                                      terminate_after=terminate_after
                                      )
         
         if pod is None:
             logging.error(f"Failed to create pod for {config}")
             return
+
+        def signal_handler(signal, frame):
+            logging.info(f"Keyboard interrupt received, terminating pod {pod['id']}")
+            runpod.terminate_pod(pod['id'])
+            logging.info(f"Pod {pod['id']} terminated")
+            sys.exit(0)
+
+        signal.signal(signal.SIGINT, signal_handler)
         
         logging.info(f"Created pod {pod['id']}, waiting for it to start...(at most {MAX_WAIT_TIME} seconds)")
-        logging.info(f" - While you're waiting, you can check the status of the pod at https://www.runpod.io/console/pods ")
+        
         username = pod['machine']['podHostId']
         ssh_command = f'ssh {username}@ssh.runpod.io -i ~/.ssh/id_ed25519'
-        logging.info(f" - After started, use the following command to ssh into the pod: {ssh_command}")          
-
+        codespace_ssh_command = f'username={username} scripts/ssh_runpod.sh'
+        
         try:        
             # wait for the pod to start
-            pod_info = None
+            pod_info = runpod.get_pod(pod['id'])['pod']
+
+            logging.info(f"More about the pod {pod['id']}: {pod_info}")
+
+            eta = AXOLOTL_RUNPOD_IMAGE_SIZE * 8 / pod_info['machine']['maxDownloadSpeedMbps'] + AXOLOTL_RUNPOD_IMAGE_SIZE * 2 / pod_info['machine']['diskMBps']
+
+            logging.info(f" - Estimated time to download and extrace the image: {eta} seconds")
+            logging.info(f" - While you're waiting, you can check the status of the pod at https://www.runpod.io/console/pods ")
+            logging.info(f" - After started, use the following command to ssh into the pod: {ssh_command}")
+            logging.info(f"     or the following command in CodeSpace: {codespace_ssh_command}")
+
             runtime = None
             waited_time = 0
             is_debug = os.getenv("RUNPOD_DEBUG") or ''
             os.environ["RUNPOD_DEBUG"] = ''
-            while runtime is None and waited_time < MAX_WAIT_TIME:
-                pod_info = runpod.get_pod(pod['id'])
-                runtime = pod_info['pod']['runtime']
-                time.sleep(POLL_PERIOD)
-                waited_time += POLL_PERIOD
+
+            with tqdm(total=eta) as pbar:
+                while runtime is None and waited_time < MAX_WAIT_TIME:
+                    pod_info = runpod.get_pod(pod['id'])['pod']
+                    runtime = pod_info['runtime']
+                    time.sleep(POLL_PERIOD)
+                    waited_time += POLL_PERIOD
+                    pbar.update(POLL_PERIOD)
+
             os.environ["RUNPOD_DEBUG"] = is_debug
 
             if runtime is None:

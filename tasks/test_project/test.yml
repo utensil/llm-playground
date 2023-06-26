@@ -9,7 +9,8 @@ runpod:
   min_memory_in_gb: 29
   min_download: 2000
   min_upload: 1500
-  terminate_after: 720
+  stop_after: 720
+  terminate_after: -1
   env:
     TEST_ENV: happy
 
