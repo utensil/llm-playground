@@ -2,3 +2,4 @@ git+https://github.com/utensil/runpod-python@pod
 fire
 addict
 tqdm
+discord.py

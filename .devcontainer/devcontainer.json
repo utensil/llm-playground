@@ -4,6 +4,7 @@
         "HUGGINGFACE_TOKEN": "${localEnv:HUGGINGFACE_TOKEN}",
         "RUNPOD_API_KEY": "${localEnv:RUNPOD_API_KEY}",
         "RUNPOD_SSH_KEY": "${localEnv:RUNPOD_SSH_KEY}",
+        "DISCORD_WEBHOOK_URL": "${localEnv:DISCORD_WEBHOOK_URL}",
         "WORKSPACE": "/workspaces/"
     }
 }

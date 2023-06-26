@@ -12,10 +12,16 @@ import runpod
 from datetime import datetime, timezone, timedelta
 import signal
 from tqdm import tqdm
+import re
+from discord import SyncWebhook
 
 AXOLOTL_RUNPOD_IMAGE = 'winglian/axolotl-runpod:main-py3.9-cu118-2.0.0'
 AXOLOTL_RUNPOD_IMAGE_SIZE_IN_GB = 12.5
 AXOLOTL_RUNPOD_IMAGE_SIZE = AXOLOTL_RUNPOD_IMAGE_SIZE_IN_GB * 1024 # In MB
+BITS_PER_BYTE = 8
+COMPRESSION_RATIO = 0.2
+
+
 DEFAULT_TEMPLATE_ID = '758uq6u5fc'
 MAX_BID_PER_GPU = 2.0
 
@@ -45,12 +51,32 @@ logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
 
 # os.environ["RUNPOD_DEBUG"] = 'true'
 
+def notify_discord(msg):
+    webhook = SyncWebhook.from_url(os.getenv("DISCORD_WEBHOOK_URL"))
+    webhook.send(msg)
+
+def log_info(msg):
+    logging.info(msg)
+    notify_discord(msg)
+
+def log_error(msg, exc_info=None):
+    logging.error(msg, exc_info=exc_info)
+    if exc_info is not None:
+        notify_discord(f'{msg}: {exc_info}')
+    else:
+        notify_discord(msg)
+
+def terminate(pod):
+    runpod.terminate_pod(pod['id'])
+    log_info(f"Pod {pod['id']} terminated")
+
 def train_on_runpod(
     config,
     **kwargs,
 ):
+
     config = Path(config.strip())
-    logging.info(f"Train on runpod with config: {config}")
+    log_info(f"Train on runpod with config: {config}")
 
     # load the config from the yaml file
     # Mostly borrowed from https://github.com/utensil/axolotl/blob/local_dataset/scripts/finetune.py
@@ -126,13 +152,12 @@ def train_on_runpod(
                                      )
         
         if pod is None:
-            logging.error(f"Failed to create pod for {config}")
+            log_error(f"Failed to create pod for {config}")
             return
 
         def signal_handler(signal, frame):
             logging.info(f"Keyboard interrupt received, terminating pod {pod['id']}")
-            runpod.terminate_pod(pod['id'])
-            logging.info(f"Pod {pod['id']} terminated")
+            terminate(pod)
             sys.exit(0)
 
         signal.signal(signal.SIGINT, signal_handler)
@@ -149,7 +174,7 @@ def train_on_runpod(
 
             logging.info(f"More about the pod {pod['id']}: {pod_info}")
 
-            eta = AXOLOTL_RUNPOD_IMAGE_SIZE * 8 / pod_info['machine']['maxDownloadSpeedMbps'] + AXOLOTL_RUNPOD_IMAGE_SIZE * 2 / pod_info['machine']['diskMBps']
+            eta = AXOLOTL_RUNPOD_IMAGE_SIZE * BITS_PER_BYTE / pod_info['machine']['maxDownloadSpeedMbps'] + AXOLOTL_RUNPOD_IMAGE_SIZE / COMPRESSION_RATIO / pod_info['machine']['diskMBps']
 
             logging.info(f" - Estimated time to download and extrace the image: {eta} seconds")
             logging.info(f" - While you're waiting, you can check the status of the pod at https://www.runpod.io/console/pods ")
@@ -172,15 +197,18 @@ def train_on_runpod(
             os.environ["RUNPOD_DEBUG"] = is_debug
 
             if runtime is None:
-                logging.error(f"Pod {pod['id']} failed to start: {pod_info}")
-                runpod.terminate_pod(pod['id'])
-                logging.info(f"Pod {pod['id']} terminated")
+                log_error(f"Pod {pod['id']} failed to start in {MAX_WAIT_TIME} seconds: {pod_info}")
+                terminate(pod)
 
-            logging.info(f"Pod {pod['id']} started: {pod_info}")  
+            log_info(f"Pod {pod['id']} started: {pod_info}")
+
+            myself = runpod.get_myself()
+
+            log_info(f"RunPod overview: {myself}")
+
         except Exception as ex:
-            logging.error(f"Something went wrong with {pod['id']}: {ex}")
-            runpod.terminate_pod(pod['id'])
-            logging.info(f"Pod {pod['id']} terminated")
+            log_error(f"Something went wrong with {pod['id']}", exc_info=ex)
+            terminate(pod)
 
 if __name__ == "__main__":
     fire.Fire(train_on_runpod)

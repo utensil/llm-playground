@@ -5,6 +5,8 @@ runpod:
   cloud_type: "SECURE" # "ALL" "COMMUNITY"
   max_bid_per_gpu: 2.0
   gpu_count: 1
+  container_disk_in_gb: 50
+  volume_in_gb: 200
   min_vcpu_count: 8
   min_memory_in_gb: 29
   min_download: 2000
