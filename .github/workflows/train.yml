@@ -53,6 +53,6 @@ jobs:
         # git status
         pip install -r helper/requirements-runpod.txt
         export TASK_ID=`git rev-parse --short HEAD`
-        echo ${{ needs.changes.outputs.task_files }} | xargs -d ' ' -l1 python helper/train-runpod.py --task_id $TASK_ID
+        echo ${{ needs.changes.outputs.task_files }} | xargs -d ' ' -l1 python helper/setup-runner.py --task_id $TASK_ID
       env:
         RUNPOD_API_KEY: ${{ secrets.RUNPOD_API_KEY }}

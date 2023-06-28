@@ -1,2 +1,2 @@
 pip install -r helper/requirements-runpod.txt
-python helper/train-runpod.py tasks/test_project/test.yml
+python helper/setup-runner.py tasks/test_project/test.yml

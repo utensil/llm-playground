@@ -117,6 +117,7 @@ def train_on_runpod(
 
         env = runpod_cfg.env or {}
         env['TRAINING_CONFIG'] = str(config)
+        env['AXOLOTL_ROOT'] = runpod_cfg.axolotl_root or '/workspace/axolotl'
 
         entry = None
         

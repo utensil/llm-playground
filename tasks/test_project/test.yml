@@ -1,9 +1,12 @@
 task: 20
 runpod:
-  entry_url: https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite.sh
+  entry: |
+    bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite_train.sh -sSf | bash"
+
   gpu: "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA A100-SXM4-80GB"
   cloud_type: "SECURE" # "ALL" "COMMUNITY"
   max_bid_per_gpu: 2.0
+  # template_id: 758uq6u5fc
   gpu_count: 1
   container_disk_in_gb: 50
   volume_in_gb: 200
@@ -11,7 +14,7 @@ runpod:
   min_memory_in_gb: 29
   min_download: 2000
   min_upload: 1500
-  stop_after: 720
+  stop_after: -1
   terminate_after: -1
   env:
     TEST_ENV: happy
@@ -20,8 +23,10 @@ runpod:
 # 1b: tiiuae/falcon-rw-1b
 # 7b: tiiuae/falcon-7b
 # 40b: tiiuae/falcon-40b
-base_model: /content/llm-playground/models/tiiuae_falcon-40b
-base_model_config: /content/llm-playground/models/tiiuae_falcon-40b
+# base_model: /content/llm-playground/models/tiiuae_falcon-40b
+# base_model_config: /content/llm-playground/models/tiiuae_falcon-40b
+base_model: tiiuae/falcon-rw-1b
+base_model_config: tiiuae/falcon-rw-1b
 # required by falcon custom model code: https://huggingface.co/tiiuae/falcon-7b/tree/main
 trust_remote_code: true
 model_type: AutoModelForCausalLM
@@ -36,81 +41,85 @@ push_dataset_to_hub: utensil
 hf_use_auth_token: true
 
 datasets:
-  - path: winglian/evals
-    data_files:
-      - hf/ARC-Challenge.jsonl
-      - hf/ARC-Easy.jsonl
-      - hf/riddle_sense.jsonl
-    type: explainchoice:chat
-  - path: winglian/evals
-    data_files:
-      - hf/gsm8k.jsonl
-      - hf/winogrande.jsonl
-    type: alpaca_chat.load_qa
-  - path: winglian/evals
-    data_files:
-      - custom/n_task.jsonl
-      - custom/misconceptions.jsonl
-      - custom/context_insensitivity.jsonl
-    type: alpaca_chat
-  - path: camel-ai/math
-    type: alpaca_chat.load_camel_ai
-  - path: camel-ai/biology
-    type: alpaca_chat.load_camel_ai
-  - path: camel-ai/physics
-    type: alpaca_chat.load_camel_ai
-  - path: camel-ai/chemistry
-    type: alpaca_chat.load_camel_ai
-  - path: winglian/evals
-    data_files:
-      - custom/in_context_qa.jsonl
-    type: context_qa
-  - path: winglian/evals
-    data_files:
-      - custom/in_context_qa.jsonl
-    type: context_qa.load_404
-  - path: winglian/evals
-    data_files:
-      - custom/jokes_explained_500up.jsonl
-    type: sharegpt_jokes
-  - path: winglian/evals
-    data_files:
-      - custom/classify-self-chat.sharegpt.jsonl
-      - custom/coding-self-chat.sharegpt.jsonl
-      - custom/prose-gpt4.sharegpt.jsonl
-      - custom/prose-rewrite-gpt4.sharegpt.jsonl
-    type: sharegpt_simple.load_role
-  - path: winglian/evals
-    data_files:
-      - openai/tldr.jsonl
-    type: summarizetldr:chat
-  - path: winglian/evals
-    data_files:
-      - hellaswag/hellaswag.jsonl
-    type: explainchoice:chat
-  - path: metaeval/ScienceQA_text_only
-    type: concisechoice:chat
-  - path: teknium/GPT4-LLM-Cleaned
-    type: alpaca_chat
-  - path: teknium/GPTeacher-General-Instruct
-    data_files: gpt4-instruct-similarity-0.6-dataset.json
-    type: gpteacher:chat
   - path: QingyiSi/Alpaca-CoT
     data_files:
-      - Chain-of-Thought/formatted_cot_data/aqua_train.json
-      - Chain-of-Thought/formatted_cot_data/creak_train.json
-      - Chain-of-Thought/formatted_cot_data/ecqa_train.json
-      - Chain-of-Thought/formatted_cot_data/esnli_train.json
-      - Chain-of-Thought/formatted_cot_data/qasc_train.json
-      - Chain-of-Thought/formatted_cot_data/qed_train.json
-      - Chain-of-Thought/formatted_cot_data/sensemaking_train.json
-      - Chain-of-Thought/formatted_cot_data/strategyqa_train.json
-      - GPTeacher/Roleplay/formatted_roleplay-similarity_0.6-instruct-dataset.json
-    type: alpaca_chat
-  - path: ehartford/WizardLM_alpaca_evol_instruct_70k_unfiltered
-    type: alpaca_chat
-  - path: ehartford/wizard_vicuna_70k_unfiltered
-    type: sharegpt:chat
+      - Chain-of-Thought/formatted_cot_data/gsm8k_train.json
+    type: alpaca:chat
+  # - path: winglian/evals
+  #   data_files:
+  #     - hf/ARC-Challenge.jsonl
+  #     - hf/ARC-Easy.jsonl
+  #     - hf/riddle_sense.jsonl
+  #   type: explainchoice:chat
+  # - path: winglian/evals
+  #   data_files:
+  #     - hf/gsm8k.jsonl
+  #     - hf/winogrande.jsonl
+  #   type: alpaca_chat.load_qa
+  # - path: winglian/evals
+  #   data_files:
+  #     - custom/n_task.jsonl
+  #     - custom/misconceptions.jsonl
+  #     - custom/context_insensitivity.jsonl
+  #   type: alpaca_chat
+  # - path: camel-ai/math
+  #   type: alpaca_chat.load_camel_ai
+  # - path: camel-ai/biology
+  #   type: alpaca_chat.load_camel_ai
+  # - path: camel-ai/physics
+  #   type: alpaca_chat.load_camel_ai
+  # - path: camel-ai/chemistry
+  #   type: alpaca_chat.load_camel_ai
+  # - path: winglian/evals
+  #   data_files:
+  #     - custom/in_context_qa.jsonl
+  #   type: context_qa
+  # - path: winglian/evals
+  #   data_files:
+  #     - custom/in_context_qa.jsonl
+  #   type: context_qa.load_404
+  # - path: winglian/evals
+  #   data_files:
+  #     - custom/jokes_explained_500up.jsonl
+  #   type: sharegpt_jokes
+  # - path: winglian/evals
+  #   data_files:
+  #     - custom/classify-self-chat.sharegpt.jsonl
+  #     - custom/coding-self-chat.sharegpt.jsonl
+  #     - custom/prose-gpt4.sharegpt.jsonl
+  #     - custom/prose-rewrite-gpt4.sharegpt.jsonl
+  #   type: sharegpt_simple.load_role
+  # - path: winglian/evals
+  #   data_files:
+  #     - openai/tldr.jsonl
+  #   type: summarizetldr:chat
+  # - path: winglian/evals
+  #   data_files:
+  #     - hellaswag/hellaswag.jsonl
+  #   type: explainchoice:chat
+  # - path: metaeval/ScienceQA_text_only
+  #   type: concisechoice:chat
+  # - path: teknium/GPT4-LLM-Cleaned
+  #   type: alpaca_chat
+  # - path: teknium/GPTeacher-General-Instruct
+  #   data_files: gpt4-instruct-similarity-0.6-dataset.json
+  #   type: gpteacher:chat
+  # - path: QingyiSi/Alpaca-CoT
+  #   data_files:
+  #     - Chain-of-Thought/formatted_cot_data/aqua_train.json
+  #     - Chain-of-Thought/formatted_cot_data/creak_train.json
+  #     - Chain-of-Thought/formatted_cot_data/ecqa_train.json
+  #     - Chain-of-Thought/formatted_cot_data/esnli_train.json
+  #     - Chain-of-Thought/formatted_cot_data/qasc_train.json
+  #     - Chain-of-Thought/formatted_cot_data/qed_train.json
+  #     - Chain-of-Thought/formatted_cot_data/sensemaking_train.json
+  #     - Chain-of-Thought/formatted_cot_data/strategyqa_train.json
+  #     - GPTeacher/Roleplay/formatted_roleplay-similarity_0.6-instruct-dataset.json
+  #   type: alpaca_chat
+  # - path: ehartford/WizardLM_alpaca_evol_instruct_70k_unfiltered
+  #   type: alpaca_chat
+  # - path: ehartford/wizard_vicuna_70k_unfiltered
+  #   type: sharegpt:chat
 
 dataset_prepared_path: last_run_prepared
 val_set_size: 0.01
@@ -132,11 +141,12 @@ lora_target_modules:
 lora_target_linear: true
 lora_fan_in_fan_out:
 
-wandb_project: falcon-qlora
+wandb_project: falcon-qlora-runner
 wandb_watch:
 wandb_run_id:
 wandb_log_model:
-output_dir: /content/axolotl-trained/falcon-qlora-40b-minotaur/
+# output_dir: /content/axolotl-trained/falcon-qlora-40b-minotaur/
+output_dir: ./qlora-out
 
 # QLoRA paper Table 9
 # - 16 for 7b & 13b
