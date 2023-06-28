@@ -77,7 +77,7 @@ then
   git lfs install
   pip install requests huggingface_hub
   # Fixes https://github.com/huggingface/accelerate/pull/1648#issuecomment-1610178618
-  pip install -U git+https://github.com/huggingface/accelerate.git
+  pip install --upgrade --no-deps --force-reinstall git+https://github.com/huggingface/accelerate.git
   pip install -U git+https://github.com/huggingface/peft.git
   cd /content/llm-playground
   python helper/train.py $TRAINING_CONFIG
