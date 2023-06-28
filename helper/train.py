@@ -11,6 +11,9 @@ scripts_dir = os.path.join(axolotl_root, "scripts")
 sys.path.insert(0, src_dir)
 sys.path.insert(0, scripts_dir)
 
+from huggingface_hub import login
+login(os.environ.get("HUGGINGFACE_TOKEN"), add_to_git_credential=True)
+
 import finetune
 from axolotl.utils.trainer import setup_trainer as setup_trainer_orig
 
