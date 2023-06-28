@@ -75,7 +75,7 @@ then
   git lfs install
   pip install requests huggingface_hub
   cd /content/llm-playground
-  python /helper/train.py $TRAINING_CONFIG
+  python helper/train.py $TRAINING_CONFIG
   # python /content/llm-playground/helper/download-model.py tiiuae/falcon-40b
 fi
 
