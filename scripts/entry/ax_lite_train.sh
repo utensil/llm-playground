@@ -68,7 +68,9 @@ echo "Launching Jupyter Lab with nohup..."
 cd /
 nohup jupyter lab --allow-root --no-browser --port=8888 --ip=* --ServerApp.token=$JUPYTER_PASSWORD --ServerApp.allow_origin=* --ServerApp.preferred_dir=$WORKSPACE &
 
-if [[ $TRAINING_CONFIG ]]
+TRAINING_CONFIG=${TRAINING_CONFIG:-""}
+
+if [[ -n $TRAINING_CONFIG ]]
 then
   apt-get update
   apt-get install -y aria2
