@@ -76,6 +76,7 @@ then
   apt-get install -y aria2
   git lfs install
   pip install requests huggingface_hub
+  pip install -U git+https://github.com/huggingface/peft.git
   cd /content/llm-playground
   python helper/train.py $TRAINING_CONFIG
   # python /content/llm-playground/helper/download-model.py tiiuae/falcon-40b
