@@ -159,7 +159,10 @@ micro_batch_size: 4
 gradient_accumulation_steps: 1
 num_epochs: 1
 # Optimizer for QLoRA
-optimizer: adamw_bnb_8bit
+# optimizer: paged_adamw_32bit
+# optimizer: adamw_bnb_8bit
+optimizer: lion_8bit
+
 torchdistx_path:
 lr_scheduler: cosine
 # QLoRA paper Table 9
