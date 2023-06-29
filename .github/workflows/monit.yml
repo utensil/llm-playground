@@ -23,7 +23,8 @@ jobs:
     - name: Monit
       run: |
         pip install -r helper/requirements-runpod.txt
-        python helper/monit-runpod.py || gh workflow disable monit.yml
+        python helper/monit-runpod.py
+        # || gh workflow disable monit.yml
       env:
         RUNPOD_API_KEY: ${{ secrets.RUNPOD_API_KEY }}
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}

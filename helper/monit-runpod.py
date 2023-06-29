@@ -14,6 +14,7 @@ import signal
 from tqdm import tqdm
 import re
 from discord import SyncWebhook
+import pexpect
 
 AXOLOTL_RUNPOD_IMAGE = 'winglian/axolotl-runpod:main-py3.9-cu118-2.0.0'
 AXOLOTL_RUNPOD_IMAGE_SIZE_IN_GB = 12.5
@@ -120,8 +121,9 @@ def monit_runpod(**kwargs):
 
                 if idle_count > 0:
                     log_info(msg)
-                else:
-                    sys.exit(-1)
+            else:
+                log_info('No pod running, disabling monit')
+                pexpect.run('gh workflow disable monit.yml')
                 
     except Exception as ex:
         log_error(f"Something went wrong with monit_runpod", exc_info=ex)

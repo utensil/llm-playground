@@ -14,6 +14,7 @@ import signal
 from tqdm import tqdm
 import re
 from discord import SyncWebhook
+import pexpect
 
 AXOLOTL_RUNPOD_IMAGE = 'winglian/axolotl-runpod:main-py3.9-cu118-2.0.0'
 AXOLOTL_RUNPOD_IMAGE_SIZE_IN_GB = 12.5
@@ -77,6 +78,7 @@ def train_on_runpod(
 
     config = Path(config.strip())
     log_info(f"Setting up RunPod with config: {config}")
+    pexpect.run('gh workflow enable monit.yml')
 
     # load the config from the yaml file
     # Mostly borrowed from https://github.com/utensil/axolotl/blob/local_dataset/scripts/finetune.py
