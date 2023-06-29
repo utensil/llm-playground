@@ -120,7 +120,7 @@ def monit_runpod(**kwargs):
 
                 if idle_count > 0:
                     log_info(msg)
-                else
+                else:
                     sys.exit(-1)
                 
     except Exception as ex:
