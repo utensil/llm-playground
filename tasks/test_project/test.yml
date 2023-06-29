@@ -16,6 +16,8 @@ runpod:
   min_upload: 1500
   stop_after: -1
   terminate_after: -1
+  # Set to false to stay running after training
+  one_shot: true
   env:
     TEST_ENV: happy
 

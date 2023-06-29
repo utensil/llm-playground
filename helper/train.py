@@ -46,37 +46,37 @@ def train_ex(
     prepare_ds_only: bool = False,
     **kwargs,
 ):
-  logging.info('train_ex before')
+    logging.info('train_ex before')
 
-  config = Path(config.strip())
-  log_info(f"Prepare training with config: {config}")
+    config = Path(config.strip())
+    log_info(f"Prepare training with config: {config}")
 
-  # TODO: avoid code dup
-  # load the config from the yaml file
-  # Mostly borrowed from https://github.com/utensil/axolotl/blob/local_dataset/scripts/finetune.py
-  with open(config, encoding="utf-8") as file:
-      cfg: DictDefault = DictDefault(yaml.safe_load(file))
+    # TODO: avoid code dup
+    # load the config from the yaml file
+    # Mostly borrowed from https://github.com/utensil/axolotl/blob/local_dataset/scripts/finetune.py
+    with open(config, encoding="utf-8") as file:
+        cfg: DictDefault = DictDefault(yaml.safe_load(file))
 
-      # if there are any options passed in the cli, if it is something that seems valid from the yaml,
-      # then overwrite the value
-      cfg_keys = cfg.keys()
-      for k, _ in kwargs.items():
-          # if not strict, allow writing to cfg even if it's not in the yml already
-          if k in cfg_keys or not cfg.strict:
-              # handle booleans
-              if isinstance(cfg[k], bool):
-                  cfg[k] = bool(kwargs[k])
-              else:
-                  cfg[k] = kwargs[k]
+        # if there are any options passed in the cli, if it is something that seems valid from the yaml,
+        # then overwrite the value
+        cfg_keys = cfg.keys()
+        for k, _ in kwargs.items():
+            # if not strict, allow writing to cfg even if it's not in the yml already
+            if k in cfg_keys or not cfg.strict:
+                # handle booleans
+                if isinstance(cfg[k], bool):
+                    cfg[k] = bool(kwargs[k])
+                else:
+                    cfg[k] = kwargs[k]
 
-  # os.environ["WANDB_RESUME"] = "auto"
-  if cfg.wandb_project is not None:
+    # os.environ["WANDB_RESUME"] = "auto"
+    if cfg.wandb_project is not None:
     run_id = cfg.wandb_run_id or wandb.util.generate_id()
     run = wandb.init(project=cfg.wandb_project, id=run_id) #, resume=True)
     os.environ["WANDB_RUN_ID"] = run_id
 
-  finetune.train(config, prepare_ds_only, **kwargs)
-  logging.info('train_ex after')
+    finetune.train(config, prepare_ds_only, **kwargs)
+    logging.info('train_ex after')
 
 def log_eval_prediction(ep):
     data = {
@@ -104,6 +104,9 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     trainer.compute_metrics = compute_metrics
 
     logging.info('setup_trainer_ex after')
+
+    log_info(f"start training")
+    
     return trainer
 
 finetune.setup_trainer = setup_trainer_ex

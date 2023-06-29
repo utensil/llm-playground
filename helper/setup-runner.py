@@ -119,6 +119,7 @@ def train_on_runpod(
         env['TRAINING_CONFIG'] = str(config)
         env['AXOLOTL_ROOT'] = runpod_cfg.axolotl_root or '/workspace/axolotl'
         env['DISCORD_WEBHOOK_URL']= os.getenv("DISCORD_WEBHOOK_URL")
+        env['TRAINING_ONE_SHOT'] = 1 if runpod_cfg.one_shot else 0
 
         entry = None
         
@@ -142,6 +143,8 @@ def train_on_runpod(
                                      cloud_type=runpod_cfg.cloud_type or "SECURE",
                                      bid_per_gpu=bid_per_gpu,
                                      template_id=runpod_cfg.template_id or DEFAULT_TEMPLATE_ID,
+                                     container_disk_in_gb=runpod_cfg.container_disk_in_gb or 50,
+                                     volume_in_gb=runpod_cfg.volume_in_gb or 200,
                                      gpu_count=runpod_cfg.gpu_count or 1,
                                      min_vcpu_count=runpod_cfg.min_vcpu_count or 8,
                                      min_memory_in_gb=runpod_cfg.min_memory_in_gb or 29,
