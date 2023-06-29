@@ -76,7 +76,7 @@ def train_on_runpod(
 ):
 
     config = Path(config.strip())
-    log_info(f"Train on runpod with config: {config}")
+    log_info(f"Setting up RunPod with config: {config}")
 
     # load the config from the yaml file
     # Mostly borrowed from https://github.com/utensil/axolotl/blob/local_dataset/scripts/finetune.py
@@ -118,6 +118,7 @@ def train_on_runpod(
         env = runpod_cfg.env or {}
         env['TRAINING_CONFIG'] = str(config)
         env['AXOLOTL_ROOT'] = runpod_cfg.axolotl_root or '/workspace/axolotl'
+        env['DISCORD_WEBHOOK_URL']= os.getenv("DISCORD_WEBHOOK_URL")
 
         entry = None
         
