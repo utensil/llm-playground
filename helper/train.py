@@ -9,6 +9,7 @@ from discord import SyncWebhook
 from addict import Dict
 import yaml
 import runpod
+from transformers.trainer_callback import TrainerCallback
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 axolotl_root = os.getenv("AXOLOTL_ROOT", os.path.abspath(os.path.join(project_root, "../axolotl")))
@@ -72,9 +73,9 @@ def train_ex(
 
     # os.environ["WANDB_RESUME"] = "auto"
     if cfg.wandb_project is not None:
-    run_id = cfg.wandb_run_id or wandb.util.generate_id()
-    run = wandb.init(project=cfg.wandb_project, id=run_id) #, resume=True)
-    os.environ["WANDB_RUN_ID"] = run_id
+        run_id = cfg.wandb_run_id or wandb.util.generate_id()
+        run = wandb.init(project=cfg.wandb_project, id=run_id) #, resume=True)
+        os.environ["WANDB_RUN_ID"] = run_id
 
     finetune.train(config, prepare_ds_only, **kwargs)
     logging.info('train_ex after')
@@ -136,5 +137,3 @@ finetune.setup_trainer = setup_trainer_ex
 
 if __name__ == "__main__":
     fire.Fire(train_ex)
-
-    
