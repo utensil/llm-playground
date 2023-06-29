@@ -93,15 +93,20 @@ def log_eval_prediction(ep):
 
 class OneshotCallback(TrainerCallback):
     def on_train_begin(self, args, state, control, **kwargs):
-        runpod.api_key = os.getenv("RUNPOD_API_KEY")
+        pass
+        # logging.info('OneshotCallback on_train_begin')
+        
+        # runpod.api_key = os.getenv("RUNPOD_API_KEY")
 
-        pod_id = os.getenv("RUNPOD_POD_ID")
+        # pod_id = os.getenv("RUNPOD_POD_ID")
 
-        runpod.terminate_pod(pod_id)
+        # runpod.terminate_pod(pod_id)
 
-        log_info(f"Pod {pod_id} terminated on train begin")
+        # log_info(f"Pod {pod_id} terminated on train begin")
 
     def on_train_end(self, args, state, control, **kwargs):
+        logging.info('OneshotCallback on_train_end')
+        
         runpod.api_key = os.getenv("RUNPOD_API_KEY")
 
         pod_id = os.getenv("RUNPOD_POD_ID")
@@ -112,7 +117,7 @@ class OneshotCallback(TrainerCallback):
 
 def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     logging.info('setup_trainer_ex before')
-    logging.info(f'cfg.some_config = {cfg.some_config}')
+    logging.info(f'cfg.runpod.one_shot = {cfg.runpod.one_shot}')
     trainer = setup_trainer_orig(cfg, train_dataset, eval_dataset, model, tokenizer)
     trainer.args.include_inputs_for_metrics = True
     compute_metrics_orig = trainer.compute_metrics
@@ -124,7 +129,8 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
 
     trainer.compute_metrics = compute_metrics
 
-    if cfg.one_shot:
+    if cfg.runpod.one_shot:
+        logging.info('trainer.add_callback(OneshotCallback)')
         trainer.add_callback(OneshotCallback)
 
     logging.info('setup_trainer_ex after')
@@ -137,3 +143,5 @@ finetune.setup_trainer = setup_trainer_ex
 
 if __name__ == "__main__":
     fire.Fire(train_ex)
+
+    
