@@ -78,6 +78,16 @@ def train_ex(
         os.environ["WANDB_RUN_ID"] = run_id
 
     finetune.train(config, prepare_ds_only, **kwargs)
+
+    if cfg.runpod.one_shot:        
+        runpod.api_key = os.getenv("RUNPOD_API_KEY")
+
+        pod_id = os.getenv("RUNPOD_POD_ID")
+
+        runpod.terminate_pod(pod_id)
+
+        log_info(f"Pod {pod_id} terminated on train end")
+
     logging.info('train_ex after')
 
 def log_eval_prediction(ep):
@@ -129,13 +139,13 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
 
     trainer.compute_metrics = compute_metrics
 
-    if cfg.runpod.one_shot:
-        logging.info('trainer.add_callback(OneshotCallback)')
-        trainer.add_callback(OneshotCallback)
+    # if cfg.runpod.one_shot:
+    #     logging.info('trainer.add_callback(OneshotCallback)')
+    #     trainer.add_callback(OneshotCallback)
 
     logging.info('setup_trainer_ex after')
 
-    log_info(f"Start training")
+    log_info(f"Training started: {wandb.run.get_url()}")
     
     return trainer
 
