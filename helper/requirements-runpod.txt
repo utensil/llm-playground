@@ -3,3 +3,4 @@ fire
 addict
 tqdm
 discord.py
+pexpect

@@ -135,7 +135,7 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
 
     logging.info('setup_trainer_ex after')
 
-    log_info(f"start training")
+    log_info(f"Start training")
     
     return trainer
 
