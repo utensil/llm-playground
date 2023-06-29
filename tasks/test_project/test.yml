@@ -161,7 +161,8 @@ num_epochs: 1
 # Optimizer for QLoRA
 # optimizer: paged_adamw_32bit
 # optimizer: adamw_bnb_8bit
-optimizer: lion_8bit
+# https://github.com/huggingface/transformers/pull/23217
+optimizer: paged_lion_8bit
 
 torchdistx_path:
 lr_scheduler: cosine
