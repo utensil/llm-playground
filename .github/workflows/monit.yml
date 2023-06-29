@@ -24,3 +24,4 @@ jobs:
       env:
         RUNPOD_API_KEY: ${{ secrets.RUNPOD_API_KEY }}
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        GH_TOKEN: ${{ github.token }}
