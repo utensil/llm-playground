@@ -5,6 +5,9 @@ import fire
 import logging
 import wandb
 import pandas as pd
+from discord import SyncWebhook
+from addict import Dict
+import yaml
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 axolotl_root = os.getenv("AXOLOTL_ROOT", os.path.abspath(os.path.join(project_root, "../axolotl")))
@@ -18,6 +21,7 @@ login(os.environ.get("HUGGINGFACE_TOKEN"), add_to_git_credential=True)
 
 import finetune
 from axolotl.utils.trainer import setup_trainer as setup_trainer_orig
+from axolotl.utils.dict import DictDefault
 
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
 
@@ -76,23 +80,24 @@ def train_ex(
 
 def log_eval_prediction(ep):
     data = {
-        'input': ep.all_inputs,
+        'input': ep.inputs,
         'prediction': ep.predictions,
-        'label': ep.all_labels
+        'label_id': ep.label_ids
     }
-    df = pd.DataFrame(data)
-    table = wandb.Table(dataframe=df)
-    wandb.run.log({"eval_entries": my_table})
+    logging.info(data)
+    # df = pd.DataFrame(data)
+    # table = wandb.Table(dataframe=df)
+    # wandb.run.log({"eval_entries": my_table})
 
 def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     logging.info('setup_trainer_ex before')
     logging.info(f'cfg.some_config = {cfg.some_config}')
     trainer = setup_trainer_orig(cfg, train_dataset, eval_dataset, model, tokenizer)
-    trainer.include_inputs_for_metrics= True
+    trainer.args.include_inputs_for_metrics = True
     compute_metrics_orig = trainer.compute_metrics
 
-    def compute_metrics(self, ep):
-        metrics = compute_metrics_orig(self, ep) if compute_metrics_orig else {}
+    def compute_metrics(ep):
+        metrics = compute_metrics_orig(ep) if compute_metrics_orig else {}
         log_eval_prediction(ep)
         return metrics
 
