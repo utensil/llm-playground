@@ -8,6 +8,7 @@ import pandas as pd
 from discord import SyncWebhook
 from addict import Dict
 import yaml
+import runpod
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 axolotl_root = os.getenv("AXOLOTL_ROOT", os.path.abspath(os.path.join(project_root, "../axolotl")))
@@ -89,6 +90,25 @@ def log_eval_prediction(ep):
     # table = wandb.Table(dataframe=df)
     # wandb.run.log({"eval_entries": my_table})
 
+class OneshotCallback(TrainerCallback):
+    def on_train_begin(self, args, state, control, **kwargs):
+        runpod.api_key = os.getenv("RUNPOD_API_KEY")
+
+        pod_id = os.getenv("RUNPOD_POD_ID")
+
+        runpod.terminate_pod(pod_id)
+
+        log_info(f"Pod {pod_id} terminated on train begin")
+
+    def on_train_end(self, args, state, control, **kwargs):
+        runpod.api_key = os.getenv("RUNPOD_API_KEY")
+
+        pod_id = os.getenv("RUNPOD_POD_ID")
+
+        runpod.terminate_pod(pod_id)
+
+        log_info(f"Pod {pod_id} terminated on train end")
+
 def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     logging.info('setup_trainer_ex before')
     logging.info(f'cfg.some_config = {cfg.some_config}')
@@ -102,6 +122,9 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
         return metrics
 
     trainer.compute_metrics = compute_metrics
+
+    if cfg.one_shot:
+        trainer.add_callback(OneshotCallback)
 
     logging.info('setup_trainer_ex after')
 

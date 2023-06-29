@@ -76,10 +76,11 @@ then
   # apt-get update
   # apt-get install -y aria2
   git lfs install
-  pip install requests huggingface_hub discord.py
+  pip install requests huggingface_hub discord.py pexpect
   # Fixes https://github.com/huggingface/accelerate/pull/1648#issuecomment-1610178618
   pip install --upgrade --no-deps --force-reinstall git+https://github.com/huggingface/accelerate.git
   pip install -U git+https://github.com/huggingface/peft.git
+  pip install --upgrade --no-deps --force-reinstall git+https://github.com/utensil/runpod-python@pod
   cd /content/llm-playground
   (python helper/train.py $TRAINING_CONFIG || true)
   # python /content/llm-playground/helper/download-model.py tiiuae/falcon-40b
