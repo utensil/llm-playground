@@ -20,7 +20,7 @@ runpod:
   one_shot: true
   env:
     TEST_ENV: happy
- deepspeed: true
+  deepspeed: true
 
 
 # 1b: tiiuae/falcon-rw-1b
