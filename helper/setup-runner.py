@@ -223,9 +223,9 @@ def train_on_runpod(
 
             log_info(f"Pod {pod['id']} started:\n{as_yaml(pod_info)}")
 
-            myself = runpod.get_myself()
+            # myself = runpod.get_myself()
 
-            log_info(f"RunPod overview:\n{as_yaml(myself)}")
+            # log_info(f"RunPod overview:\n{as_yaml(myself)}")
 
         except Exception as ex:
             log_error(f"Something went wrong with {pod['id']}", exc_info=ex)

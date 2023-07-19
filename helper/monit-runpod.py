@@ -86,7 +86,7 @@ def monit_runpod(**kwargs):
         logging.info(f"RunPod overview: {myself}")
 
         if myself is not None:
-            msg = ""
+            msg = "```\n"
             pods = myself['pods']
             if len(pods) > 0:
                 msg = f"{len(pods)} pods running, spending ${myself['currentSpendPerHr']} per hour:\n\n"
@@ -116,6 +116,8 @@ def monit_runpod(**kwargs):
                         msg += f'{status}\t{id}\t{cpu}%\t{ram}%\t{gpu}%\t{vram}%\t{uptime / 60.0:.2f} min\n'
                     else:
                         msg += f'Booting\t{id}\n'
+
+                msg += "\n```"
 
                 logging.info(msg)
 
