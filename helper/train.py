@@ -79,6 +79,7 @@ def train_ex(
 
     finetune.train(config, prepare_ds_only, **kwargs)
 
+    # the following is intensionally not in a finally block, because we want the pod to stay alive for inspection and debugging if anything goes wrong
     if cfg.runpod.one_shot:        
         runpod.api_key = os.getenv("RUNPOD_API_KEY")
 

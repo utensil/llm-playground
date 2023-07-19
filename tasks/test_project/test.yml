@@ -14,7 +14,7 @@ runpod:
   min_memory_in_gb: 29
   min_download: 2000
   min_upload: 1500
-  stop_after: -1
+  stop_after: 3600
   terminate_after: -1
   # Set to false to stay running after training
   one_shot: true
@@ -194,7 +194,7 @@ warmup_steps: 10
 eval_steps: 5
 save_steps: 10
 debug:
-deepspeed:
+# deepspeed:
 weight_decay: 0.01
 adam_beta1:
 adam_beta2: 0.999
