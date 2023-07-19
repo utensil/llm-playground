@@ -83,6 +83,8 @@ then
   pip install git+https://github.com/utensil/runpod-python@pod
   # Fixes https://github.com/microsoft/DeepSpeed/issues/3963
   pip install pydantic==1.10.10
+  # Optional: for deepspeed
+  pip3 install -U torch --index-url https://download.pytorch.org/whl/cu118
   cd /content/llm-playground
   (accelerate launch helper/train.py $TRAINING_CONFIG || true)
   # python /content/llm-playground/helper/download-model.py tiiuae/falcon-40b
