@@ -78,7 +78,7 @@ def train_ex(
     if cfg.wandb_project is not None:
         run_id = cfg.wandb_run_id or wandb.util.generate_id()
         accelerator = Accelerator(log_with="wandb")
-        accelerator.init_trackers(cfg.wandb_project, id=run_id)
+        accelerator.init_trackers(cfg.wandb_project, init_kwargs={"id": run_id})
         # run = wandb.init(project=cfg.wandb_project, id=run_id) #, resume=True)
         os.environ["WANDB_RUN_ID"] = run_id
     else:
