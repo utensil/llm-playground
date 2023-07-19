@@ -134,6 +134,7 @@ def train_on_runpod(
                 deepspeed = config.parent.joinpath(deepspeed)
 
             env['ACCELERATE_USE_DEEPSPEED'] = 'true'
+            env['DEEPSPEED_CONFIG_PATH'] = deepspeed
             log_info(f"Deepspeed enabled, using config: {deepspeed}")
 
         entry = None

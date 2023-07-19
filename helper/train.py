@@ -129,6 +129,10 @@ class OneshotCallback(TrainerCallback):
 def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     logging.info('setup_trainer_ex before')
     logging.info(f'cfg.runpod.one_shot = {cfg.runpod.one_shot}')
+
+    if os.environ.get('ACCELERATE_USE_DEEPSPEED', 'false') == 'true':
+        cfg.deepspeed = os.environ.get('DEEPSPEED_CONFIG_PATH', False)
+
     trainer = setup_trainer_orig(cfg, train_dataset, eval_dataset, model, tokenizer)
     trainer.args.include_inputs_for_metrics = True
     compute_metrics_orig = trainer.compute_metrics
