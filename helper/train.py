@@ -10,6 +10,7 @@ from addict import Dict
 import yaml
 import runpod
 from transformers.trainer_callback import TrainerCallback
+from accelerate import Accelerator
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 axolotl_root = os.getenv("AXOLOTL_ROOT", os.path.abspath(os.path.join(project_root, "../axolotl")))
@@ -71,25 +72,39 @@ def train_ex(
                 else:
                     cfg[k] = kwargs[k]
 
+    accelerator = None
+
     # os.environ["WANDB_RESUME"] = "auto"
     if cfg.wandb_project is not None:
         run_id = cfg.wandb_run_id or wandb.util.generate_id()
-        run = wandb.init(project=cfg.wandb_project, id=run_id) #, resume=True)
+        accelerator = Accelerator(log_with="wandb")
+        accelerator.init_trackers(cfg.wandb_project, id=run_id)
+        # run = wandb.init(project=cfg.wandb_project, id=run_id) #, resume=True)
         os.environ["WANDB_RUN_ID"] = run_id
+    else:
+        accelerator = Accelerator()
 
-    finetune.train(config, prepare_ds_only, **kwargs)
+    try:
 
-    # the following is intensionally not in a finally block, because we want the pod to stay alive for inspection and debugging if anything goes wrong
-    if cfg.runpod.one_shot:        
-        runpod.api_key = os.getenv("RUNPOD_API_KEY")
+        finetune.train(config, prepare_ds_only, **kwargs)
 
-        pod_id = os.getenv("RUNPOD_POD_ID")
+        # the following is intensionally not in a finally block, because we want the pod to stay alive for inspection and debugging if anything goes wrong
+        if cfg.runpod.one_shot:        
+            runpod.api_key = os.getenv("RUNPOD_API_KEY")
 
-        runpod.terminate_pod(pod_id)
+            pod_id = os.getenv("RUNPOD_POD_ID")
 
-        log_info(f"Pod {pod_id} terminated on train end")
+            runpod.terminate_pod(pod_id)
 
-    logging.info('train_ex after')
+            log_info(f"Pod {pod_id} terminated on train end")
+
+        logging.info('train_ex after')
+
+    except Exception as ex:
+        log_error(f"Error during training: {ex}", exc_info=ex)
+    finally:
+        accelerator.end_training()
+
 
 def log_eval_prediction(ep):
     data = {
