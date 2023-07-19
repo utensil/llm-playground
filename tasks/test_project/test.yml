@@ -7,7 +7,7 @@ runpod:
   cloud_type: "SECURE" # "ALL" "COMMUNITY"
   max_bid_per_gpu: 2.0
   # template_id: 758uq6u5fc
-  gpu_count: 1
+  gpu_count: 2
   container_disk_in_gb: 50
   volume_in_gb: 200
   min_vcpu_count: 8
@@ -20,6 +20,7 @@ runpod:
   one_shot: true
   env:
     TEST_ENV: happy
+  deepspeed: true
 
 
 # 1b: tiiuae/falcon-rw-1b

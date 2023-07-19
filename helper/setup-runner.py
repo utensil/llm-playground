@@ -120,7 +120,18 @@ def train_on_runpod(
         env = runpod_cfg.env or {}
         env['TRAINING_CONFIG'] = str(config)
         env['AXOLOTL_ROOT'] = runpod_cfg.axolotl_root or '/workspace/axolotl'
-        env['DISCORD_WEBHOOK_URL']= os.getenv("DISCORD_WEBHOOK_URL")
+        env['DISCORD_WEBHOOK_URL'] = os.getenv("DISCORD_WEBHOOK_URL")
+
+        deepspeed = runpod_cfg.deepspeed or cfg.deepspeed or False
+
+        if deepspeed:
+            if str(deepspeed).lower() == 'true':
+                deepspeed = config.parent.joinpath('./ds_config.json')
+            else:
+                deepspeed = config.parent.joinpath(deepspeed)
+
+            env['ACCELERATE_USE_DEEPSPEED'] = 'true'
+            log_info(f"Deepspeed enabled, using config: {deepspeed}")
 
         entry = None
         
