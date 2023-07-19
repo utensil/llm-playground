@@ -67,6 +67,9 @@ def log_error(msg, exc_info=None):
     else:
         notify_discord(msg)
 
+def as_yaml(data):
+    return yaml.dump(data, allow_unicode=True)
+
 def terminate(pod):
     runpod.terminate_pod(pod['id'])
     log_info(f"Pod {pod['id']} terminated")
@@ -217,11 +220,11 @@ def train_on_runpod(
                 log_error(f"Pod {pod['id']} failed to start in {MAX_WAIT_TIME} seconds: {pod_info}")
                 terminate(pod)
 
-            log_info(f"Pod {pod['id']} started: {pod_info}")
+            log_info(f"Pod {pod['id']} started:\n\n{as_yaml(pod_info)}")
 
             myself = runpod.get_myself()
 
-            log_info(f"RunPod overview: {myself}")
+            log_info(f"RunPod overview:\n\n{as_yaml(myself)}")
 
         except Exception as ex:
             log_error(f"Something went wrong with {pod['id']}", exc_info=ex)
