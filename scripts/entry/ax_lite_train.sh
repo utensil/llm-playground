@@ -82,7 +82,7 @@ then
   pip install -U git+https://github.com/huggingface/peft.git
   pip install git+https://github.com/utensil/runpod-python@pod
   cd /content/llm-playground
-  (python helper/train.py $TRAINING_CONFIG || true)
+  (accelerate launch helper/train.py $TRAINING_CONFIG || true)
   # python /content/llm-playground/helper/download-model.py tiiuae/falcon-40b
 fi
 
