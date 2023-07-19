@@ -165,7 +165,8 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
 
     logging.info('setup_trainer_ex after')
 
-    log_info(f"Training started: {wandb.run.get_url()}")
+    if wandb.run:
+        log_info(f"Training started: {wandb.run.get_url()}")
     
     return trainer
 
