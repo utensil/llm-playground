@@ -56,9 +56,8 @@ def notify_discord(msg):
     webhook = SyncWebhook.from_url(os.getenv("DISCORD_WEBHOOK_URL"))
     return webhook.send(msg, wait=True)
 
-def edit_discord_message(msg_id, msg):
-    webhook = SyncWebhook.from_url(os.getenv("DISCORD_WEBHOOK_URL"))
-    return webhook.edit_message(msg_id, content=msg)
+def edit_discord_message(last_msg, msg):
+    return last_msg.edit(content=msg)
 
 def log_info(msg):
     logging.info(msg)
@@ -187,7 +186,7 @@ def train_on_runpod(
 
         signal.signal(signal.SIGINT, signal_handler)
         
-        msg_id = log_info(f"Created pod {pod['id']}, waiting for it to start...(at most {MAX_WAIT_TIME} seconds)")
+        msg_created = log_info(f"Created pod {pod['id']}, waiting for it to start...(at most {MAX_WAIT_TIME} seconds)")
         
         username = pod['machine']['podHostId']
         ssh_command = f'ssh {username}@ssh.runpod.io -i ~/.ssh/id_ed25519'
@@ -218,7 +217,7 @@ def train_on_runpod(
                     time.sleep(POLL_PERIOD)
                     waited_time += POLL_PERIOD
                     pbar.update(POLL_PERIOD)
-                    edit_discord_message(msg_id, f"Created pod {pod['id']}, waited for {waited_time}/{eta} seconds...")
+                    edit_discord_message(msg_created, f"Created pod {pod['id']}, waited for {waited_time}/{eta} seconds...")
 
             os.environ["RUNPOD_DEBUG"] = is_debug
 
@@ -227,7 +226,7 @@ def train_on_runpod(
                 terminate(pod)
 
             logging.info(f"Pod {pod['id']} started:\n{as_yaml(pod_info)}")
-            edit_discord_message(msg_id, f"Pod {pod['id']} started:\n{as_yaml(pod_info)}")
+            edit_discord_message(msg_created, f"Pod {pod['id']} started:\n{as_yaml(pod_info)}")
 
             # myself = runpod.get_myself()
 
