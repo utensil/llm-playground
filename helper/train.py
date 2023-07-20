@@ -11,6 +11,7 @@ import yaml
 import runpod
 from transformers.trainer_callback import TrainerCallback
 from accelerate import Accelerator
+from accelerate.tracking import on_main_process
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 axolotl_root = os.getenv("AXOLOTL_ROOT", os.path.abspath(os.path.join(project_root, "../axolotl")))
@@ -29,6 +30,7 @@ from axolotl.utils.dict import DictDefault
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
 
 # TODO: avoid code dup
+@on_main_process
 def notify_discord(msg):
     webhook = SyncWebhook.from_url(os.getenv("DISCORD_WEBHOOK_URL"))
     webhook.send(msg)
@@ -49,8 +51,6 @@ def train_ex(
     prepare_ds_only: bool = False,
     **kwargs,
 ):
-    logging.info('train_ex before')
-
     config = Path(config.strip())
     log_info(f"Prepare training with config: {config}")
 
@@ -86,7 +86,9 @@ def train_ex(
 
     try:
 
+        logging.info('train_ex before')
         finetune.train(config, prepare_ds_only, **kwargs)
+        logging.info('train_ex after')
 
         # the following is intensionally not in a finally block, because we want the pod to stay alive for inspection and debugging if anything goes wrong
         if cfg.runpod.one_shot:        
@@ -97,8 +99,6 @@ def train_ex(
             runpod.terminate_pod(pod_id)
 
             log_info(f"Pod {pod_id} terminated on train end")
-
-        logging.info('train_ex after')
 
     except Exception as ex:
         log_error(f"Error during training: {ex}", exc_info=ex)
@@ -142,13 +142,15 @@ class OneshotCallback(TrainerCallback):
         log_info(f"Pod {pod_id} terminated on train end")
 
 def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
-    logging.info('setup_trainer_ex before')
     logging.info(f'cfg.runpod.one_shot = {cfg.runpod.one_shot}')
 
     if os.environ.get('ACCELERATE_USE_DEEPSPEED', 'false') == 'true':
         cfg.deepspeed = os.environ.get('DEEPSPEED_CONFIG_PATH', False)
 
+    logging.info('setup_trainer_ex before')
     trainer = setup_trainer_orig(cfg, train_dataset, eval_dataset, model, tokenizer)
+    logging.info('setup_trainer_ex after')
+
     trainer.args.include_inputs_for_metrics = True
     compute_metrics_orig = trainer.compute_metrics
 
@@ -163,8 +165,7 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     #     logging.info('trainer.add_callback(OneshotCallback)')
     #     trainer.add_callback(OneshotCallback)
 
-    logging.info('setup_trainer_ex after')
-
+    # Only the main process can get `wandb.run` for multiple-GPU training.
     if wandb.run:
         log_info(f"Training started: {wandb.run.get_url()}")
     
