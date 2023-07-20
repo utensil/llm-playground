@@ -34,6 +34,9 @@ def notify_discord(msg):
     webhook = SyncWebhook.from_url(os.getenv("DISCORD_WEBHOOK_URL"))
     webhook.send(msg)
 
+def edit_discord_message(last_msg, msg):
+    return last_msg.edit(content=msg)
+
 def log_info(msg):
     logging.info(msg)
     notify_discord(msg)
@@ -109,13 +112,20 @@ def train_ex(
         accelerator.end_training()
 
 
+def log_data(name, data):
+    logging.info(f'{name}(type={type(data)}, shape={data.shape}):\n{data}')
+
 def log_eval_prediction(ep):
     data = {
         'input': ep.inputs,
         'prediction': ep.predictions,
         'label_id': ep.label_ids
     }
-    logging.info(data)
+
+    log_data('inputs', ep.inputs)
+    log_data('predictions', ep.predictions)
+    log_data('label_ids', ep.label_ids)
+
     # df = pd.DataFrame(data)
     # table = wandb.Table(dataframe=df)
     # wandb.run.log({"eval_entries": my_table})
