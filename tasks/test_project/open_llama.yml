@@ -20,7 +20,7 @@ runpod:
   one_shot: true
   env:
     TEST_ENV: happy
-  deepspeed: true
+  # deepspeed: true
 
 base_model: openlm-research/open_llama_3b
 base_model_config: openlm-research/open_llama_3b
