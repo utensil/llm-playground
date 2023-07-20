@@ -58,7 +58,7 @@ def notify_discord(msg):
 
 def edit_discord_message(msg_id, msg):
     webhook = SyncWebhook.from_url(os.getenv("DISCORD_WEBHOOK_URL"))
-    return webhook.edit_message(msg_id, msg)
+    return webhook.edit_message(msg_id, content=msg)
 
 def log_info(msg):
     logging.info(msg)
