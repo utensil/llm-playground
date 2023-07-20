@@ -30,7 +30,6 @@ from axolotl.utils.dict import DictDefault
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
 
 # TODO: avoid code dup
-@on_main_process
 def notify_discord(msg):
     webhook = SyncWebhook.from_url(os.getenv("DISCORD_WEBHOOK_URL"))
     webhook.send(msg)
@@ -52,7 +51,10 @@ def train_ex(
     **kwargs,
 ):
     config = Path(config.strip())
-    log_info(f"Prepare training with config: {config}")
+    local_rank = int(os.environ.get("LOCAL_RANK", 0))
+
+    if local_rank == 0:
+        log_info(f"Prepare training with config: {config}")
 
     # TODO: avoid code dup
     # load the config from the yaml file
@@ -101,7 +103,8 @@ def train_ex(
             log_info(f"Pod {pod_id} terminated on train end")
 
     except Exception as ex:
-        log_error(f"Error during training: {ex}", exc_info=ex)
+        if local_rank == 0:
+            log_error(f"Error during training: {ex}", exc_info=ex)
     finally:
         accelerator.end_training()
 

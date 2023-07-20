@@ -183,7 +183,7 @@ def train_on_runpod(
 
         signal.signal(signal.SIGINT, signal_handler)
         
-        logging.info(f"Created pod {pod['id']}, waiting for it to start...(at most {MAX_WAIT_TIME} seconds)")
+        log_info(f"Created pod {pod['id']}, waiting for it to start...(at most {MAX_WAIT_TIME} seconds)")
         
         username = pod['machine']['podHostId']
         ssh_command = f'ssh {username}@ssh.runpod.io -i ~/.ssh/id_ed25519'

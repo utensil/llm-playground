@@ -22,7 +22,8 @@ runpod:
     TEST_ENV: happy
   deepspeed: true
 
-base_model: huggyllama/llama-13b
+base_model: openlm-research/open_llama_3b
+base_model_config: openlm-research/open_llama_3b
 model_type: LlamaForCausalLM
 tokenizer_type: LlamaTokenizer
 
@@ -197,6 +198,6 @@ max_grad_norm: 0.3
 fsdp:
 fsdp_config:
 special_tokens:
-  pad_token: "<|endoftext|>"
-  bos_token: ">>ABSTRACT<<"
-  eos_token: "<|endoftext|>"
+  bos_token: "<s>"
+  eos_token: "</s>"
+  unk_token: "<unk>"
