@@ -217,7 +217,7 @@ def train_on_runpod(
                     time.sleep(POLL_PERIOD)
                     waited_time += POLL_PERIOD
                     pbar.update(POLL_PERIOD)
-                    edit_discord_message(msg_created, f"Created pod {pod['id']}, waited for {waited_time}/{eta} seconds...")
+                    edit_discord_message(msg_created, f"Created pod {pod['id']}, waited for {waited_time}/{eta:.2f} seconds...")
 
             os.environ["RUNPOD_DEBUG"] = is_debug
 
