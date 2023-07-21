@@ -172,7 +172,7 @@ def log_eval_prediction_debug(ep, tokenizer):
 
     log_data('inputs', ep.inputs, tokenizer)
     log_data('predictions', ep.predictions, tokenizer)
-    log_data('label_ids', ep.label_ids, tokenizer)
+    log_data('labels', ep.label_ids, tokenizer)
 
     # df = pd.DataFrame(data)
     # table = wandb.Table(dataframe=df)
@@ -188,7 +188,10 @@ def log_eval_prediction(ep, tokenizer):
 
         df = pd.DataFrame(data)
         table = wandb.Table(dataframe=df)
-        wandb.run.log({"eval_entries": table})
+
+        artifact = wandb.Artifact('eval_entries', type="raw_data")
+        artifact.add(table, 't_eval_entries')
+        wandb.run.log_artifact(artifact)
 
 class OneshotCallback(TrainerCallback):
     def on_train_begin(self, args, state, control, **kwargs):
