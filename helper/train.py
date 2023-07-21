@@ -25,9 +25,12 @@ sys.path.insert(0, scripts_dir)
 
 import finetune
 from axolotl.utils.trainer import setup_trainer as setup_trainer_orig
+import axolotl.utils.models
 from axolotl.utils.dict import DictDefault
 
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
+
+context = {}
 
 # TODO: avoid code dup
 def notify_discord(msg):
@@ -181,7 +184,7 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     trainer.args.include_inputs_for_metrics = True
     compute_metrics_orig = trainer.compute_metrics
 
-    tokenizer = trainer.tokenizer
+    tokenizer = context['tokenizer']
 
     logging.info(f'trainer.tokenizer: {tokenizer}')
 
@@ -202,8 +205,18 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     
     return trainer
 
+def load_tokenizer_ex(
+    tokenizer_config,
+    tokenizer_type,
+    cfg,
+):
+    tokenizer = models.load_tokenizer(tokenizer_config, tokenizer_type, cfg)
+    context['tokenizer'] = tokenizer
+    return tokenizer
+
 if __name__ == "__main__":
     finetune.setup_trainer = setup_trainer_ex
+    models.load_tokenizer = load_tokenizer_ex
     fire.Fire(train_ex)
 
     
