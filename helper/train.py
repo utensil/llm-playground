@@ -246,6 +246,7 @@ def load_model_ex(
 if __name__ == "__main__":
     finetune.setup_trainer = setup_trainer_ex
     finetune.load_tokenizer = load_tokenizer_ex
+    finetune.load_model = load_model_ex
     fire.Fire(train_ex)
 
     
