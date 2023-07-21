@@ -4,7 +4,7 @@ runpod:
     bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite_train.sh -sSf | bash"
 
   # "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA A100-SXM4-80GB"
-  gpu: "NVIDIA RTX A6000"
+  gpu: "NVIDIA A100-SXM4-80GB"
   # pod_type: INTERRUPTABLE
   cloud_type: "SECURE" # "ALL" "COMMUNITY"
   max_bid_per_gpu: 2.0
@@ -24,8 +24,8 @@ runpod:
     TEST_ENV: happy
   # deepspeed: true
 
-base_model: openaccess-ai-collective/minotaur-7b
-base_model_config: openaccess-ai-collective/minotaur-7b
+base_model: openaccess-ai-collective/minotaur-13b-fixed
+base_model_config: openaccess-ai-collective/minotaur-13b-fixed
 model_type: LlamaForCausalLM
 
 load_in_8bit: false
