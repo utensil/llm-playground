@@ -24,8 +24,9 @@ sys.path.insert(0, src_dir)
 sys.path.insert(0, scripts_dir)
 
 import finetune
+import axolotl
 from axolotl.utils.trainer import setup_trainer as setup_trainer_orig
-import axolotl.utils.models
+from axolotl.utils.models import load_tokenizer as load_tokenizer_orig
 from axolotl.utils.dict import DictDefault
 
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
@@ -210,13 +211,13 @@ def load_tokenizer_ex(
     tokenizer_type,
     cfg,
 ):
-    tokenizer = models.load_tokenizer(tokenizer_config, tokenizer_type, cfg)
+    tokenizer = load_tokenizer_orig(tokenizer_config, tokenizer_type, cfg)
     context['tokenizer'] = tokenizer
     return tokenizer
 
 if __name__ == "__main__":
     finetune.setup_trainer = setup_trainer_ex
-    models.load_tokenizer = load_tokenizer_ex
+    finetune.load_tokenizer = load_tokenizer_ex
     fire.Fire(train_ex)
 
     
