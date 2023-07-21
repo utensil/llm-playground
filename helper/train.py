@@ -119,23 +119,26 @@ def train_ex(
 
         log_info(f"Pod {pod_id} terminated on train end")
 
-def log_data(name, data):
-    logging.info(f'{name}(type={type(data)}, shape={data.shape}):\n{data}')
+def log_data(name, data, tokenizer):
+    # logging.info(f'{name}(type={type(data)}, shape={data.shape}):\n{data}')
+
+    logging.info(f'{name}:\n{tokenizer.batch_decode(data, skip_special_tokens=True)}')
+
     if wandb.run:
         for i in range(len(data)):
             hist = wandb.Histogram(data[i]) #, num_bins=512)
             wandb.log({f"histogram/{name}": hist})
 
-def log_eval_prediction(ep):
+def log_eval_prediction(ep, tokenizer):
     data = {
         'input': ep.inputs,
         'prediction': ep.predictions,
         'label_id': ep.label_ids
     }
 
-    log_data('inputs', ep.inputs)
-    log_data('predictions', ep.predictions)
-    log_data('label_ids', ep.label_ids)
+    log_data('inputs', ep.inputs, tokenizer)
+    log_data('predictions', ep.predictions, tokenizer)
+    log_data('label_ids', ep.label_ids, tokenizer)
 
     # df = pd.DataFrame(data)
     # table = wandb.Table(dataframe=df)
@@ -178,9 +181,11 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     trainer.args.include_inputs_for_metrics = True
     compute_metrics_orig = trainer.compute_metrics
 
+    tokenizer = trainer.tokenizer
+
     def compute_metrics(ep):
         metrics = compute_metrics_orig(ep) if compute_metrics_orig else {}
-        log_eval_prediction(ep)
+        log_eval_prediction(ep, tokenizer)
         return metrics
 
     trainer.compute_metrics = compute_metrics
