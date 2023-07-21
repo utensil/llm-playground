@@ -147,7 +147,23 @@ def log_data(name, data, tokenizer):
     except Exception as ex:
         logging.error(f'Error logging {name}: {ex}', exc_info=ex)
 
-def log_eval_prediction(ep, tokenizer):
+def decode_data(name, data, tokenizer):
+    try:
+        if data.ndim == 3:
+            data = torch.argmax(torch.from_numpy(data), dim=-1)
+
+        if data.ndim != 2:
+            raise ValueError(f'Invalid data shape: {type(data)} {data.shape}')
+        
+        data = np.where(data != -100, data, tokenizer.pad_token_id)
+
+        return tokenizer.batch_decode(data, skip_special_tokens=True)
+
+    except Exception as ex:
+        logging.error(f'Error decoding {name}, returning empty strings: {ex}', exc_info=ex)
+        return ['' for _ in range(len(data))]
+
+def log_eval_prediction_debug(ep, tokenizer):
     # data = {
     #     'input': ep.inputs,
     #     'prediction': ep.predictions,
@@ -161,6 +177,18 @@ def log_eval_prediction(ep, tokenizer):
     # df = pd.DataFrame(data)
     # table = wandb.Table(dataframe=df)
     # wandb.run.log({"eval_entries": my_table})
+
+def log_eval_prediction(ep, tokenizer):
+    if wandb.run:
+        data = {
+            'input': decode_data('inputs', ep.inputs, tokenizer),
+            'prediction': decode_data('predictions', ep.predictions, tokenizer),
+            'label_id': decode_data('label_ids', ep.label_ids, tokenizer)
+        }
+
+        df = pd.DataFrame(data)
+        table = wandb.Table(dataframe=df)
+        wandb.run.log({"eval_entries": table})
 
 class OneshotCallback(TrainerCallback):
     def on_train_begin(self, args, state, control, **kwargs):
