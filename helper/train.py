@@ -121,9 +121,10 @@ def train_ex(
 
 def log_data(name, data):
     logging.info(f'{name}(type={type(data)}, shape={data.shape}):\n{data}')
-    for i in range(len(data)):
-        hist = wandb.Histogram(data[i]) #, num_bins=512)
-        wandb.log({f"histogram/{name}": hist})
+    if wandb.run:
+        for i in range(len(data)):
+            hist = wandb.Histogram(data[i]) #, num_bins=512)
+            wandb.log({f"histogram/{name}": hist})
 
 def log_eval_prediction(ep):
     data = {
