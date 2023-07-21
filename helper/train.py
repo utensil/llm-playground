@@ -164,19 +164,9 @@ def decode_data(name, data, tokenizer):
         return ['' for _ in range(len(data))]
 
 def log_eval_prediction_debug(ep, tokenizer):
-    # data = {
-    #     'input': ep.inputs,
-    #     'prediction': ep.predictions,
-    #     'label_id': ep.label_ids
-    # }
-
     log_data('inputs', ep.inputs, tokenizer)
     log_data('predictions', ep.predictions, tokenizer)
     log_data('labels', ep.label_ids, tokenizer)
-
-    # df = pd.DataFrame(data)
-    # table = wandb.Table(dataframe=df)
-    # wandb.run.log({"eval_entries": my_table})
 
 def log_eval_prediction(ep, tokenizer):
     if wandb.run:
@@ -196,30 +186,6 @@ def log_eval_prediction(ep, tokenizer):
 
         except Exception as ex:
             logging.error(f'Error logging eval predictions: {ex}', exc_info=ex)
-
-class OneshotCallback(TrainerCallback):
-    def on_train_begin(self, args, state, control, **kwargs):
-        pass
-        # logging.info('OneshotCallback on_train_begin')
-        
-        # runpod.api_key = os.getenv("RUNPOD_API_KEY")
-
-        # pod_id = os.getenv("RUNPOD_POD_ID")
-
-        # runpod.terminate_pod(pod_id)
-
-        # log_info(f"Pod {pod_id} terminated on train begin")
-
-    def on_train_end(self, args, state, control, **kwargs):
-        logging.info('OneshotCallback on_train_end')
-        
-        runpod.api_key = os.getenv("RUNPOD_API_KEY")
-
-        pod_id = os.getenv("RUNPOD_POD_ID")
-
-        runpod.terminate_pod(pod_id)
-
-        log_info(f"Pod {pod_id} terminated on train end")
 
 def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     # logging.info(f'cfg.runpod.one_shot = {cfg.runpod.one_shot}')
@@ -244,10 +210,6 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
         return metrics
 
     trainer.compute_metrics = compute_metrics
-
-    # if cfg.runpod.one_shot:
-    #     logging.info('trainer.add_callback(OneshotCallback)')
-    #     trainer.add_callback(OneshotCallback)
 
     # Only the main process can get `wandb.run` for multiple-GPU training.
     if wandb.run:
