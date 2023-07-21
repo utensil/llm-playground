@@ -12,6 +12,8 @@ import runpod
 from transformers.trainer_callback import TrainerCallback
 from accelerate import Accelerator
 from accelerate.tracking import on_main_process
+import torch
+import numpy as np
 
 from huggingface_hub import login
 login(os.environ.get("HUGGINGFACE_TOKEN"), add_to_git_credential=True)
@@ -127,6 +129,13 @@ def log_data(name, data, tokenizer):
     # logging.info(f'{name}(type={type(data)}, shape={data.shape}):\n{data}')
 
     try:
+        if data.ndim == 3:
+            data = torch.argmax(data, dim=-1)
+
+        if data.ndim != 2:
+            raise ValueError(f'Invalid data shape: {type(data)} {data.shape}')
+        
+        data = np.where(data != -100, data, tokenizer.pad_token_id)
 
         logging.info(f'{name}:\n{tokenizer.batch_decode(data, skip_special_tokens=True)}')
         
