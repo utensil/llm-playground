@@ -130,7 +130,7 @@ def log_data(name, data, tokenizer):
 
     try:
         if data.ndim == 3:
-            data = torch.argmax(data, dim=-1)
+            data = torch.argmax(torch.from_numpy(data), dim=-1)
 
         if data.ndim != 2:
             raise ValueError(f'Invalid data shape: {type(data)} {data.shape}')
