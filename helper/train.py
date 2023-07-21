@@ -157,7 +157,7 @@ def decode_data(name, data, tokenizer):
         
         data = np.where(data != -100, data, tokenizer.pad_token_id)
 
-        return tokenizer.batch_decode(data, skip_special_tokens=True)
+        return tokenizer.batch_decode(data)
 
     except Exception as ex:
         logging.error(f'Error decoding {name}, returning empty strings: {ex}', exc_info=ex)
