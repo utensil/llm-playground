@@ -38,9 +38,9 @@ push_dataset_to_hub: utensil
 hf_use_auth_token: true
 
 datasets:
-  # - path: QingyiSi/Alpaca-CoT
-  #   data_files:
-  #     - Chain-of-Thought/formatted_cot_data/gsm8k_train.json
+  - path: QingyiSi/Alpaca-CoT
+    data_files:
+      - Chain-of-Thought/formatted_cot_data/gsm8k_train.json
   #   type: alpaca:chat
   # - path: winglian/evals
   #   data_files:
@@ -75,9 +75,9 @@ datasets:
   #   data_files:
   #     - custom/in_context_qa.jsonl
   #   type: context_qa.load_404
-  - path: winglian/evals
-    data_files:
-      - custom/jokes_explained_500up.jsonl
+  # - path: winglian/evals
+  #   data_files:
+  #     - custom/jokes_explained_500up.jsonl
   #   type: sharegpt_jokes
   # - path: winglian/evals
   #   data_files:
@@ -154,7 +154,7 @@ output_dir: ./qlora-out
 # decrease if OOM, increase for max VRAM utilization
 micro_batch_size: 4
 gradient_accumulation_steps: 1
-num_epochs: 0.3
+num_epochs: 0.2
 # Optimizer for QLoRA
 # optimizer: paged_adamw_32bit
 # optimizer: adamw_bnb_8bit
