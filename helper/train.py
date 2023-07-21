@@ -109,15 +109,15 @@ def train_ex(
     finally:
         accelerator.end_training()
 
-    # the following is intensionally not in the finally block, because we want the pod to stay alive for inspection and debugging if anything goes wrong
-    if cfg.runpod.one_shot:        
-        runpod.api_key = os.getenv("RUNPOD_API_KEY")
+        # If we need it stay alive for inspection, we should set one_shot to false
+        if cfg.runpod.one_shot:        
+            runpod.api_key = os.getenv("RUNPOD_API_KEY")
 
-        pod_id = os.getenv("RUNPOD_POD_ID")
+            pod_id = os.getenv("RUNPOD_POD_ID")
 
-        runpod.terminate_pod(pod_id)
+            runpod.terminate_pod(pod_id)
 
-        log_info(f"Pod {pod_id} terminated on train end")
+            log_info(f"Pod {pod_id} terminated on train end")
 
 def log_data(name, data, tokenizer):
     # logging.info(f'{name}(type={type(data)}, shape={data.shape}):\n{data}')
@@ -130,11 +130,11 @@ def log_data(name, data, tokenizer):
             wandb.log({f"histogram/{name}": hist})
 
 def log_eval_prediction(ep, tokenizer):
-    data = {
-        'input': ep.inputs,
-        'prediction': ep.predictions,
-        'label_id': ep.label_ids
-    }
+    # data = {
+    #     'input': ep.inputs,
+    #     'prediction': ep.predictions,
+    #     'label_id': ep.label_ids
+    # }
 
     log_data('inputs', ep.inputs, tokenizer)
     log_data('predictions', ep.predictions, tokenizer)
@@ -182,6 +182,8 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     compute_metrics_orig = trainer.compute_metrics
 
     tokenizer = trainer.tokenizer
+
+    logging.info(f'trainer.tokenizer: {tokenizer}')
 
     def compute_metrics(ep):
         metrics = compute_metrics_orig(ep) if compute_metrics_orig else {}
