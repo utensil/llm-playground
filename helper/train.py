@@ -183,13 +183,13 @@ def log_eval_prediction(ep, tokenizer):
         data = {
             'input': decode_data('inputs', ep.inputs, tokenizer),
             'prediction': decode_data('predictions', ep.predictions, tokenizer),
-            'label_id': decode_data('label_ids', ep.label_ids, tokenizer)
+            'labels': decode_data('label_ids', ep.label_ids, tokenizer)
         }
 
         df = pd.DataFrame(data)
         table = wandb.Table(dataframe=df)
 
-        artifact = wandb.Artifact('eval_entries', type="raw_data")
+        artifact = wandb.Artifact('eval_entries', type="dataset")
         artifact.add(table, 't_eval_entries')
         wandb.run.log_artifact(artifact)
 
