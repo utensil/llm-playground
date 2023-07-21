@@ -126,12 +126,17 @@ def train_ex(
 def log_data(name, data, tokenizer):
     # logging.info(f'{name}(type={type(data)}, shape={data.shape}):\n{data}')
 
-    logging.info(f'{name}:\n{tokenizer.batch_decode(data, skip_special_tokens=True)}')
+    try:
 
-    if wandb.run:
-        for i in range(len(data)):
-            hist = wandb.Histogram(data[i]) #, num_bins=512)
-            wandb.log({f"histogram/{name}": hist})
+        logging.info(f'{name}:\n{tokenizer.batch_decode(data, skip_special_tokens=True)}')
+        
+        if wandb.run:
+            for i in range(len(data)):
+                hist = wandb.Histogram(data[i]) #, num_bins=512)
+                wandb.log({f"histogram/{name}": hist})
+
+    except Exception as ex:
+        logging.error(f'Error logging {name}: {ex}', exc_info=ex)
 
 def log_eval_prediction(ep, tokenizer):
     # data = {
