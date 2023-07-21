@@ -28,7 +28,7 @@ sys.path.insert(0, scripts_dir)
 import finetune
 import axolotl
 from axolotl.utils.trainer import setup_trainer as setup_trainer_orig
-from axolotl.utils.models import load_tokenizer as load_tokenizer_orig
+from axolotl.utils.models import load_tokenizer as load_tokenizer_orig, load_model as load_model_orig
 from axolotl.utils.dict import DictDefault
 
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
@@ -225,6 +225,23 @@ def load_tokenizer_ex(
     tokenizer = load_tokenizer_orig(tokenizer_config, tokenizer_type, cfg)
     context['tokenizer'] = tokenizer
     return tokenizer
+
+def load_model_ex(
+    base_model, base_model_config, model_type, tokenizer, cfg, adapter="lora"
+):
+    local_model_path = os.path.join('models', f"{'_'.join(base_model.split('/')[-2:])}")
+    local_model_config_path = os.path.join('models', f"{'_'.join(base_model_config.split('/')[-2:])}")
+
+    # The model should be pre-downloaded before this training script
+    if Path(local_model_path).exists() and Path(local_model_config_path).exists():
+        log_info(f'Loading model from local: base_model={local_model_path} base_model_config={local_model_config_path}')
+        model = load_model_orig(local_model_path, local_model_config_path, model_type, tokenizer, cfg, adapter)
+    else:
+        model = load_model_orig(base_model, base_model_config, model_type, tokenizer, cfg, adapter)
+
+    context['model'] = model
+
+    return model
 
 if __name__ == "__main__":
     finetune.setup_trainer = setup_trainer_ex

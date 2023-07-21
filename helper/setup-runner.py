@@ -127,6 +127,7 @@ def train_on_runpod(
         env['TRAINING_CONFIG'] = str(config)
         env['AXOLOTL_ROOT'] = runpod_cfg.axolotl_root or '/workspace/axolotl'
         env['DISCORD_WEBHOOK_URL'] = os.getenv("DISCORD_WEBHOOK_URL")
+        env['PREDOWNLOAD_MODEL'] = cfg.base_model
 
         deepspeed = runpod_cfg.deepspeed or cfg.deepspeed or False
 

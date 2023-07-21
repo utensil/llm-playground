@@ -74,7 +74,7 @@ if [[ -n $TRAINING_CONFIG ]]
 then
   # Fixes update hang
   # apt-get update
-  # apt-get install -y aria2
+  apt-get install -y aria2
   git lfs install
   pip install requests huggingface_hub discord.py pexpect
   # Fixes https://github.com/huggingface/accelerate/pull/1648#issuecomment-1610178618
@@ -86,8 +86,8 @@ then
   # Optional: for deepspeed
   pip3 install -U torch --index-url https://download.pytorch.org/whl/cu118
   cd /content/llm-playground
+  (python /content/llm-playground/helper/download-model.py $PREDOWNLOAD_MODEL || true)
   (accelerate launch helper/train.py $TRAINING_CONFIG || true)
-  # python /content/llm-playground/helper/download-model.py tiiuae/falcon-40b
 fi
 
 sleep infinity
