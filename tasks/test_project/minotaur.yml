@@ -26,9 +26,7 @@ runpod:
 
 base_model: openaccess-ai-collective/minotaur-7b
 base_model_config: openaccess-ai-collective/minotaur-7b
-
 model_type: LlamaForCausalLM
-tokenizer_type: LlamaTokenizer
 
 load_in_8bit: false
 # enable 4bit for QLoRA
