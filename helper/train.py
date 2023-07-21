@@ -180,18 +180,22 @@ def log_eval_prediction_debug(ep, tokenizer):
 
 def log_eval_prediction(ep, tokenizer):
     if wandb.run:
-        data = {
-            'input': decode_data('inputs', ep.inputs, tokenizer),
-            'prediction': decode_data('predictions', ep.predictions, tokenizer),
-            'labels': decode_data('label_ids', ep.label_ids, tokenizer)
-        }
+        try:
+            data = {
+                'input': decode_data('inputs', ep.inputs, tokenizer),
+                'prediction': decode_data('predictions', ep.predictions, tokenizer),
+                'labels': decode_data('label_ids', ep.label_ids, tokenizer)
+            }
 
-        df = pd.DataFrame(data)
-        table = wandb.Table(dataframe=df)
+            df = pd.DataFrame(data)
+            table = wandb.Table(dataframe=df)
 
-        artifact = wandb.Artifact('eval_entries', type="dataset")
-        artifact.add(table, 't_eval_entries')
-        wandb.run.log_artifact(artifact)
+            artifact = wandb.Artifact('eval', type="dataset")
+            artifact.add(table, 't_eval')
+            wandb.run.log_artifact(artifact)
+
+        except Exception as ex:
+            logging.error(f'Error logging eval predictions: {ex}', exc_info=ex)
 
 class OneshotCallback(TrainerCallback):
     def on_train_begin(self, args, state, control, **kwargs):
