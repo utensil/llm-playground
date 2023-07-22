@@ -4,7 +4,7 @@ runpod:
     bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite_train.sh -sSf | bash"
 
   # "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA A100-SXM4-80GB"
-  gpu: "NVIDIA A100-SXM4-80GB"
+  gpu: "NVIDIA RTX A6000"
   # pod_type: INTERRUPTABLE
   cloud_type: "SECURE" # "ALL" "COMMUNITY"
   max_bid_per_gpu: 2.0
@@ -24,8 +24,8 @@ runpod:
     TEST_ENV: happy
   # deepspeed: true
 
-base_model: openaccess-ai-collective/minotaur-13b-fixed
-base_model_config: openaccess-ai-collective/minotaur-13b-fixed
+base_model: openaccess-ai-collective/minotaur-7b
+base_model_config: openaccess-ai-collective/minotaur-7b
 model_type: LlamaForCausalLM
 
 load_in_8bit: false
@@ -35,6 +35,7 @@ gptq: false
 strict: false
 
 push_dataset_to_hub: utensil
+hub_model_id: minotaur-7b-qlora
 hf_use_auth_token: true
 
 datasets:
@@ -152,9 +153,9 @@ output_dir: ./qlora-out
 # - 7b: 40
 # - 40b: 4
 # decrease if OOM, increase for max VRAM utilization
-micro_batch_size: 8
+micro_batch_size: 4
 gradient_accumulation_steps: 1
-num_epochs: 1.5
+num_epochs: 0.3
 # Optimizer for QLoRA
 # optimizer: paged_adamw_32bit
 # optimizer: adamw_bnb_8bit
