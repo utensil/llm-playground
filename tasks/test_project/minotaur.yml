@@ -39,10 +39,14 @@ hub_model_id: minotaur-7b-qlora
 hf_use_auth_token: true
 
 datasets:
-  - path: QingyiSi/Alpaca-CoT
+  - path: ehartford/dolphin
     data_files:
-      - Chain-of-Thought/formatted_cot_data/gsm8k_train.json
-    type: alpaca:chat
+      - flan1m-alpaca-uncensored.jsonl
+    type: alpaca
+  # - path: QingyiSi/Alpaca-CoT
+  #   data_files:
+  #     - Chain-of-Thought/formatted_cot_data/gsm8k_train.json
+  #   type: alpaca:chat
   # - path: winglian/evals
   #   data_files:
   #     - hf/ARC-Challenge.jsonl
@@ -155,7 +159,7 @@ output_dir: ./qlora-out
 # decrease if OOM, increase for max VRAM utilization
 micro_batch_size: 4
 gradient_accumulation_steps: 1
-num_epochs: 0.3
+num_epochs: 0.003
 # Optimizer for QLoRA
 # optimizer: paged_adamw_32bit
 # optimizer: adamw_bnb_8bit
