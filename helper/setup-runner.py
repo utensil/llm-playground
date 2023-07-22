@@ -125,6 +125,8 @@ def train_on_runpod(
 
         env = runpod_cfg.env or {}
         env['TRAINING_CONFIG'] = str(config)
+        env['AXOLOTL_GIT'] = runpod_cfg.axolotl_git or 'https://github.com/OpenAccess-AI-Collective/axolotl'
+        env['AXOLOTL_GIT_BRANCH'] = runpod_cfg.axolotl_git_branch or 'main'
         env['AXOLOTL_ROOT'] = runpod_cfg.axolotl_root or '/workspace/axolotl'
         env['DISCORD_WEBHOOK_URL'] = os.getenv("DISCORD_WEBHOOK_URL")
         env['PREDOWNLOAD_MODEL'] = cfg.base_model

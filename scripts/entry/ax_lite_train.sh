@@ -34,11 +34,14 @@ pip install jupyterhub notebook jupyterlab jupyterlab-git ipywidgets
 # prepare monitoring GPU
 pip install nvitop
 
+AXOLOTL_GIT=${AXOLOTL_GIT:-"https://github.com/OpenAccess-AI-Collective/axolotl"}
+AXOLOTL_GIT_BRANCH=${AXOLOTL_GIT_BRANCH:-"main"}
+
 # update axolotl
 cd $WORKSPACE
 if [ ! -d "axolotl-update" ]; then
-  git clone https://github.com/OpenAccess-AI-Collective/axolotl axolotl-update
-# don't update between run yet
+  git clone -b $AXOLOTL_GIT_BRANCH --single-branch  $AXOLOTL_GIT axolotl-update
+# don't update between runs yet
 # else
 #   cd axolotl-update && git pull && cd ..
 fi
