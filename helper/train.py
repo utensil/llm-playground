@@ -209,7 +209,8 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
         log_eval_prediction(ep, tokenizer)
         return metrics
 
-    trainer.compute_metrics = compute_metrics
+    if cfg.runpod.log_eval:
+        trainer.compute_metrics = compute_metrics
 
     # Only the main process can get `wandb.run` for multiple-GPU training.
     if wandb.run:

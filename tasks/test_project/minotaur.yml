@@ -20,6 +20,7 @@ runpod:
   terminate_after: -1
   # Set to false to stay running after training
   one_shot: true
+  log_eval: false
   env:
     TEST_ENV: happy
   # deepspeed: true
