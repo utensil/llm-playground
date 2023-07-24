@@ -40,10 +40,13 @@ hub_model_id: minotaur-7b-qlora
 hf_use_auth_token: true
 
 datasets:
-  - path: ehartford/dolphin
-    data_files:
-      - flan1m-alpaca-uncensored.jsonl
-    type: alpaca
+datasets:
+  - path: Open-Orca/oo-gpt4-200k
+    type: alpaca_w_system.load_open_orca
+  # - path: ehartford/dolphin
+  #   data_files:
+  #     - flan1m-alpaca-uncensored.jsonl
+  #   type: alpaca
   # - path: QingyiSi/Alpaca-CoT
   #   data_files:
   #     - Chain-of-Thought/formatted_cot_data/gsm8k_train.json
