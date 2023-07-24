@@ -3,8 +3,8 @@ runpod:
   entry: |
     bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite_train.sh -sSf | bash"
 
-  # "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA RTX 6000 Ada Generation" "NVIDIA A100-SXM4-80GB"
-  gpu: "NVIDIA RTX 6000 Ada Generation"
+  # "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA RTX 6000 Ada Generation" "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"
+  gpu: "NVIDIA A100 80GB PCIe"
   # pod_type: INTERRUPTABLE
   cloud_type: "SECURE" # "ALL" "COMMUNITY"
   max_bid_per_gpu: 2.0
