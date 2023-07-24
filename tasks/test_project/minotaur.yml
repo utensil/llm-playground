@@ -40,7 +40,6 @@ hub_model_id: minotaur-7b-qlora
 hf_use_auth_token: true
 
 datasets:
-datasets:
   - path: Open-Orca/oo-gpt4-200k
     type: alpaca_w_system.load_open_orca
   # - path: ehartford/dolphin
