@@ -45,6 +45,8 @@ hf_use_auth_token: true
 datasets:
   - path: Open-Orca/OpenOrca
     type: alpaca_w_system.load_open_orca
+    data_files:
+      - 1M-GPT4-Augmented.parquet
   # - path: ehartford/dolphin
   #   data_files:
   #     - flan1m-alpaca-uncensored.jsonl
