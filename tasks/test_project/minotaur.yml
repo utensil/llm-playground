@@ -6,7 +6,7 @@ runpod:
   axolotl_git: https://github.com/utensil/axolotl
   axolotl_git_branch: large_dataset
   # "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA GeForce RTX 4090" "NVIDIA RTX 6000 Ada Generation" "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"
-  gpu: "NVIDIA GeForce RTX 4090"
+  gpu: "NVIDIA A100-SXM4-80GB"
   # pod_type: INTERRUPTABLE
   cloud_type: "SECURE" # "ALL" "COMMUNITY" "SECURE"
   max_bid_per_gpu: 2.0
