@@ -45,7 +45,7 @@ if [ ! -d "axolotl-update" ]; then
 # else
 #   cd axolotl-update && git pull && cd ..
 fi
-cp -r axolotl-update axolotl
+cp -rf axolotl-update axolotl
 cd axolotl
 # but don't install yet
 # pip install -e .
