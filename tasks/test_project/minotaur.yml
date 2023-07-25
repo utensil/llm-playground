@@ -16,8 +16,8 @@ runpod:
   volume_in_gb: 200
   min_vcpu_count: 8
   min_memory_in_gb: 29
-  min_download: 2000
-  min_upload: 1500
+  # min_download: 2000
+  # min_upload: 1500
   stop_after: 3600
   terminate_after: -1
   debug: true
