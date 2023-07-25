@@ -120,8 +120,10 @@ def train_on_runpod(
 
         gpu_info = runpod.get_gpu(gpu)
 
+        logging.info(f"GPU Info: {gpu_info}")
+
         # TODO: warn if the bid is too high
-        bid_per_gpu = min(gpu_info['lowestPrice']['minimumBidPrice'], runpod_cfg.max_bid_per_gpu or MAX_BID_PER_GPU)
+        bid_per_gpu = min(gpu_info['lowestPrice']['minimumBidPrice'] or MAX_BID_PER_GPU, runpod_cfg.max_bid_per_gpu or MAX_BID_PER_GPU)
 
         env = runpod_cfg.env or {}
         env['TRAINING_CONFIG'] = str(config)
@@ -161,7 +163,7 @@ def train_on_runpod(
 
         if runpod_cfg.debug:
             os.environ["RUNPOD_DEBUG"] = 'true'
-            log_info(f"Debug mode enabled")
+            logging.info(f"Debug mode enabled")
         
         if runpod_cfg.pod_type == 'INTERRUPTABLE':
             pod = runpod.create_spot_pod(f'Training {config}',
