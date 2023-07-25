@@ -16,7 +16,7 @@ import re
 from discord import SyncWebhook
 import pexpect
 
-AXOLOTL_RUNPOD_IMAGE = 'winglian/axolotl-runpod:main-py3.9-cu118-2.0.0'
+AXOLOTL_RUNPOD_IMAGE = 'winglian/axolotl-runpod:main-py3.10-cu118-2.0.1'
 AXOLOTL_RUNPOD_IMAGE_SIZE_IN_GB = 12.5
 AXOLOTL_RUNPOD_IMAGE_SIZE = AXOLOTL_RUNPOD_IMAGE_SIZE_IN_GB * 1024 # In MB
 BITS_PER_BYTE = 8

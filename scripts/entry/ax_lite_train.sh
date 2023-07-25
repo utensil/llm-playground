@@ -3,7 +3,7 @@
 # Container source: https://github.com/OpenAccess-AI-Collective/axolotl/blob/main/docker/Dockerfile-runpod
 #
 #
-# To run this in RunPod with `winglian/axolotl-runpod:main-py3.9-cu118-2.0.0`, set
+# To run this in RunPod with `winglian/axolotl-runpod:main-py3.10-cu118-2.0.1`, set
 # Expose HTTP Ports (Max 10): 7860,8888
 # docker command: `bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite.sh -sSf | bash"`
 # JUPYTER_PASSWORD change to your secret
