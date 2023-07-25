@@ -159,6 +159,10 @@ def train_on_runpod(
         else:
             terminate_after = (datetime.now(timezone.utc) + timedelta(seconds=runpod_cfg.terminate_after or DEFAULT_TERMINATE_AFTER)).strftime('"%Y-%m-%dT%H:%M:%SZ"')
 
+        if runpod_cfg.debug:
+            os.environ["RUNPOD_DEBUG"] = 'true'
+            log_info(f"Debug mode enabled")
+        
         if runpod_cfg.pod_type == 'INTERRUPTABLE':
             pod = runpod.create_spot_pod(f'Training {config}',
                                         AXOLOTL_RUNPOD_IMAGE,
