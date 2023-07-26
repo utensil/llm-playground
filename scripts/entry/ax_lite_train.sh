@@ -78,7 +78,7 @@ then
   # apt-get update
   apt-get install -y aria2
   git lfs install
-  pip install requests huggingface_hub discord.py pexpect
+  pip install requests huggingface_hub discord.py pexpect pytest
   # Fixes https://github.com/huggingface/accelerate/pull/1648#issuecomment-1610178618
   # pip install --upgrade --force-reinstall git+https://github.com/huggingface/accelerate.git
   pip install -U git+https://github.com/huggingface/peft.git

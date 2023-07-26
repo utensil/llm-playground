@@ -1,4 +1,4 @@
-task: 36
+task: 37
 runpod:
   entry: |
     bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite_train.sh -sSf | bash"
