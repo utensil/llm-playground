@@ -40,15 +40,14 @@ AXOLOTL_GIT_BRANCH=${AXOLOTL_GIT_BRANCH:-"main"}
 # update axolotl
 cd $WORKSPACE
 if [ ! -d "axolotl-update" ]; then
-  git clone -b $AXOLOTL_GIT_BRANCH --single-branch  $AXOLOTL_GIT axolotl-update
+  git clone -b $AXOLOTL_GIT_BRANCH --single-branch $AXOLOTL_GIT axolotl-update
 # don't update between runs yet
 # else
 #   cd axolotl-update && git pull && cd ..
 fi
 cp -rf axolotl-update axolotl
 cd axolotl
-# but don't install yet
-# pip install -e .
+pip install -e .
 
 mkdir -p /content/
 cd /content/
