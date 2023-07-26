@@ -9,6 +9,8 @@ from discord import SyncWebhook
 from addict import Dict
 import yaml
 import runpod
+from huggingface_hub import Repository, create_repo
+from transformers.utils import get_full_repo_name
 from transformers.trainer_callback import TrainerCallback
 from accelerate import Accelerator
 from accelerate.tracking import on_main_process
@@ -187,11 +189,27 @@ def log_eval_prediction(ep, tokenizer):
         except Exception as ex:
             logging.error(f'Error logging eval predictions: {ex}', exc_info=ex)
 
+# Adapted from transformers.keras_callbacks.PushToHubCallback.__init__
+# Need to run it earlier
+def init_output_dir_from_hub_for_lora(cfg):
+    hub_model_id = cfg.hub_model_id
+    output_dir = Path(cfg.output_dir)
+    if "/" not in hub_model_id:
+        hub_model_id = get_full_repo_name(hub_model_id)
+
+    create_repo(hub_model_id, exist_ok=True)
+    repo = Repository(str(output_dir), clone_from=hub_model_id)
+    cfg.lora_model_dir = str(output_dir)
+    
+
 def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     # logging.info(f'cfg.runpod.one_shot = {cfg.runpod.one_shot}')
 
     if os.environ.get('ACCELERATE_USE_DEEPSPEED', 'false') == 'true':
         cfg.deepspeed = os.environ.get('DEEPSPEED_CONFIG_PATH', False)
+
+    if cfg.hf_use_auth_token and cfg.hub_model_id and cfg.adapter:
+        init_output_dir_from_hub_for_lora(cfg)
 
     logging.info('setup_trainer_ex before')
     trainer = setup_trainer_orig(cfg, train_dataset, eval_dataset, model, tokenizer)
