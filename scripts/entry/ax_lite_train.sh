@@ -80,7 +80,7 @@ then
   git lfs install
   pip install requests huggingface_hub discord.py pexpect
   # Fixes https://github.com/huggingface/accelerate/pull/1648#issuecomment-1610178618
-  pip install --upgrade --force-reinstall git+https://github.com/huggingface/accelerate.git
+  # pip install --upgrade --force-reinstall git+https://github.com/huggingface/accelerate.git
   pip install -U git+https://github.com/huggingface/peft.git
   pip install git+https://github.com/utensil/runpod-python@pod
   # Fixes https://github.com/microsoft/DeepSpeed/issues/3963
