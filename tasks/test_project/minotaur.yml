@@ -20,7 +20,7 @@ runpod:
   # min_upload: 1500
   stop_after: 3600
   terminate_after: -1
-  debug: true
+  debug: false
   # Set to false to stay running after training
   one_shot: true
   log_eval: true
