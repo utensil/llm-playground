@@ -132,7 +132,7 @@ datasets:
   #   type: sharegpt:chat
 
 dataset_prepared_path: last_run_prepared
-val_set_size: 0.01
+val_set_size: 0.00003 # num_epochs * 0.01
 # enable QLoRA
 adapter: qlora
 lora_model_dir:
