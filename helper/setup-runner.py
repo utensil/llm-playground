@@ -164,45 +164,49 @@ def train_on_runpod(
         if runpod_cfg.debug:
             os.environ["RUNPOD_DEBUG"] = 'true'
             logging.info(f"Debug mode enabled")
-        
-        if runpod_cfg.pod_type == 'INTERRUPTABLE':
-            pod = runpod.create_spot_pod(f'Training {config}',
-                                        AXOLOTL_RUNPOD_IMAGE,
-                                        gpu,
-                                        cloud_type=runpod_cfg.cloud_type or "SECURE",
-                                        bid_per_gpu=bid_per_gpu,
-                                        template_id=runpod_cfg.template_id or DEFAULT_TEMPLATE_ID,
-                                        container_disk_in_gb=runpod_cfg.container_disk_in_gb or 50,
-                                        volume_in_gb=runpod_cfg.volume_in_gb or 200,
-                                        gpu_count=runpod_cfg.gpu_count or 1,
-                                        min_vcpu_count=runpod_cfg.min_vcpu_count or 8,
-                                        min_memory_in_gb=runpod_cfg.min_memory_in_gb or 29,
-                                        min_download=runpod_cfg.min_download or None,
-                                        min_upload=runpod_cfg.min_upload or None,
-                                        docker_args=entry,
-                                        env=env,
-                                        stop_after=stop_after,
-                                        terminate_after=terminate_after
-                                        )
-        else:
-            pod = runpod.create_pod(f'Training {config}',
-                                        AXOLOTL_RUNPOD_IMAGE,
-                                        gpu,
-                                        cloud_type=runpod_cfg.cloud_type or "SECURE",
-                                        template_id=runpod_cfg.template_id or DEFAULT_TEMPLATE_ID,
-                                        container_disk_in_gb=runpod_cfg.container_disk_in_gb or 50,
-                                        volume_in_gb=runpod_cfg.volume_in_gb or 200,
-                                        gpu_count=runpod_cfg.gpu_count or 1,
-                                        min_vcpu_count=runpod_cfg.min_vcpu_count or 8,
-                                        min_memory_in_gb=runpod_cfg.min_memory_in_gb or 29,
-                                        min_download=runpod_cfg.min_download or None,
-                                        min_upload=runpod_cfg.min_upload or None,
-                                        docker_args=entry,
-                                        env=env,
-                                        stop_after=stop_after,
-                                        terminate_after=terminate_after
-                                        )
-        
+
+        try:
+            if runpod_cfg.pod_type == 'INTERRUPTABLE':
+                pod = runpod.create_spot_pod(f'Training {config}',
+                                            AXOLOTL_RUNPOD_IMAGE,
+                                            gpu,
+                                            cloud_type=runpod_cfg.cloud_type or "SECURE",
+                                            bid_per_gpu=bid_per_gpu,
+                                            template_id=runpod_cfg.template_id or DEFAULT_TEMPLATE_ID,
+                                            container_disk_in_gb=runpod_cfg.container_disk_in_gb or 50,
+                                            volume_in_gb=runpod_cfg.volume_in_gb or 200,
+                                            gpu_count=runpod_cfg.gpu_count or 1,
+                                            min_vcpu_count=runpod_cfg.min_vcpu_count or 8,
+                                            min_memory_in_gb=runpod_cfg.min_memory_in_gb or 29,
+                                            min_download=runpod_cfg.min_download or None,
+                                            min_upload=runpod_cfg.min_upload or None,
+                                            docker_args=entry,
+                                            env=env,
+                                            stop_after=stop_after,
+                                            terminate_after=terminate_after
+                                            )
+            else:
+                pod = runpod.create_pod(f'Training {config}',
+                                            AXOLOTL_RUNPOD_IMAGE,
+                                            gpu,
+                                            cloud_type=runpod_cfg.cloud_type or "SECURE",
+                                            template_id=runpod_cfg.template_id or DEFAULT_TEMPLATE_ID,
+                                            container_disk_in_gb=runpod_cfg.container_disk_in_gb or 50,
+                                            volume_in_gb=runpod_cfg.volume_in_gb or 200,
+                                            gpu_count=runpod_cfg.gpu_count or 1,
+                                            min_vcpu_count=runpod_cfg.min_vcpu_count or 8,
+                                            min_memory_in_gb=runpod_cfg.min_memory_in_gb or 29,
+                                            min_download=runpod_cfg.min_download or None,
+                                            min_upload=runpod_cfg.min_upload or None,
+                                            docker_args=entry,
+                                            env=env,
+                                            stop_after=stop_after,
+                                            terminate_after=terminate_after
+                                            )
+            
+        except Exception as ex:
+            log_error(f"Failed to create pod for {config}", exc_info=ex)
+            sys.exit(0)
         
         if pod is None:
             log_error(f"Failed to create pod for {config}")

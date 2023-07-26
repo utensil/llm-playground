@@ -121,9 +121,9 @@ def train_ex(
 
             pod_id = os.getenv("RUNPOD_POD_ID")
 
-            runpod.terminate_pod(pod_id)
-
             log_info(f"Pod {pod_id} terminated on train end")
+
+            runpod.terminate_pod(pod_id)
 
 def log_data(name, data, tokenizer):
     # logging.info(f'{name}(type={type(data)}, shape={data.shape}):\n{data}')

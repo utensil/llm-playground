@@ -88,8 +88,8 @@ then
   # Optional: for deepspeed
   pip3 install -U torch --index-url https://download.pytorch.org/whl/cu118
   cd /content/llm-playground
-  (python /content/llm-playground/helper/download-model.py $PREDOWNLOAD_MODEL || true)
-  (accelerate launch helper/train.py $TRAINING_CONFIG || true)
+  (python /content/llm-playground/helper/download-model.py $PREDOWNLOAD_MODEL || true )
+  (accelerate launch helper/train.py $TRAINING_CONFIG || python /content/llm-playground/helper/terminate-runpod.py )
 fi
 
 sleep infinity
