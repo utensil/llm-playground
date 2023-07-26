@@ -208,9 +208,6 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
     if os.environ.get('ACCELERATE_USE_DEEPSPEED', 'false') == 'true':
         cfg.deepspeed = os.environ.get('DEEPSPEED_CONFIG_PATH', False)
 
-    if cfg.hf_use_auth_token and cfg.hub_model_id and cfg.adapter:
-        init_output_dir_from_hub_for_lora(cfg)
-
     logging.info('setup_trainer_ex before')
     trainer = setup_trainer_orig(cfg, train_dataset, eval_dataset, model, tokenizer)
     logging.info('setup_trainer_ex after')
@@ -220,7 +217,7 @@ def setup_trainer_ex(cfg, train_dataset, eval_dataset, model, tokenizer):
 
     tokenizer = context['tokenizer']
 
-    logging.info(f'trainer.tokenizer: {tokenizer}')
+    logging.info(f'context.tokenizer: {tokenizer}')
 
     def compute_metrics(ep):
         metrics = compute_metrics_orig(ep) if compute_metrics_orig else {}
@@ -248,6 +245,11 @@ def load_tokenizer_ex(
 def load_model_ex(
     base_model, base_model_config, model_type, tokenizer, cfg, adapter="lora"
 ):
+    
+    if cfg.hf_use_auth_token and cfg.hub_model_id and cfg.adapter:
+        init_output_dir_from_hub_for_lora(cfg)
+        logging.info(f'cfg.lora_model_dir: {cfg.lora_model_dir}')
+
     local_model_path = os.path.join('models', f"{'_'.join(base_model.split('/')[-2:])}")
     local_model_config_path = os.path.join('models', f"{'_'.join(base_model_config.split('/')[-2:])}")
 
