@@ -8,7 +8,7 @@ runpod:
   # "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA GeForce RTX 4090" "NVIDIA RTX 6000 Ada Generation" "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"
   gpu: "NVIDIA A100 80GB PCIe"
   # pod_type: INTERRUPTABLE
-  cloud_type: "SECURE" # "ALL" "COMMUNITY" "SECURE"
+  cloud_type: "ALL" # "ALL" "COMMUNITY" "SECURE"
   max_bid_per_gpu: 2.0
   # template_id: 758uq6u5fc
   gpu_count: 1
