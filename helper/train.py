@@ -109,7 +109,7 @@ def train_ex(
 
     try:
         logging.info('train_ex before')
-        finetune.train(config, prepare_ds_only, **kwargs)
+        finetune.train(config, cfg.runpod.prepare_ds_only or prepare_ds_only, **kwargs)
         logging.info('train_ex after')
 
     except Exception as ex:
