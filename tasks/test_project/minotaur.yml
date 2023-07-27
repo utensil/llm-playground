@@ -6,7 +6,7 @@ runpod:
   axolotl_git: https://github.com/utensil/axolotl
   axolotl_git_branch: large_dataset
   # "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA GeForce RTX 4090" "NVIDIA RTX 6000 Ada Generation" "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"
-  gpu: "NVIDIA A100 80GB PCIe"
+  gpu: "NVIDIA RTX A6000"
   # pod_type: INTERRUPTABLE
   cloud_type: "SECURE" # "ALL" "COMMUNITY" "SECURE"
   max_bid_per_gpu: 2.0
@@ -39,7 +39,7 @@ gptq: false
 strict: false
 
 push_dataset_to_hub: utensil
-hub_model_id: minotaur-7b-qlora
+hub_model_id: minotaur-7b-orca
 hf_use_auth_token: true
 
 datasets:
@@ -165,7 +165,7 @@ output_dir: ./qlora-out
 # - 7b: 40
 # - 40b: 4
 # decrease if OOM, increase for max VRAM utilization
-micro_batch_size: 12
+micro_batch_size: 4
 gradient_accumulation_steps: 1
 num_epochs: 0.003
 # Optimizer for QLoRA
