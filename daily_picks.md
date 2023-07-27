@@ -12,6 +12,20 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 
 |    Date    | 📚Papers | 🚀News                                                 | ⚡Discoveries | 🧠Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
+| 6.7 | [INSTRUCTEVAL](https://arxiv.org/abs/2306.04757) |  | |
+| 6.6 | [InstructZero](https://arxiv.org/abs/2306.03082) |  | |
+| 6.5 | [Video-LLaMA](https://arxiv.org/abs/2306.02858) |  | |
+| 6.5 | [RLHF-APA](https://arxiv.org/abs/2306.02231) |  | |
+| 6.5 | [Orca](https://arxiv.org/abs/2306.02707) |  | |
+| 6.5 | [Tr+SD](https://arxiv.org/abs/2306.02531) |  | |
+| 6.2 | [RefinedWeb](https://arxiv.org/abs/2306.01116) |  | |
+| 6.2 | [StyleDrop](https://arxiv.org/abs/2306.00983) |  | |
+| 6.1 | [Hiera: A Hierarchical ViT](https://arxiv.org/abs/2306.00989) |  | |
+| 6.1 | [Hidden Language in SD](https://arxiv.org/abs/2306.00966) |  | |
+| 6.1 | [Birth of a Transformer](https://arxiv.org/abs/2306.00802) |  | |
+| 6.1 | [ReviewerGPT](https://arxiv.org/abs/2306.02707) |  | |
+| 5.31 | [Grammar Prompting for DSL](https://arxiv.org/abs/2305.19234) |  | |
+| 5.28 | [Geometric Algebra Transformers](https://arxiv.org/abs/2305.18415) |  | |
 | 5.26 | | [Falcon 7B/40B & RefinedWeb](https://huggingface.co/tiiuae/falcon-40b-instruct) |  |
 | 5.26 | | [Gorilla](https://gorilla.cs.berkeley.edu/) | [TF Agents](https://github.com/huggingface/transformers/pull/23214) |
 | 5.24 | [Recursively](https://arxiv.org/abs/2305.14699) | |
