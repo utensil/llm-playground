@@ -1,0 +1,218 @@
+task: 42
+runpod:
+  entry: |
+    bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite_train.sh -sSf | bash"
+
+  axolotl_git: https://github.com/utensil/axolotl
+  axolotl_git_branch: large_dataset
+  # "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA GeForce RTX 4090" "NVIDIA RTX 6000 Ada Generation" "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"
+  gpu: "NVIDIA A100 80GB PCIe"
+  # pod_type: INTERRUPTABLE
+  cloud_type: "ALL" # "ALL" "COMMUNITY" "SECURE"
+  max_bid_per_gpu: 2.0
+  # template_id: 758uq6u5fc
+  gpu_count: 1
+  container_disk_in_gb: 50
+  volume_in_gb: 100
+  min_vcpu_count: 8
+  min_memory_in_gb: 29
+  # min_download: 2000
+  # min_upload: 1500
+  stop_after: 3600
+  terminate_after: -1
+  debug: false
+  # Set to false to stay running after training
+  one_shot: true
+  log_eval: true
+  env:
+    CUDA_LAUNCH_BLOCKING: 1
+    TEST_ENV: happy
+  # deepspeed: true
+
+base_model: bigcode/starcoderplus
+base_model_config: bigcode/starcoderplus
+
+load_in_8bit: false
+# enable 4bit for QLoRA
+load_in_4bit: true
+gptq: false
+strict: false
+
+push_dataset_to_hub: utensil
+hub_model_id: starcoderplus-dolphin
+hf_use_auth_token: true
+
+datasets:
+  # - path: Open-Orca/OpenOrca
+  #   type: alpaca_w_system.load_open_orca
+  #   data_files:
+  #     - 1M-GPT4-Augmented.parquet
+  - path: ehartford/dolphin
+    data_files:
+      - flan1m-alpaca-uncensored.jsonl
+    type: alpaca
+  # - path: QingyiSi/Alpaca-CoT
+  #   data_files:
+  #     - Chain-of-Thought/formatted_cot_data/gsm8k_train.json
+  #   type: alpaca:chat
+  # - path: winglian/evals
+  #   data_files:
+  #     - hf/ARC-Challenge.jsonl
+  #     - hf/ARC-Easy.jsonl
+  #     - hf/riddle_sense.jsonl
+  #   type: explainchoice:chat
+  # - path: winglian/evals
+  #   data_files:
+  #     - hf/gsm8k.jsonl
+  #     - hf/winogrande.jsonl
+  #   type: alpaca_chat.load_qa
+  # - path: winglian/evals
+  #   data_files:
+  #     - custom/n_task.jsonl
+  #     - custom/misconceptions.jsonl
+  #     - custom/context_insensitivity.jsonl
+  #   type: alpaca_chat
+  # - path: camel-ai/math
+  #   type: alpaca_chat.load_camel_ai
+  # - path: camel-ai/biology
+  #   type: alpaca_chat.load_camel_ai
+  # - path: camel-ai/physics
+  #   type: alpaca_chat.load_camel_ai
+  # - path: camel-ai/chemistry
+  #   type: alpaca_chat.load_camel_ai
+  # - path: winglian/evals
+  #   data_files:
+  #     - custom/in_context_qa.jsonl
+  #   type: context_qa
+  # - path: winglian/evals
+  #   data_files:
+  #     - custom/in_context_qa.jsonl
+  #   type: context_qa.load_404
+  # - path: winglian/evals
+  #   data_files:
+  #     - custom/jokes_explained_500up.jsonl
+  #   type: sharegpt_jokes
+  # - path: winglian/evals
+  #   data_files:
+  #     - custom/classify-self-chat.sharegpt.jsonl
+  #     - custom/coding-self-chat.sharegpt.jsonl
+  #     - custom/prose-gpt4.sharegpt.jsonl
+  #     - custom/prose-rewrite-gpt4.sharegpt.jsonl
+  #   type: sharegpt_simple.load_role
+  # - path: winglian/evals
+  #   data_files:
+  #     - openai/tldr.jsonl
+  #   type: summarizetldr:chat
+  # - path: winglian/evals
+  #   data_files:
+  #     - hellaswag/hellaswag.jsonl
+  #   type: explainchoice:chat
+  # - path: metaeval/ScienceQA_text_only
+  #   type: concisechoice:chat
+  # - path: teknium/GPT4-LLM-Cleaned
+  #   type: alpaca_chat
+  # - path: teknium/GPTeacher-General-Instruct
+  #   data_files: gpt4-instruct-similarity-0.6-dataset.json
+  #   type: gpteacher:chat
+  # - path: QingyiSi/Alpaca-CoT
+  #   data_files:
+  #     - Chain-of-Thought/formatted_cot_data/aqua_train.json
+  #     - Chain-of-Thought/formatted_cot_data/creak_train.json
+  #     - Chain-of-Thought/formatted_cot_data/ecqa_train.json
+  #     - Chain-of-Thought/formatted_cot_data/esnli_train.json
+  #     - Chain-of-Thought/formatted_cot_data/qasc_train.json
+  #     - Chain-of-Thought/formatted_cot_data/qed_train.json
+  #     - Chain-of-Thought/formatted_cot_data/sensemaking_train.json
+  #     - Chain-of-Thought/formatted_cot_data/strategyqa_train.json
+  #     - GPTeacher/Roleplay/formatted_roleplay-similarity_0.6-instruct-dataset.json
+  #   type: alpaca_chat
+  # - path: ehartford/WizardLM_alpaca_evol_instruct_70k_unfiltered
+  #   type: alpaca_chat
+  # - path: ehartford/wizard_vicuna_70k_unfiltered
+  #   type: sharegpt:chat
+
+dataset_prepared_path: last_run_prepared
+val_set_size: 0.00003 # num_epochs * 0.01
+# enable QLoRA
+adapter: qlora
+# lora_model_dir: ./qlora-out
+sequence_len: 2048
+max_packed_sequence_len: 2048
+
+# hyperparameters from QLoRA paper Appendix B.2
+# "We find hyperparameters to be largely robust across datasets"
+lora_r: 64
+lora_alpha: 16
+# 0.1 for models up to 13B
+# 0.05 for 33B and 65B models
+lora_dropout: 0.05
+# add LoRA modules on all linear layers of the base model
+lora_target_modules:
+lora_target_linear: true
+lora_fan_in_fan_out:
+
+wandb_project: axolotl-runner-test
+wandb_watch:
+wandb_run_id:
+wandb_log_model:
+# output_dir: /content/axolotl-trained/falcon-qlora-40b-minotaur/
+output_dir: ./qlora-out
+
+# QLoRA paper Table 9
+# - 16 for 7b & 13b
+# - 32 for 33b, 64 for 64b
+# Max size tested on A6000
+# - 7b: 40
+# - 40b: 4
+# decrease if OOM, increase for max VRAM utilization
+micro_batch_size: 4
+gradient_accumulation_steps: 2
+num_epochs: 0.003
+# Optimizer for QLoRA
+# optimizer: paged_adamw_32bit
+# optimizer: adamw_bnb_8bit
+# https://github.com/huggingface/transformers/pull/23217
+optimizer: paged_lion_8bit
+
+torchdistx_path:
+lr_scheduler: cosine
+# QLoRA paper Table 9
+# - 2e-4 for 7b & 13b
+# - 1e-4 for 33b & 64b
+learning_rate: 0.0002
+train_on_inputs: false
+group_by_length: false
+bf16: true
+fp16: false
+tf32: true
+gradient_checkpointing: true
+# stop training after this many evaluation losses have increased in a row
+# https://huggingface.co/transformers/v4.2.2/_modules/transformers/trainer_callback.html#EarlyStoppingCallback
+# early_stopping_patience: 3
+resume_from_checkpoint:
+auto_resume_from_checkpoints: true
+local_rank:
+logging_steps: 1
+# xformers_attention:
+# flash_attention:
+gptq_groupsize:
+gptq_model_v1:
+warmup_steps: 10
+eval_steps: 5
+save_steps: 10
+debug:
+# deepspeed:
+weight_decay: 0.01
+adam_beta1:
+adam_beta2: 0.999
+adam_epsilon:
+# Gradient clipping max norm
+max_grad_norm: 0.3
+
+fsdp:
+fsdp_config:
+special_tokens:
+  pad_token: "<|endoftext|>"
+  bos_token: "<|endoftext|>"
+  eos_token: "<|endoftext|>"
+  unk_token: "<|endoftext|>"
