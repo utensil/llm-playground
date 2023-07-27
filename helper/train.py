@@ -246,9 +246,9 @@ def load_model_ex(
     base_model, base_model_config, model_type, tokenizer, cfg, adapter="lora"
 ):
     
-    if cfg.hf_use_auth_token and cfg.hub_model_id and cfg.adapter:
-        init_output_dir_from_hub_for_lora(cfg)
-        logging.info(f'cfg.lora_model_dir: {cfg.lora_model_dir}')
+    # if cfg.hf_use_auth_token and cfg.hub_model_id and cfg.adapter:
+    #     init_output_dir_from_hub_for_lora(cfg)
+    #     logging.info(f'cfg.lora_model_dir: {cfg.lora_model_dir}')
 
     local_model_path = os.path.join('models', f"{'_'.join(base_model.split('/')[-2:])}")
     local_model_config_path = os.path.join('models', f"{'_'.join(base_model_config.split('/')[-2:])}")
