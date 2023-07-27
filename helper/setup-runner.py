@@ -173,6 +173,7 @@ def train_on_runpod(
                                             cloud_type=runpod_cfg.cloud_type or "SECURE",
                                             bid_per_gpu=bid_per_gpu,
                                             template_id=runpod_cfg.template_id or DEFAULT_TEMPLATE_ID,
+                                            volume_mount_path=runpod_cfg.volume_mount_path or '/content',
                                             container_disk_in_gb=runpod_cfg.container_disk_in_gb or 50,
                                             volume_in_gb=runpod_cfg.volume_in_gb or 200,
                                             gpu_count=runpod_cfg.gpu_count or 1,
