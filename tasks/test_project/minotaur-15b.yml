@@ -13,7 +13,7 @@ runpod:
   # template_id: 758uq6u5fc
   gpu_count: 1
   container_disk_in_gb: 50
-  volume_in_gb: 100
+  volume_in_gb: 200
   min_vcpu_count: 8
   min_memory_in_gb: 29
   # min_download: 2000
@@ -172,7 +172,7 @@ num_epochs: 0.003
 # optimizer: paged_adamw_32bit
 # optimizer: adamw_bnb_8bit
 # https://github.com/huggingface/transformers/pull/23217
-optimizer: paged_lion_8bit
+optimizer: paged_adamw_8bit
 
 torchdistx_path:
 lr_scheduler: cosine
