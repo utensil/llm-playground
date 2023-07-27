@@ -25,6 +25,7 @@ runpod:
   one_shot: true
   log_eval: true
   env:
+    CUDA_LAUNCH_BLOCKING: 1
     TEST_ENV: happy
   # deepspeed: true
 
