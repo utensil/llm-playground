@@ -39,18 +39,18 @@ gptq: false
 strict: false
 
 push_dataset_to_hub: utensil
-hub_model_id: minotaur-15b-dolphin
+hub_model_id: minotaur-15b-orca
 hf_use_auth_token: true
 
 datasets:
-  # - path: Open-Orca/OpenOrca
-  #   type: alpaca_w_system.load_open_orca
-  #   data_files:
-  #     - 1M-GPT4-Augmented.parquet
-  - path: ehartford/dolphin
+  - path: Open-Orca/OpenOrca
+    type: alpaca_w_system.load_open_orca
     data_files:
-      - flan1m-alpaca-uncensored.jsonl
-    type: alpaca
+      - 1M-GPT4-Augmented.parquet
+  # - path: ehartford/dolphin
+  #   data_files:
+  #     - flan1m-alpaca-uncensored.jsonl
+  #   type: alpaca
   # - path: QingyiSi/Alpaca-CoT
   #   data_files:
   #     - Chain-of-Thought/formatted_cot_data/gsm8k_train.json
