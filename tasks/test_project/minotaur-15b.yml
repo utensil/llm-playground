@@ -1,12 +1,14 @@
-task: 4
+task: 39
 runpod:
   entry: |
     bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite_train.sh -sSf | bash"
 
-  # "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA A100-SXM4-80GB"
-  gpu: "NVIDIA A100-SXM4-80GB"
+  axolotl_git: https://github.com/utensil/axolotl
+  axolotl_git_branch: large_dataset
+  # "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA GeForce RTX 4090" "NVIDIA RTX 6000 Ada Generation" "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"
+  gpu: "NVIDIA A100 80GB PCIe"
   # pod_type: INTERRUPTABLE
-  cloud_type: "SECURE" # "ALL" "COMMUNITY"
+  cloud_type: "SECURE" # "ALL" "COMMUNITY" "SECURE"
   max_bid_per_gpu: 2.0
   # template_id: 758uq6u5fc
   gpu_count: 1
@@ -14,13 +16,14 @@ runpod:
   volume_in_gb: 200
   min_vcpu_count: 8
   min_memory_in_gb: 29
-  min_download: 2000
-  min_upload: 1500
+  # min_download: 2000
+  # min_upload: 1500
   stop_after: 3600
   terminate_after: -1
+  debug: false
   # Set to false to stay running after training
   one_shot: true
-  log_eval: false
+  log_eval: true
   env:
     TEST_ENV: happy
   # deepspeed: true
@@ -35,18 +38,22 @@ gptq: false
 strict: false
 
 push_dataset_to_hub: utensil
-hub_model_id: minotaur-15b-qlora
+hub_model_id: minotaur-15b-dolphin
 hf_use_auth_token: true
 
 datasets:
-  # - path: ehartford/dolphin
+  # - path: Open-Orca/OpenOrca
+  #   type: alpaca_w_system.load_open_orca
   #   data_files:
-  #     - flan1m-alpaca-uncensored.jsonl
-  #   type: alpaca
-  - path: QingyiSi/Alpaca-CoT
+  #     - 1M-GPT4-Augmented.parquet
+  - path: ehartford/dolphin
     data_files:
-      - Chain-of-Thought/formatted_cot_data/gsm8k_train.json
-    type: alpaca:chat
+      - flan1m-alpaca-uncensored.jsonl
+    type: alpaca
+  # - path: QingyiSi/Alpaca-CoT
+  #   data_files:
+  #     - Chain-of-Thought/formatted_cot_data/gsm8k_train.json
+  #   type: alpaca:chat
   # - path: winglian/evals
   #   data_files:
   #     - hf/ARC-Challenge.jsonl
@@ -124,10 +131,10 @@ datasets:
   #   type: sharegpt:chat
 
 dataset_prepared_path: last_run_prepared
-val_set_size: 0.01
+val_set_size: 0.00003 # num_epochs * 0.01
 # enable QLoRA
 adapter: qlora
-lora_model_dir:
+lora_model_dir: ./qlora-out
 sequence_len: 2048
 max_packed_sequence_len: 2048
 
@@ -158,8 +165,8 @@ output_dir: ./qlora-out
 # - 40b: 4
 # decrease if OOM, increase for max VRAM utilization
 micro_batch_size: 4
-gradient_accumulation_steps: 1
-num_epochs: 0.2
+gradient_accumulation_steps: 2
+num_epochs: 0.003
 # Optimizer for QLoRA
 # optimizer: paged_adamw_32bit
 # optimizer: adamw_bnb_8bit
