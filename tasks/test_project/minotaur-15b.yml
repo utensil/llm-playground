@@ -134,7 +134,7 @@ dataset_prepared_path: last_run_prepared
 val_set_size: 0.00003 # num_epochs * 0.01
 # enable QLoRA
 adapter: qlora
-lora_model_dir: ./qlora-out
+# lora_model_dir: ./qlora-out
 sequence_len: 2048
 max_packed_sequence_len: 2048
 
