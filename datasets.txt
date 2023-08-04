@@ -207,24 +207,55 @@ PocketDoc/Alpaca_Evol_Instruct_Cleaned
 GAIR/lima
 PocketDoc/DansPileOfSets
 WizardLM/WizardLM_evol_instruct_V2_196k
-# TODO: pending approval
-dmayhem93/orca-chatgpt-50k
 
-# TODO extra download
-#   SirNeural/flan_v2
-#   conceptofmind/flan_dialog_submix
-#   vietgpt/OIG_mathqa_flanv2_en
-#   neural_code_search
-#   ccdv/arxiv-summarization
-#   neulab/conala
-#   reshinthadith/synthetic_program_synthesis_python_1M
-#   fiveflow/cot_ranking
-#   squad_adversarial
 Alignment-Lab-AI/AILabAssistant
 
 tasksource/tasksource-instruct-v0
 tasksource/zero-shot-label-nli
 tasksource/icl-symbol-tuning-instruct
+
+vietgpt/OIG_mathqa_flanv2_en
+neural_code_search
+neulab/conala
+reshinthadith/synthetic_program_synthesis_python_1M
+fiveflow/cot_ranking
+squad_adversarial
+bigscience-data/roots_zh-cn_wikipedia
+
+
+knkarthick/dialogsum
+jondurbin/rosettacode-raw
+winddude/IHOPv01
+jondurbin/rosettacode-10
+Norquinal/claude_multi_instruct_1k
+Open-Orca/OpenOrca
+ehartford/dolphin
+
+CheshireAI/guanaco-unchained
+Salesforce/dialogstudio
+theblackcat102/evol-codealpaca-v1
+nickrosh/Evol-Instruct-Code-80k-v1
+
+
+P1ayer-1/books-3
+P1ayer-1/college_textbooks
+P1ayer-1/books-3-textbooks
+P1ayer-1/crash_course_subs
+P1ayer-1/stack-exchange-preferences-code-v2
+goendalf666/sql-chat-instructions
+wenhu/TheoremQA
+lukaemon/bbh
+dmayhem93/agieval-lsat-ar
+lmsys/chatbot_arena_conversations
+shahules786/orca-chat
+CarperAI/openai_summarize_comparisons
+declare-lab/InstructEvalImpact
+nampdn-ai/tiny-codes
+
+
+declare-lab/flan-mini
+allenai/peS2o
+LinkSoul/instruction_merge_set
 
 # huge extra downloads, TODO subreddit
 https://github.com/CornellNLP/ConvoKit
@@ -315,7 +346,14 @@ https://github.com/X-PLUG/mPLUG-Owl
 
 # TODO: too big, to foundational, need to filter and dedup
 
+# ~3G
 # SirNeural/flan_v2
+
+# ~85G
+# conceptofmind/flan_dialog_submix
+
+# 7GB
+#   ccdv/arxiv-summarization
 
 # https://huggingface.co/datasets/allenai/c4/tree/mC4_3.1.0/multilingual
 # allenai/c4
