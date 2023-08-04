@@ -47,7 +47,8 @@ def get_file(url_info, output_folder):
         return
 
     with open(output_folder / filename, 'wb') as f:
-        r = requests.get(url, stream=True)
+        token = os.environ.get("HUGGINGFACE_TOKEN")
+        r = requests.get(url, stream=True, headers={"authorization" : f'Bearer {token}'})
         block_size = 1024
         with tqdm.tqdm(postfix=f'File: {filename}', total=total_size, unit='iB', unit_scale=True, bar_format='{l_bar}{bar}| {n_fmt:6}/{total_fmt:6} {rate_fmt:6} {postfix}') as t:
             for data in r.iter_content(block_size):
