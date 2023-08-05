@@ -267,8 +267,20 @@ stingning/ultrachat
 # 14 GB
 ArmelR/stack-exchange-instruction
 
+https://github.com/HKUNLP/DS-1000
+https://github.com/project-baize/baize-chatbot
+https://github.com/leanprover/lean4-samples
+https://github.com/microsoft/promptbench
+https://github.com/llm-attacks/llm-attacks
+https://github.com/lz1oceani/verify_cot
+https://github.com/Lichang-Chen/InstructZero
+https://github.com/salesforce/factualNLG
+
 # huge extra downloads, TODO subreddit
 https://github.com/CornellNLP/ConvoKit
+
+# huge extra downloads and mostly dup
+https://github.com/allenai/open-instruct
 
 # has extra download
 
@@ -303,6 +315,18 @@ https://github.com/michiyasunaga/DrRepair
 # https://cloud.google.com/sdk/docs/install-sdk#linux
 # gsutil -m cp -r gs://dm-code_contests local_location
 https://github.com/deepmind/code_contests
+
+# use gdown to download the dataset (~4G) and notebooks (~8G)
+https://github.com/rajasagashe/JuICe
+
+# https://github.com/InternLM/opencompass/releases/download/0.1.1/OpenCompassData.zip
+https://github.com/InternLM/opencompass
+
+
+https://github.com/lean-dojo/ReProver
+# Lean 3: https://zenodo.org/record/8016386 by https://github.com/lean-dojo/LeanDojo/blob/main/scripts/generate-benchmark-lean3.ipynb
+# Lean 4: https://zenodo.org/record/8040110 by https://github.com/lean-dojo/LeanDojo/blob/main/scripts/generate-benchmark-lean4.ipynb
+https://github.com/lean-dojo/LeanDojo
 
 # should have filted
 
