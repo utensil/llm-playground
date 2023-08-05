@@ -257,6 +257,16 @@ declare-lab/flan-mini
 allenai/peS2o
 LinkSoul/instruction_merge_set
 
+jondurbin/airoboros-gpt4-m2.0
+rombodawg/MegaCodeTraining200k
+causalnlp/corr2cause
+ehartford/WizardLM_evol_instruct_V2_196k_unfiltered_merged_split
+ehartford/open-instruct-uncensored
+stingning/ultrachat
+
+# 14 GB
+ArmelR/stack-exchange-instruction
+
 # huge extra downloads, TODO subreddit
 https://github.com/CornellNLP/ConvoKit
 
@@ -354,6 +364,14 @@ https://github.com/X-PLUG/mPLUG-Owl
 
 # 7GB
 #   ccdv/arxiv-summarization
+
+# 311GB
+# bigcode/starcoderdata
+
+# ~90GB
+# MMInstruction/M3IT
+# 204GB
+# MMInstruction/M3IT-80
 
 # https://huggingface.co/datasets/allenai/c4/tree/mC4_3.1.0/multilingual
 # allenai/c4
