@@ -114,7 +114,7 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 | 4.11 | [Auto-Sci](https://arxiv.org/abs/2304.05332) |
 | 4.12 | | | [RunPod.io](https://runpod.io?ref=km0th85l) |
 | 4.10 |  [pal](https://github.com/reasoning-machines/pal) |
-| 4.9 | | |  [Patrick's talk](https://www.youtube.com/watch?v=tp_h3vzkObo) |
+| 4.9 | | |  [Patrick's talk](https://www.youtube.com/watch?v=tp_h3vzkObo) [:octocat:](https://www.imo.universite-paris-saclay.fr/~patrick.massot/Examples/ContinuousFrom.html) |
 | 4.9 |  [ACT]([Trusted-AI/adversarial-robustness-toolbox](https://github.com/Trusted-AI/adversarial-robustness-toolbox)) |
 | 4.9 | | |  [dagster](https://github.com/dagster-io/dagster) & [mage-ai](https://github.com/mage-ai/mage-ai) |
 | 4.8 | | |  [data-centric-AI](https://github.com/daochenzha/data-centric-AI) |
