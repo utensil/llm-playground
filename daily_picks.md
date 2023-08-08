@@ -12,6 +12,9 @@ Inspired by [GenAI_LLM_timeline](https://github.com/hollobit/GenAI_LLM_timeline)
 
 |    Date    | 📚Papers | 🚀News                                                 | ⚡Discoveries | 🧠Thoughts/work |
 | :--------: | :----- | :--------------------------------------------------- | :---------- | :------------ |
+| 8.7 | [DL for mathematicians](https://arxiv.org/abs/2304.12602) & [Will TP+DL change Math?](https://leanprover.zulipchat.com/user_uploads/3121/kPPfIoy-LeC4pND7U2s46y9H/BAMS_Buzzard.pdf) |  | [Ask Mathlib4](https://wolfia.com/?projectId=bf92ba10-e8c4-4a23-800d-d12afaa98e5e) |
+| 7.9 | [DT-Solver](https://aclanthology.org/2023.acl-long.706.pdf) |  | |
+| 6.7 | [INSTRUCTEVAL](https://arxiv.org/abs/2306.04757) |  | |
 | 6.7 | [INSTRUCTEVAL](https://arxiv.org/abs/2306.04757) |  | |
 | 6.6 | [InstructZero](https://arxiv.org/abs/2306.03082) |  | |
 | 6.5 | [Video-LLaMA](https://arxiv.org/abs/2306.02858) |  | |
