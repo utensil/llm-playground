@@ -88,7 +88,7 @@ output_dir: ./qlora-out
 # - 40b: 4
 # decrease if OOM, increase for max VRAM utilization
 micro_batch_size: 1
-gradient_accumulation_steps: 2
+gradient_accumulation_steps: 1
 num_epochs: 0.1
 # Optimizer for QLoRA
 # optimizer: paged_adamw_32bit
@@ -107,7 +107,7 @@ group_by_length: false
 bf16: false
 fp16: false
 tf32: true
-gradient_checkpointing: true
+gradient_checkpointing: false
 # stop training after this many evaluation losses have increased in a row
 # https://huggingface.co/transformers/v4.2.2/_modules/transformers/trainer_callback.html#EarlyStoppingCallback
 # early_stopping_patience: 3
