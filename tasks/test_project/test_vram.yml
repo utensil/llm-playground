@@ -1,0 +1,135 @@
+task: 41
+runpod:
+  entry: |
+    bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite_train.sh -sSf | bash"
+
+  gpu: "NVIDIA RTX A6000" # "NVIDIA RTX A6000" "NVIDIA A100-SXM4-80GB"
+  pod_type: INTERRUPTABLE
+  cloud_type: "SECURE" # "ALL" "COMMUNITY"
+  max_bid_per_gpu: 2.0
+  # template_id: 758uq6u5fc
+  gpu_count: 1
+  container_disk_in_gb: 50
+  volume_in_gb: 50
+  min_vcpu_count: 8
+  min_memory_in_gb: 29
+  min_download: 2000
+  min_upload: 1500
+  stop_after: 3600
+  terminate_after: -1
+  # Set to false to stay running after training
+  one_shot: true
+  env:
+    TEST_ENV: happy
+  deepspeed: true
+
+
+# 1b: tiiuae/falcon-rw-1b
+# 7b: tiiuae/falcon-7b
+# 40b: tiiuae/falcon-40b
+# base_model: /content/llm-playground/models/tiiuae_falcon-40b
+# base_model_config: /content/llm-playground/models/tiiuae_falcon-40b
+base_model: tiiuae/falcon-rw-1b
+base_model_config: tiiuae/falcon-rw-1b
+# required by falcon custom model code: https://huggingface.co/tiiuae/falcon-7b/tree/main
+trust_remote_code: true
+model_type: AutoModelForCausalLM
+tokenizer_type: AutoTokenizer
+load_in_8bit: false
+load_in_4bit: false
+gptq: false
+strict: false
+
+push_dataset_to_hub: utensil
+hf_use_auth_token: true
+
+datasets:
+  - path: QingyiSi/Alpaca-CoT
+    data_files:
+      - Chain-of-Thought/formatted_cot_data/gsm8k_train.json
+    type: alpaca:chat
+
+dataset_prepared_path: last_run_prepared
+val_set_size: 0.01
+
+adapter:
+lora_model_dir:
+sequence_len: 2048
+max_packed_sequence_len: 2048
+
+# hyperparameters from QLoRA paper Appendix B.2
+# "We find hyperparameters to be largely robust across datasets"
+lora_r: 64
+lora_alpha: 16
+# 0.1 for models up to 13B
+# 0.05 for 33B and 65B models
+lora_dropout: 0.05
+# add LoRA modules on all linear layers of the base model
+lora_target_modules:
+lora_target_linear: true
+lora_fan_in_fan_out:
+
+wandb_project: falcon-qlora-runner
+wandb_watch:
+wandb_run_id:
+wandb_log_model:
+# output_dir: /content/axolotl-trained/falcon-qlora-40b-minotaur/
+output_dir: ./qlora-out
+
+# QLoRA paper Table 9
+# - 16 for 7b & 13b
+# - 32 for 33b, 64 for 64b
+# Max size tested on A6000
+# - 7b: 40
+# - 40b: 4
+# decrease if OOM, increase for max VRAM utilization
+micro_batch_size: 4
+gradient_accumulation_steps: 2
+num_epochs: 0.1
+# Optimizer for QLoRA
+# optimizer: paged_adamw_32bit
+# optimizer: adamw_bnb_8bit
+# https://github.com/huggingface/transformers/pull/23217
+optimizer: adamw_torch
+
+torchdistx_path:
+lr_scheduler: cosine
+# QLoRA paper Table 9
+# - 2e-4 for 7b & 13b
+# - 1e-4 for 33b & 64b
+learning_rate: 0.0002
+train_on_inputs: false
+group_by_length: false
+bf16: false
+fp16: false
+tf32: true
+gradient_checkpointing: true
+# stop training after this many evaluation losses have increased in a row
+# https://huggingface.co/transformers/v4.2.2/_modules/transformers/trainer_callback.html#EarlyStoppingCallback
+# early_stopping_patience: 3
+resume_from_checkpoint:
+auto_resume_from_checkpoints: true
+local_rank:
+logging_steps: 1
+xformers_attention:
+flash_attention:
+gptq_groupsize:
+gptq_model_v1:
+warmup_steps: 10
+eval_steps: 5
+save_steps: 10
+debug:
+# deepspeed:
+weight_decay: 0.01
+adam_beta1:
+adam_beta2: 0.999
+adam_epsilon:
+# Gradient clipping max norm
+max_grad_norm: 0.3
+
+fsdp:
+fsdp_config:
+special_tokens:
+  pad_token: "<|endoftext|>"
+  bos_token: ">>ABSTRACT<<"
+  eos_token: "<|endoftext|>"
