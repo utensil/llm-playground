@@ -11,7 +11,7 @@ runpod:
   # template_id: 758uq6u5fc
   gpu_count: 1
   container_disk_in_gb: 50
-  volume_in_gb: 10
+  volume_in_gb: 100
   min_vcpu_count: 8
   min_memory_in_gb: 29
   # min_download: 2000
