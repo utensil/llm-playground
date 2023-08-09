@@ -121,7 +121,7 @@ gptq_groupsize:
 gptq_model_v1:
 warmup_steps: 10
 eval_steps: 5
-save_steps: 10
+save_steps: 20
 debug:
 # deepspeed:
 weight_decay: 0.01
