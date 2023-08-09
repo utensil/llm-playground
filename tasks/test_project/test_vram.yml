@@ -3,25 +3,29 @@ runpod:
   entry: |
     bash -c "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/utensil/llm-playground/main/scripts/entry/ax_lite_train.sh -sSf | bash"
 
-  gpu: "NVIDIA RTX A6000" # "NVIDIA RTX A6000" "NVIDIA A100-SXM4-80GB"
-  pod_type: INTERRUPTABLE
-  cloud_type: "SECURE" # "ALL" "COMMUNITY"
+  # "NVIDIA RTX A5000" # "NVIDIA RTX A6000" "NVIDIA GeForce RTX 4090" "NVIDIA RTX 6000 Ada Generation" "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"
+  gpu: "NVIDIA RTX A6000"
+  # pod_type: INTERRUPTABLE
+  cloud_type: "ALL" # "ALL" "COMMUNITY" "SECURE"
   max_bid_per_gpu: 2.0
   # template_id: 758uq6u5fc
   gpu_count: 1
   container_disk_in_gb: 50
-  volume_in_gb: 50
+  volume_in_gb: 10
   min_vcpu_count: 8
   min_memory_in_gb: 29
-  min_download: 2000
-  min_upload: 1500
+  # min_download: 2000
+  # min_upload: 1500
   stop_after: 3600
   terminate_after: -1
+  debug: false
   # Set to false to stay running after training
   one_shot: true
+  log_eval: true
   env:
+    CUDA_LAUNCH_BLOCKING: 1
     TEST_ENV: happy
-  deepspeed: true
+  # deepspeed: true
 
 
 # 1b: tiiuae/falcon-rw-1b
