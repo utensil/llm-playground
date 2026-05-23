@@ -1,0 +1,80 @@
+name: render-notebooks
+
+# Render every notebook under notebooks/ to a static HTML page and publish a
+# browsable index to GitHub Pages. Avoids nbviewer's GitHub-API rate limits.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'notebooks/**'
+      - '.github/workflows/render-notebooks.yml'
+      - '.github/scripts/build_index.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent Pages deploy; don't cancel an in-progress one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install nbconvert
+        run: pip install --upgrade nbconvert
+
+      - name: Render notebooks → HTML
+        run: |
+          set -uo pipefail
+          mkdir -p _site
+          failed=0
+          # Preserve the notebooks/ tree under _site/. Skip checkpoint dirs.
+          while IFS= read -r -d '' nb; do
+            outdir="_site/$(dirname "$nb")"
+            mkdir -p "$outdir"
+            echo "::group::$nb"
+            if jupyter nbconvert --to html --output-dir "$outdir" "$nb"; then
+              echo "ok"
+            else
+              echo "::warning file=$nb::nbconvert failed for $nb"
+              failed=$((failed+1))
+            fi
+            echo "::endgroup::"
+          done < <(find notebooks -name '*.ipynb' -not -path '*/.ipynb_checkpoints/*' -print0)
+          echo "render failures: $failed"
+
+      - name: Build index
+        run: python .github/scripts/build_index.py _site
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
