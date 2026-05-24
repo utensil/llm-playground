@@ -1,0 +1,88 @@
+engine: nixery
+
+# Render notebooks to HTML on tangled's CI (Spindle) and publish to the `site`
+# branch, which the sub-path site (utensil.tngl.sh/llm-playground) serves.
+# Single step on purpose: each step runs in a fresh container, only the
+# workspace persists — so install + render + publish stay together.
+when:
+  # push-to-main ONLY. The spindle injects all repo secrets into every run
+  # regardless of event (no pull_request_target distinction), so a PR-triggered
+  # run could exfiltrate the deploy key. Keep secret-bearing deploys on trusted
+  # pushes only.
+  - event: ["push"]
+    branch: main
+
+dependencies:
+  nixpkgs:
+    - bash
+    - coreutils
+    - git
+    - openssh
+    - cacert
+    - python3
+    - gcc
+    - findutils
+
+steps:
+  - name: render and publish
+    command: |
+      set -euo pipefail
+      # nixery image refs must be lowercase, so we can't pull
+      # python3Packages.nbconvert directly — install nbconvert via pip instead.
+      export SSL_CERT_FILE="${SSL_CERT_FILE:-${NIX_SSL_CERT_FILE:-/etc/ssl/certs/ca-bundle.crt}}"
+      # pyzmq (pulled in by nbconvert) needs libstdc++.so.6 at runtime; the
+      # minimal nix image lacks it on the loader path. Point LD_LIBRARY_PATH at
+      # the gcc lib in the nix store.
+      libstdcpp_path="$(find /nix/store -maxdepth 4 -name 'libstdc++.so.6' 2>/dev/null | head -1)"
+      libstdcpp_dir="$(dirname "${libstdcpp_path:-/nonexistent}")"
+      export LD_LIBRARY_PATH="${libstdcpp_dir}:${LD_LIBRARY_PATH:-}"
+      echo "::group::env"
+      python3 --version; git --version
+      echo "libstdc++ dir: ${libstdcpp_dir:-NOT FOUND}"
+      echo "PWD=$(pwd)"; ls -a | head
+      python3 -m venv .venv
+      . .venv/bin/activate
+      pip install --quiet --upgrade pip nbconvert
+      jupyter nbconvert --version
+      echo "::endgroup::"
+
+      echo "::group::render"
+      mkdir -p _site
+      n=0
+      while IFS= read -r -d '' nb; do
+        outdir="_site/$(dirname "$nb")"
+        mkdir -p "$outdir"
+        if jupyter nbconvert --to html --output-dir "$outdir" "$nb"; then
+          n=$((n+1))
+        else
+          echo "WARN: nbconvert failed for $nb"
+        fi
+      done < <(find notebooks -name '*.ipynb' -not -path '*/.ipynb_checkpoints/*' -print0)
+      echo "rendered $n notebooks"
+      python3 .github/scripts/build_index.py _site --base-href /llm-playground/
+      echo "::endgroup::"
+
+      echo "::group::publish"
+      : "${DEPLOY_SSH_KEY_B64:?DEPLOY_SSH_KEY_B64 secret not set}"
+      # The runner is uid 0 with no /etc/passwd entry, so ssh fails with
+      # "No user exists for uid 0". Give it a home + a passwd entry.
+      export HOME="${HOME:-/tmp/cihome}"
+      mkdir -p "$HOME"
+      grep -q ':0:0:' /etc/passwd 2>/dev/null || \
+        echo "root:x:0:0:root:${HOME}:/bin/sh" >> /etc/passwd 2>/dev/null || true
+      mkdir -p "$HOME/.ssh" && chmod 700 "$HOME/.ssh"
+      # Key is stored base64 (single line) to survive the secret→env round-trip
+      # intact; a raw PEM loses its newlines and ssh fails "error in libcrypto".
+      printf '%s' "$DEPLOY_SSH_KEY_B64" | base64 -d > "$HOME/.ssh/deploy"
+      chmod 600 "$HOME/.ssh/deploy"
+      export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/deploy -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=$HOME/.ssh/known_hosts"
+      export GIT_AUTHOR_NAME=tangled-ci GIT_AUTHOR_EMAIL=ci@utensil.tngl.sh
+      export GIT_COMMITTER_NAME=tangled-ci GIT_COMMITTER_EMAIL=ci@utensil.tngl.sh
+      cd _site
+      git init -q
+      git checkout -q -b site
+      git add -A
+      git commit -q -m "render notebooks $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+      git push --force "git@tangled.org:utensil.tngl.sh/llm-playground" site
+      echo "pushed rendered site → branch 'site'"
+      echo "::endgroup::"

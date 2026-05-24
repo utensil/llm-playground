@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
 """Generate _site/index.html linking to every rendered notebook HTML.
 
-Usage: build_index.py <site_dir>
+Usage: build_index.py <site_dir> [--base-href <href>]
 Walks <site_dir> for *.html (excluding index.html), groups them by their
 parent directory, and writes a simple browsable index at <site_dir>/index.html.
+
+--base-href injects a <base href="..."> tag so the relative notebook links
+resolve correctly even when the index is opened WITHOUT a trailing slash (e.g.
+tangled's sub-path sites serve `/<repo>` without redirecting to `/<repo>/`, so
+bare relative hrefs would otherwise resolve against the domain root and 404).
 """
 
 from __future__ import annotations
 
+import argparse
 import html
 import sys
 from collections import defaultdict
@@ -15,10 +21,12 @@ from pathlib import Path
 
 
 def main() -> int:
-    if len(sys.argv) != 2:
-        print("usage: build_index.py <site_dir>", file=sys.stderr)
-        return 2
-    root = Path(sys.argv[1])
+    ap = argparse.ArgumentParser()
+    ap.add_argument("site_dir")
+    ap.add_argument("--base-href", default=None,
+                    help="value for an injected <base href>, e.g. /llm-playground/")
+    args = ap.parse_args()
+    root = Path(args.site_dir)
     if not root.is_dir():
         print(f"error: {root} is not a directory", file=sys.stderr)
         return 2
@@ -35,6 +43,10 @@ def main() -> int:
         "<!DOCTYPE html>",
         '<html lang="en"><head><meta charset="utf-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1">',
+    ]
+    if args.base_href:
+        out.append(f'<base href="{html.escape(args.base_href)}">')
+    out += [
         "<title>llm-playground — rendered notebooks</title>",
         "<style>",
         "body{font-family:system-ui,-apple-system,sans-serif;max-width:900px;"
