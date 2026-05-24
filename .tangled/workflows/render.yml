@@ -47,6 +47,8 @@ steps:
       echo "::endgroup::"
 
       echo "::group::render"
+      # strip un-renderable broken widget/stream metadata so nbconvert won't crash
+      python3 .github/scripts/sanitize_notebooks.py notebooks
       mkdir -p _site
       n=0
       while IFS= read -r -d '' nb; do

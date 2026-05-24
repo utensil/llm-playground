@@ -37,6 +37,9 @@ jobs:
       - name: Install nbconvert
         run: pip install --upgrade nbconvert
 
+      - name: Sanitize notebooks
+        run: python .github/scripts/sanitize_notebooks.py notebooks
+
       - name: Render notebooks → HTML
         run: |
           set -uo pipefail
